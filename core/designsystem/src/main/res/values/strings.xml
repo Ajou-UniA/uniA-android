@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--  SignIn Screen  -->
+    <string name="sign_in_title">Welcome</string>
+    <string name="sign_in_title_email">Email</string>
+    <string name="sign_in_title_password">Password</string>
+    <string name="sign_in_title_remember_account">Remember-me</string>
+    <string name="sign_in_title_forgot_password">Forgot password?</string>
+    <string name="sign_in_btn_sign_in">Sign In</string>
+    <string name="sign_in_btn_sign_up">Sign Up</string>
+
+</resources>

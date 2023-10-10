@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.UniA.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FFF9FAFB</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/icon_logo</item>
+        <item name="windowSplashScreenAnimationDuration">200</item>
+        <item name="postSplashScreenTheme">@style/Theme.UniA</item>
+    </style>
+
+</resources>

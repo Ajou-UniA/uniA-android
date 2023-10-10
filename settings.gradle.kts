@@ -23,5 +23,6 @@ include(
     ":core:network",
     ":core:loggingsystem",
 
-    ":feature:onborading"
+    ":feature:splash",
+    ":feature:onboarding"
 )

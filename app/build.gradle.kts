@@ -1,20 +1,32 @@
+import Dependencies.usingAndroidTestDependencies
+import Dependencies.usingCoreKtxDependencies
+import Dependencies.usingHiltDependencies
+import Dependencies.usingKotlinStdLibDependencies
+import Dependencies.usingTimberDependencies
+import Dependencies.usingUnitTestDependencies
+import Dependencies.usingSplashDependencies
+import Dependencies.usingComposeDependencies
+import Dependencies.usingActivityDepdendencies
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
     namespace = "com.ajouunia.unia_android"
-    compileSdk = 33
+    compileSdk = AppConfig.COMPILE_SDK
 
     defaultConfig {
         applicationId = "com.ajouunia.unia_android"
-        minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = AppConfig.MIN_SDK
+        targetSdk = AppConfig.TARGET_SDK
+        versionCode = AppConfig.VERSION_CODE
+        versionName = AppConfig.APP_VERSION
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = AppConfig.ANDROID_TEST_INSTRUMENTATION_RUNNER
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -30,11 +42,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = AppConfig.SOURCE_COMPATIBILITY
+        targetCompatibility = AppConfig.TARGET_COMPATIBILITY
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = AppConfig.JVM_TARGET
     }
     buildFeatures {
         compose = true
@@ -50,20 +62,29 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:loggingsystem"))
+    implementation(project(":core:network"))
+    implementation(project(":feature:splash"))
+    implementation(project(":feature:onboarding"))
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.0")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    this.usingKotlinStdLibDependencies()
+    this.usingCoreKtxDependencies()
+
+    this.usingSplashDependencies()
+    this.usingActivityDepdendencies()
+    this.usingComposeDependencies()
+
+    this.usingHiltDependencies()
+
+    this.usingUnitTestDependencies()
+    this.usingAndroidTestDependencies()
+
+    this.usingTimberDependencies()
+}
+
+kapt {
+    correctErrorTypes = true
 }

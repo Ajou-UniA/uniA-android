@@ -28,7 +28,7 @@ object Dependencies {
     private val composeLiveData = "androidx.compose.runtime:runtime-livedata"
     private val composeViewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${LibVersions.COMPOSE_VIEW_MODEL}"
     private val composeNavigation = "androidx.navigation:navigation-compose:${LibVersions.COMPOSE_NAVIGATION}"
-    private val runtime_compose = "androidx.lifecycle:lifecycle-runtime-compose:${LibVersions.COMPOSE_NAVIGATION}"
+    private val runtime_compose = "androidx.lifecycle:lifecycle-runtime-compose:${LibVersions.LIFECYCLE}"
     //endregion
 
     //region OkHttp
