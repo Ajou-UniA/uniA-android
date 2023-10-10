@@ -34,6 +34,7 @@ import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.R
 import com.ajouunia.core.designsystem.component.UniATextField
 import com.ajouunia.core.designsystem.urbanistFamily
+import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_ROUTE
 
 @Composable
 fun ConfirmEmailScreen(
@@ -84,7 +85,10 @@ fun ConfirmEmailScreen(
             shape = RoundedCornerShape(size = 10.dp),
             colors = ButtonDefaults.buttonColors(Color(0xFF8354FF)),
             onClick = {
-                // TODO Sign
+                val options = NavOptions.Builder()
+                    .setPopUpTo(CONFIRM_EMAIL_ROUTE, inclusive = true)
+                    .build()
+                navigateToConfirmEmail(options)
             }
         ) {
             Text(
@@ -133,9 +137,6 @@ fun ConfirmEmailScreen(
                     append(" via your email.")
                 }
             },
-
-//            "When your Ajou University email verification is complete,\nwe will send you a verification code via your email.",
-
         )
     }
 }

@@ -7,6 +7,7 @@ import com.ajouunia.feature.onboarding.navigation.navigateToAgreementService
 import com.ajouunia.feature.onboarding.navigation.navigateToConfirmEmail
 import com.ajouunia.feature.onboarding.navigation.navigateToForgotPassword
 import com.ajouunia.feature.onboarding.navigation.navigateToSignIn
+import com.ajouunia.feature.onboarding.navigation.navigateToVerificationCode
 import com.ajouunia.feature.onboarding.navigation.onBoarding
 import com.ajouunia.unia_android.ui.UniAAppState
 import com.ajouunia.feature.splash.navigation.SPLASH_NAVIGATION_ROUTE
@@ -36,6 +37,8 @@ fun UniANavHost(
             navigateToAgreementService = navController::navigateToAgreementService,
             navigateToForgotPassword = navController::navigateToForgotPassword,
             navigateToConfirmEmail = navController::navigateToConfirmEmail,
+            navigateToVerificationCode = navController::navigateToVerificationCode,
+            navigateToSignUp = {},
             navigateToHome = {
 
             }

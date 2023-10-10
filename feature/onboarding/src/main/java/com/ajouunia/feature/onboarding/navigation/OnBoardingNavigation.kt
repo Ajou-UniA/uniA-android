@@ -7,11 +7,13 @@ import androidx.navigation.compose.composable
 import com.ajouunia.feature.onboarding.route.AgreementServiceRoute
 import com.ajouunia.feature.onboarding.route.ConfirmEmailRoute
 import com.ajouunia.feature.onboarding.route.SignInRoute
+import com.ajouunia.feature.onboarding.route.VerificationCodeRoute
 
 const val SIGN_IN_NAVIGATION_ROUTE = "sign_in_route"
 const val AGREEMENT_SERVICE_ROUTE = "agreement_service_route"
 const val FORGOT_PASSWORD_NAVIGATION_ROUTE = "forgot_password_route"
 const val CONFIRM_EMAIL_ROUTE = "confirm_email_route"
+const val VERIFICATION_CODE_ROUTE = "verification_code_route"
 
 fun NavController.navigateToSignIn(navOptions: NavOptions? = null) {
     this.navigate(SIGN_IN_NAVIGATION_ROUTE, navOptions)
@@ -29,11 +31,17 @@ fun NavController.navigateToConfirmEmail(navOptions: NavOptions? = null) {
     this.navigate(CONFIRM_EMAIL_ROUTE, navOptions)
 }
 
+fun NavController.navigateToVerificationCode(navOptions: NavOptions? = null) {
+    this.navigate(VERIFICATION_CODE_ROUTE, navOptions)
+}
+
 fun NavGraphBuilder.onBoarding(
     navigateToBack: () -> Unit,
     navigateToAgreementService: (NavOptions) -> Unit,
     navigateToForgotPassword: (NavOptions) -> Unit,
     navigateToConfirmEmail: (NavOptions) -> Unit,
+    navigateToVerificationCode: (NavOptions) -> Unit,
+    navigateToSignUp: (NavOptions) -> Unit,
     navigateToHome: (NavOptions) -> Unit
 ) {
     composable(route = SIGN_IN_NAVIGATION_ROUTE) {
@@ -54,9 +62,13 @@ fun NavGraphBuilder.onBoarding(
     composable(route = CONFIRM_EMAIL_ROUTE) {
         ConfirmEmailRoute(
             navigateToBack = navigateToBack,
-            navigateToConfirmCode = {
-
-            }
+            navigateToConfirmCode = navigateToVerificationCode
+        )
+    }
+    composable(route = VERIFICATION_CODE_ROUTE) {
+        VerificationCodeRoute(
+            navigateToBack = navigateToBack,
+            navigateToSignUp = navigateToSignUp
         )
     }
 }
