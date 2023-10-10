@@ -31,10 +31,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavOptions
-import com.ajouunia.core.designsystem.R
 import com.ajouunia.core.designsystem.component.UniATextField
 import com.ajouunia.core.designsystem.urbanistFamily
-import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_ROUTE
+import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_NAVIGATION_ROUTE
 
 @Composable
 fun ConfirmEmailScreen(
@@ -51,7 +50,7 @@ fun ConfirmEmailScreen(
             .padding(vertical = 50.dp, horizontal = 38.dp),
     ) {
         Text(
-            text = "Confirm Your\nAjou University Email",
+            text = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_title),
             style = TextStyle(
                 fontSize = 30.sp,
                 lineHeight = 35.sp,
@@ -86,13 +85,13 @@ fun ConfirmEmailScreen(
             colors = ButtonDefaults.buttonColors(Color(0xFF8354FF)),
             onClick = {
                 val options = NavOptions.Builder()
-                    .setPopUpTo(CONFIRM_EMAIL_ROUTE, inclusive = true)
+                    .setPopUpTo(CONFIRM_EMAIL_NAVIGATION_ROUTE, inclusive = true)
                     .build()
                 navigateToConfirmEmail(options)
             }
         ) {
             Text(
-                text = "Confirm",
+                text = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_btn_confirm),
                 style = TextStyle(
                     fontSize = 15.sp,
                     lineHeight = 10.sp,
@@ -114,7 +113,7 @@ fun ConfirmEmailScreen(
                         color = Color(0xFF000000),
                     )
                 ) {
-                    append("When your Ajou University email verification is complete, we will send you a ")
+                    append(stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_message_first))
                 }
                 withStyle(
                     style = SpanStyle(
@@ -124,7 +123,7 @@ fun ConfirmEmailScreen(
                         color = Color(0xFF000000),
                     )
                 ) {
-                    append("verification code")
+                    append(stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_message_verification_code))
                 }
                 withStyle(
                     style = SpanStyle(
@@ -134,7 +133,7 @@ fun ConfirmEmailScreen(
                         color = Color(0xFF000000),
                     )
                 ) {
-                    append(" via your email.")
+                    append(stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_message_second))
                 }
             },
         )

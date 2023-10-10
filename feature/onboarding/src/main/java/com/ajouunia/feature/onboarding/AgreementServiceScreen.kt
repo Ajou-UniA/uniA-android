@@ -33,7 +33,7 @@ import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.uniaiconpack.IconArrow
 import com.ajouunia.core.designsystem.uniaiconpack.IconUncheckEllipse
 import com.ajouunia.core.designsystem.urbanistFamily
-import com.ajouunia.feature.onboarding.navigation.AGREEMENT_SERVICE_ROUTE
+import com.ajouunia.feature.onboarding.navigation.AGREEMENT_SERVICE_NAVIGATION_ROUTE
 
 @Composable
 fun AgreementServiceScreen(
@@ -150,7 +150,7 @@ fun AgreementServiceScreen(
                 colors = ButtonDefaults.buttonColors(Color(0xFF8354FF)),
                 onClick = {
                     val options = NavOptions.Builder()
-                        .setPopUpTo(AGREEMENT_SERVICE_ROUTE, inclusive = true)
+                        .setPopUpTo(AGREEMENT_SERVICE_NAVIGATION_ROUTE, inclusive = true)
                         .build()
                     navigateToConfirmEmail(options)
                 }

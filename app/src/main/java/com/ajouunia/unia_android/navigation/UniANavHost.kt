@@ -2,11 +2,14 @@ package com.ajouunia.unia_android.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import com.ajouunia.feature.onboarding.navigation.navigateToAgreementService
 import com.ajouunia.feature.onboarding.navigation.navigateToConfirmEmail
 import com.ajouunia.feature.onboarding.navigation.navigateToForgotPassword
+import com.ajouunia.feature.onboarding.navigation.navigateToOnBoarding
 import com.ajouunia.feature.onboarding.navigation.navigateToSignIn
+import com.ajouunia.feature.onboarding.navigation.navigateToSignUp
 import com.ajouunia.feature.onboarding.navigation.navigateToVerificationCode
 import com.ajouunia.feature.onboarding.navigation.onBoarding
 import com.ajouunia.unia_android.ui.UniAAppState
@@ -38,7 +41,8 @@ fun UniANavHost(
             navigateToForgotPassword = navController::navigateToForgotPassword,
             navigateToConfirmEmail = navController::navigateToConfirmEmail,
             navigateToVerificationCode = navController::navigateToVerificationCode,
-            navigateToSignUp = {},
+            navigateToSignUp = navController::navigateToSignUp,
+            navigateToOnBoarding = navController::navigateToOnBoarding,
             navigateToHome = {
 
             }
