@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.ajouunia.feature.onboarding.navigation.navigateToAgreementService
+import com.ajouunia.feature.onboarding.navigation.navigateToConfirmEmail
 import com.ajouunia.feature.onboarding.navigation.navigateToForgotPassword
 import com.ajouunia.feature.onboarding.navigation.navigateToSignIn
 import com.ajouunia.feature.onboarding.navigation.onBoarding
@@ -34,6 +35,7 @@ fun UniANavHost(
             navigateToBack = navController::popBackStack,
             navigateToAgreementService = navController::navigateToAgreementService,
             navigateToForgotPassword = navController::navigateToForgotPassword,
+            navigateToConfirmEmail = navController::navigateToConfirmEmail,
             navigateToHome = {
 
             }

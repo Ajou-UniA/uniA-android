@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Icon
@@ -22,16 +21,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
-import com.ajouunia.feature.onboarding.AgreementServiceScreen
-import com.ajouunia.feature.onboarding.AgreementServiceViewModel
+import com.ajouunia.feature.onboarding.ConfirmEmailScreen
+import com.ajouunia.feature.onboarding.ConfirmEmailViewModel
 
 @Composable
-internal fun AgreementServiceRoute(
+internal fun ConfirmEmailRoute(
     navigateToBack: () -> Unit,
-    navigateToTerms: (NavOptions) -> Unit,
-    navigateToPrivacy: (NavOptions) -> Unit,
-    navigateToConfirmEmail: (NavOptions) -> Unit,
-    viewModel: AgreementServiceViewModel = hiltViewModel()
+    navigateToConfirmCode: (NavOptions) -> Unit,
+    viewModel: ConfirmEmailViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.observeAsState()
 
@@ -42,7 +39,8 @@ internal fun AgreementServiceRoute(
                 .background(color = Color.White),
             topBar = {
                 Box(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .statusBarsPadding()
                         .background(Color.White),
                     contentAlignment = Alignment.CenterStart
@@ -57,9 +55,9 @@ internal fun AgreementServiceRoute(
                 }
             }
         ) { padding ->
-            AgreementServiceScreen(
+            ConfirmEmailScreen(
                 modifier = Modifier.padding(padding),
-                navigateToConfirmEmail = navigateToConfirmEmail
+                navigateToConfirmEmail = navigateToConfirmCode
             )
         }
     }
@@ -67,14 +65,15 @@ internal fun AgreementServiceRoute(
 
 @Preview(showBackground = true)
 @Composable
-fun AgreementServiceRoutePreview() {
+fun ConfirmEmailRoutePreview() {
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.White),
         topBar = {
             Box(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .statusBarsPadding()
                     .background(Color.White),
                 contentAlignment = Alignment.CenterStart
@@ -84,12 +83,12 @@ fun AgreementServiceRoutePreview() {
                     contentDescription = "back",
                     modifier = Modifier
                         .padding(start = 24.dp, top = 60.dp)
-                        .clickable { },
+                        .clickable {  },
                 )
             }
         }
     ) { padding ->
-        AgreementServiceScreen(
+        ConfirmEmailScreen(
             modifier = Modifier.padding(padding),
             navigateToConfirmEmail = {}
         )

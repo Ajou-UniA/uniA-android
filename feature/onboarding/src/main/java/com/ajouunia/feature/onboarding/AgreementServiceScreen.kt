@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -27,10 +28,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavOptions
+import com.ajouunia.core.designsystem.R
 import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.uniaiconpack.IconArrow
 import com.ajouunia.core.designsystem.uniaiconpack.IconUncheckEllipse
 import com.ajouunia.core.designsystem.urbanistFamily
+import com.ajouunia.feature.onboarding.navigation.AGREEMENT_SERVICE_ROUTE
 
 @Composable
 fun AgreementServiceScreen(
@@ -47,7 +50,7 @@ fun AgreementServiceScreen(
         verticalArrangement = Arrangement.SpaceAround,
     ) {
         Text(
-            text = "To access UniA's\nservices, please agree\nto the terms and\nconditions.",
+            text = stringResource(id = R.string.agreement_service_title),
             style = TextStyle(
                 fontSize = 30.sp,
                 lineHeight = 35.sp,
@@ -70,7 +73,7 @@ fun AgreementServiceScreen(
                 )
                 Row {
                     Text(
-                        text = "I agree and accept ",
+                        text = stringResource(id = R.string.agreement_service_agree_message),
                         style = TextStyle(
                             fontSize = 15.sp,
                             lineHeight = 18.sp,
@@ -80,7 +83,7 @@ fun AgreementServiceScreen(
                         )
                     )
                     Text(
-                        text = "Terms of Use",
+                        text = stringResource(id = R.string.agreement_service_terms),
                         style = TextStyle(
                             fontSize = 15.sp,
                             lineHeight = 18.sp,
@@ -111,7 +114,7 @@ fun AgreementServiceScreen(
                 )
                 Row {
                     Text(
-                        text = "I agree and accept ",
+                        text = stringResource(id = R.string.agreement_service_agree_message),
                         style = TextStyle(
                             fontSize = 15.sp,
                             lineHeight = 18.sp,
@@ -121,7 +124,7 @@ fun AgreementServiceScreen(
                         )
                     )
                     Text(
-                        text = "Privacy Policy",
+                        text = stringResource(id = R.string.agreement_service_privacy),
                         style = TextStyle(
                             fontSize = 15.sp,
                             lineHeight = 18.sp,
@@ -146,12 +149,14 @@ fun AgreementServiceScreen(
                 shape = RoundedCornerShape(size = 10.dp),
                 colors = ButtonDefaults.buttonColors(Color(0xFF8354FF)),
                 onClick = {
-                    val options = NavOptions.Builder().build()
+                    val options = NavOptions.Builder()
+                        .setPopUpTo(AGREEMENT_SERVICE_ROUTE, inclusive = true)
+                        .build()
                     navigateToConfirmEmail(options)
                 }
             ) {
                 Text(
-                    text = "Agree and continue",
+                    text = stringResource(id = R.string.agreement_service_agree),
                     style = TextStyle(
                         fontSize = 15.sp,
                         lineHeight = 10.sp,
