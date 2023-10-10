@@ -2,6 +2,7 @@ package com.ajouunia.core.designsystem
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.ajouunia.core.designsystem.uniaiconpack.IconArrow
+import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
 import com.ajouunia.core.designsystem.uniaiconpack.IconEyeHide
 import com.ajouunia.core.designsystem.uniaiconpack.IconEyeShow
 import com.ajouunia.core.designsystem.uniaiconpack.IconLogoName
@@ -17,12 +18,6 @@ public val UniAIconPack.UniAAllIcons: ____KtList<ImageVector>
     if (__UniAAllIcons != null) {
       return __UniAAllIcons!!
     }
-    __UniAAllIcons= listOf(
-      IconLogoName,
-      IconUncheckEllipse,
-      IconArrow,
-      IconEyeHide,
-      IconEyeShow
-    )
+    __UniAAllIcons= listOf(IconBackArrow, IconLogoName, IconUncheckEllipse, IconArrow, IconEyeHide, IconEyeShow)
     return __UniAAllIcons!!
   }

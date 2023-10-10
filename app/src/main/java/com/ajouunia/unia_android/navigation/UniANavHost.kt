@@ -31,6 +31,7 @@ fun UniANavHost(
             }
         )
         onBoarding(
+            navigateToBack = navController::popBackStack,
             navigateToAgreementService = navController::navigateToAgreementService,
             navigateToForgotPassword = navController::navigateToForgotPassword,
             navigateToHome = {

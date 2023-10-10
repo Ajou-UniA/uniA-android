@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.uniaiconpack.IconEyeHide
 import com.ajouunia.core.designsystem.uniaiconpack.IconEyeShow
+import com.ajouunia.core.designsystem.urbanistFamily
 
 // region const value field
 private val TextFieldHeight: Dp = 52.dp
@@ -133,6 +134,7 @@ private fun UniABasicTextField(
         visualTransformation = if (!passwordVisible && isPassword) PasswordVisualTransformation() else VisualTransformation.None,
         maxLines = 1,
         textStyle = TextStyle(
+            fontFamily = urbanistFamily,
             fontWeight = FontWeight(400),
             fontStyle = FontStyle.Normal,
             fontSize = 13.sp,

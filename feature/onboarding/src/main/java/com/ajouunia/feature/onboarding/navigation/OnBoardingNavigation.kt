@@ -24,6 +24,7 @@ fun NavController.navigateToForgotPassword(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.onBoarding(
+    navigateToBack: () -> Unit,
     navigateToAgreementService: (NavOptions) -> Unit,
     navigateToForgotPassword: (NavOptions) -> Unit,
     navigateToHome: (NavOptions) -> Unit
@@ -37,6 +38,7 @@ fun NavGraphBuilder.onBoarding(
     }
     composable(route = AGREEMENT_SERVICE_ROUTE) {
         AgreementServiceRoute(
+            navigateToBack = navigateToBack,
             navigateToTerms = {},
             navigateToPrivacy = {},
             navigateToConfirmEmail = {}

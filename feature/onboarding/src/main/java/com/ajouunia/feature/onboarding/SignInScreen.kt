@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.component.UniACheckbox
 import com.ajouunia.core.designsystem.component.UniATextField
+import com.ajouunia.core.designsystem.urbanistFamily
 import com.ajouunia.feature.onboarding.state.SignInUIState
 
 @Composable
@@ -77,6 +78,7 @@ fun SignInScreen(
                 style = TextStyle(
                     fontSize = 13.sp,
                     lineHeight = 10.sp,
+                    fontFamily = urbanistFamily,
                     fontWeight = FontWeight(600),
                     color = Color(0xFF000000),
                 )
@@ -93,6 +95,7 @@ fun SignInScreen(
                 style = TextStyle(
                     fontSize = 13.sp,
                     lineHeight = 10.sp,
+                    fontFamily = urbanistFamily,
                     fontWeight = FontWeight(600),
                     color = Color(0xFF000000),
                 )
@@ -114,6 +117,7 @@ fun SignInScreen(
                     labelStyle = TextStyle(
                         fontSize = 13.sp,
                         lineHeight = 22.sp,
+                        fontFamily = urbanistFamily,
                         fontWeight = FontWeight(600),
                         color = Color(0xFF000000),
                     )
@@ -126,6 +130,7 @@ fun SignInScreen(
                     style = TextStyle(
                         fontSize = 13.sp,
                         lineHeight = 10.sp,
+                        fontFamily = urbanistFamily,
                         fontWeight = FontWeight(600),
                         color = Color(0xFF000000),
                         textAlign = TextAlign.Right,
@@ -148,6 +153,7 @@ fun SignInScreen(
                     style = TextStyle(
                         fontSize = 15.sp,
                         lineHeight = 10.sp,
+                        fontFamily = urbanistFamily,
                         fontWeight = FontWeight(600),
                         color = Color(0xFFFFFFFF),
                         textAlign = TextAlign.Center,
@@ -171,6 +177,7 @@ fun SignInScreen(
                     style = TextStyle(
                         fontSize = 15.sp,
                         lineHeight = 10.sp,
+                        fontFamily = urbanistFamily,
                         fontWeight = FontWeight(600),
                         color = Color(0xFFFFFFFF),
                         textAlign = TextAlign.Center,

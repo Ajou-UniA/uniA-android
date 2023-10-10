@@ -30,6 +30,7 @@ import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.uniaiconpack.IconArrow
 import com.ajouunia.core.designsystem.uniaiconpack.IconUncheckEllipse
+import com.ajouunia.core.designsystem.urbanistFamily
 
 @Composable
 fun AgreementServiceScreen(
@@ -42,14 +43,15 @@ fun AgreementServiceScreen(
         modifier = modifier
             .fillMaxSize()
             .background(color = Color.White)
-            .padding(horizontal = 20.dp, vertical = 40.dp),
+            .padding(bottom = 20.dp, start = 38.dp, end = 38.dp),
         verticalArrangement = Arrangement.SpaceAround,
     ) {
         Text(
             text = "To access UniA's\nservices, please agree\nto the terms and\nconditions.",
             style = TextStyle(
                 fontSize = 30.sp,
-                lineHeight = 22.sp,
+                lineHeight = 35.sp,
+                fontFamily = urbanistFamily,
                 fontWeight = FontWeight(700),
                 color = Color(0xFF000000),
             )
@@ -72,6 +74,7 @@ fun AgreementServiceScreen(
                         style = TextStyle(
                             fontSize = 15.sp,
                             lineHeight = 18.sp,
+                            fontFamily = urbanistFamily,
                             fontWeight = FontWeight(600),
                             color = Color(0xFF000000),
                         )
@@ -81,6 +84,7 @@ fun AgreementServiceScreen(
                         style = TextStyle(
                             fontSize = 15.sp,
                             lineHeight = 18.sp,
+                            fontFamily = urbanistFamily,
                             fontWeight = FontWeight(600),
                             color = Color(0xFF8354FF),
                         )
@@ -111,6 +115,7 @@ fun AgreementServiceScreen(
                         style = TextStyle(
                             fontSize = 15.sp,
                             lineHeight = 18.sp,
+                            fontFamily = urbanistFamily,
                             fontWeight = FontWeight(600),
                             color = Color(0xFF000000),
                         )
@@ -120,6 +125,7 @@ fun AgreementServiceScreen(
                         style = TextStyle(
                             fontSize = 15.sp,
                             lineHeight = 18.sp,
+                            fontFamily = urbanistFamily,
                             fontWeight = FontWeight(600),
                             color = Color(0xFF8354FF),
                         )
@@ -149,6 +155,7 @@ fun AgreementServiceScreen(
                     style = TextStyle(
                         fontSize = 15.sp,
                         lineHeight = 10.sp,
+                        fontFamily = urbanistFamily,
                         fontWeight = FontWeight(600),
                         color = Color(0xFFFFFFFF),
                         textAlign = TextAlign.Center,
