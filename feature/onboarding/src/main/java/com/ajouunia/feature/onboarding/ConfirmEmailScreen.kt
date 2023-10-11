@@ -34,14 +34,17 @@ import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.component.UniATextField
 import com.ajouunia.core.designsystem.urbanistFamily
 import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_NAVIGATION_ROUTE
+import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
 
 @Composable
 fun ConfirmEmailScreen(
     modifier: Modifier = Modifier,
-    navigateToConfirmEmail: (NavOptions) -> Unit,
+    uiState: ConfirmEmailUIState,
+    changeInputEmail: (String) -> Unit,
+    enableButton: Boolean,
+    onClickSubmit: () -> Unit,
 ) {
     val context = LocalContext.current
-    var userEmail by rememberSaveable { mutableStateOf("") }
 
     Column(
         modifier = modifier
@@ -61,7 +64,7 @@ fun ConfirmEmailScreen(
         )
         Spacer(modifier = Modifier.height(36.dp))
         Text(
-            text = "Email",
+            text = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_title_email),
             style = TextStyle(
                 fontSize = 13.sp,
                 lineHeight = 10.sp,
@@ -71,10 +74,8 @@ fun ConfirmEmailScreen(
             )
         )
         UniATextField(
-            value = userEmail,
-            onValueChange = { newValue ->
-                userEmail = newValue
-            }
+            value = uiState.email,
+            onValueChange = changeInputEmail
         )
         Spacer(modifier = Modifier.height(42.dp))
         Button(
@@ -83,11 +84,9 @@ fun ConfirmEmailScreen(
                 .heightIn(min = 52.dp),
             shape = RoundedCornerShape(size = 10.dp),
             colors = ButtonDefaults.buttonColors(Color(0xFF8354FF)),
+            enabled = enableButton,
             onClick = {
-                val options = NavOptions.Builder()
-                    .setPopUpTo(CONFIRM_EMAIL_NAVIGATION_ROUTE, inclusive = true)
-                    .build()
-                navigateToConfirmEmail(options)
+                onClickSubmit()
             }
         ) {
             Text(
@@ -142,8 +141,22 @@ fun ConfirmEmailScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun ConfirmEmailScreenPreview() {
+fun ConfirmEmailScreenEnablePreview() {
     ConfirmEmailScreen(
-        navigateToConfirmEmail = {}
+        uiState = ConfirmEmailUIState.Init,
+        changeInputEmail = {},
+        enableButton = true,
+        onClickSubmit = {},
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ConfirmEmailScreenDisablePreview() {
+    ConfirmEmailScreen(
+        uiState = ConfirmEmailUIState.Init,
+        changeInputEmail = {},
+        enableButton = false,
+        onClickSubmit = {},
     )
 }

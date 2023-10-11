@@ -19,6 +19,7 @@
 
 <!--  ConfirmEmail Screen  -->
     <string name="confirm_email_title">Confirm Your\nAjou University Email</string>
+    <string name="confirm_email_title_email">Email</string>
     <string name="confirm_email_btn_confirm">Confirm</string>
     <string name="confirm_email_message_first">When your Ajou University email verification is complete, we will send you a\t</string>
     <string name="confirm_email_message_verification_code">verification code</string>

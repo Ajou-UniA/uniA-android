@@ -40,6 +40,7 @@ object Dependencies {
     //region Retrofit
     private val retrofit = "com.squareup.retrofit2:retrofit:${LibVersions.RETROFIT}"
     private val gsonConverter = "com.squareup.retrofit2:converter-gson:${LibVersions.RETROFIT}"
+    private val scalarConverter = "com.squareup.retrofit2:converter-scalars:${LibVersions.RETROFIT}"
 
     //endregion
 
@@ -118,6 +119,7 @@ object Dependencies {
     fun DependencyHandler.usingRetrofitDependencies() {
         implementation(retrofit)
         implementation(gsonConverter)
+        implementation(scalarConverter)
     }
 
     fun DependencyHandler.usingRoomDependencies() {

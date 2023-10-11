@@ -23,6 +23,8 @@ import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
 import com.ajouunia.feature.onboarding.ConfirmEmailScreen
 import com.ajouunia.feature.onboarding.ConfirmEmailViewModel
+import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_NAVIGATION_ROUTE
+import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
 
 @Composable
 internal fun ConfirmEmailRoute(
@@ -31,6 +33,22 @@ internal fun ConfirmEmailRoute(
     viewModel: ConfirmEmailViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.observeAsState()
+
+    when (uiState) {
+        is ConfirmEmailUIState.Success -> {
+            val options = NavOptions.Builder()
+                .setPopUpTo(CONFIRM_EMAIL_NAVIGATION_ROUTE, inclusive = true)
+                .build()
+            navigateToConfirmCode(options)
+        }
+        is ConfirmEmailUIState.Loading -> {
+
+        }
+        is ConfirmEmailUIState.Error -> {
+
+        }
+        else -> Unit
+    }
 
     uiState?.let { state ->
         Scaffold(
@@ -57,7 +75,10 @@ internal fun ConfirmEmailRoute(
         ) { padding ->
             ConfirmEmailScreen(
                 modifier = Modifier.padding(padding),
-                navigateToConfirmEmail = navigateToConfirmCode
+                uiState = state,
+                changeInputEmail = viewModel::changeInputEmail,
+                enableButton = viewModel.isValidEmail(),
+                onClickSubmit = viewModel::submitEmail,
             )
         }
     }
@@ -90,7 +111,10 @@ fun ConfirmEmailRoutePreview() {
     ) { padding ->
         ConfirmEmailScreen(
             modifier = Modifier.padding(padding),
-            navigateToConfirmEmail = {}
+            uiState = ConfirmEmailUIState.Init,
+            changeInputEmail = {},
+            enableButton = true,
+            onClickSubmit = {},
         )
     }
 }
