@@ -41,13 +41,15 @@ import com.ajouunia.feature.onboarding.state.SignInUIState
 fun SignInScreen(
     modifier: Modifier = Modifier,
     uiState: SignInUIState,
+    validInfo: Boolean = false,
+    changeInputEmail: (String) -> Unit,
+    changeInputPassword: (String) -> Unit,
+    onClickSignIn: () -> Unit,
     navigateToAgreementService: (NavOptions) -> Unit,
     navigateToForgotPassword: (NavOptions) -> Unit,
     navigateToHome: (NavOptions) -> Unit
 ) {
     val context = LocalContext.current
-    var userEmail by rememberSaveable { mutableStateOf("") }
-    var password by rememberSaveable { mutableStateOf("") }
     var isRemember by rememberSaveable { mutableStateOf(false) }
 
     Surface(
@@ -84,9 +86,9 @@ fun SignInScreen(
                 )
             )
             UniATextField(
-                value = userEmail,
+                value = uiState.email,
                 onValueChange = { newValue ->
-                    userEmail = newValue
+                    changeInputEmail(newValue)
                 }
             )
             Spacer(modifier = Modifier.height(22.dp))
@@ -101,9 +103,9 @@ fun SignInScreen(
                 )
             )
             UniATextField(
-                value = password,
+                value = uiState.password,
                 onValueChange = { newValue ->
-                    password = newValue
+                    changeInputPassword(newValue)
                 }
             )
             Spacer(modifier = Modifier.height(24.dp))
@@ -144,8 +146,9 @@ fun SignInScreen(
                     .heightIn(min = 52.dp),
                 shape = RoundedCornerShape(size = 10.dp),
                 colors = ButtonDefaults.buttonColors(Color(0xFF8354FF)),
+                enabled = validInfo,
                 onClick = {
-                    // TODO Sign
+                    onClickSignIn()
                 }
             ) {
                 Text(
@@ -194,14 +197,11 @@ fun SignInScreen(
 fun SignInScreenPreview() {
     SignInScreen(
         uiState = SignInUIState.Init,
-        navigateToAgreementService = {
-
-        },
-        navigateToForgotPassword = {
-
-        },
-        navigateToHome = {
-
-        }
+        changeInputEmail = {},
+        changeInputPassword = {},
+        onClickSignIn = {},
+        navigateToAgreementService = {},
+        navigateToForgotPassword = {},
+        navigateToHome = {}
     )
 }

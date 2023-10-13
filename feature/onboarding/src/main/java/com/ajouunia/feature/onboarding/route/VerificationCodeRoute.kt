@@ -21,13 +21,21 @@ import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
 import com.ajouunia.feature.onboarding.VerificationCodeScreen
 import com.ajouunia.feature.onboarding.VerificationCodeViewModel
+import com.ajouunia.feature.onboarding.navigation.VERIFICATION_CODE_NAVIGATION_ROUTE
 
 @Composable
 internal fun VerificationCodeRoute(
+    userEmail: String,
     navigateToBack: () -> Unit,
-    navigateToSignUp: (NavOptions) -> Unit,
+    navigateToSignUp: (NavOptions, String) -> Unit,
     viewModel: VerificationCodeViewModel = hiltViewModel()
 ) {
+
+//    val options = NavOptions.Builder()
+//        .setPopUpTo(VERIFICATION_CODE_NAVIGATION_ROUTE, inclusive = true)
+//        .build()
+//    navigateToSignUp(options)
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -51,8 +59,7 @@ internal fun VerificationCodeRoute(
         }
     ) { padding ->
         VerificationCodeScreen(
-            modifier = Modifier.padding(padding),
-            navigateToSignUp = navigateToSignUp
+            modifier = Modifier.padding(padding)
         )
     }
 }
@@ -84,7 +91,6 @@ fun VerificationCodeRoutePreview() {
     ) { padding ->
         VerificationCodeScreen(
             modifier = Modifier.padding(padding),
-            navigateToSignUp = {}
         )
     }
 }

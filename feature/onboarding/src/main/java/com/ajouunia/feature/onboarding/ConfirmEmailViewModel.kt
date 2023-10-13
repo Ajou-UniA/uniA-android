@@ -1,12 +1,13 @@
 package com.ajouunia.feature.onboarding
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ajouunia.core.domain.usecase.CheckEmailUseCase
+import com.ajouunia.core.domain.usecase.IsDuplicateEmailUseCase
 import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
+import com.ajouunia.feature.onboarding.utils.isAjouUnivEmail
+import com.ajouunia.feature.onboarding.utils.isEmptyId
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,7 +16,7 @@ import javax.inject.Inject
 class ConfirmEmailViewModel
 @Inject
 constructor(
-    private val checkEmailUseCase: CheckEmailUseCase
+    private val isDuplicateEmailUseCase: IsDuplicateEmailUseCase
 ) : ViewModel() {
     private val _uiState = MutableLiveData<ConfirmEmailUIState>(ConfirmEmailUIState.Init)
     val uiState: LiveData<ConfirmEmailUIState>
@@ -39,7 +40,7 @@ constructor(
     }
 
     private fun remoteSubmitEmail(email: String) = viewModelScope.launch {
-        checkEmailUseCase(userEmail = email).onSuccess {
+        isDuplicateEmailUseCase(userEmail = email).onSuccess {
             when (it.result) {
                 true -> remoteSendCode(email = email)
                 false -> _uiState.postValue(ConfirmEmailUIState.Error(email))
@@ -50,23 +51,15 @@ constructor(
     }
 
     private fun remoteSendCode(email: String) {
-
+        // TODO
+        _uiState.postValue(ConfirmEmailUIState.Success(email = email))
     }
 
     fun isValidEmail(): Boolean = _uiState.value?.email?.let {
-        it.isAjouUnivEmail() && it.isEmptyId()
+        it.isAjouUnivEmail() and it.isEmptyId()
     } ?: false
 
-    private fun String.isAjouUnivEmail(): Boolean = this.contains(AJOU_UNIV_DEFAULT_EMAIL_FORM)
-
-    private fun String.isEmptyId(): Boolean = this.split(AJOU_UNIV_DEFAULT_EMAIL_FORM).let { list ->
-        return@let when (list.size) {
-            2 -> list[0].isNotEmpty() && list[1].isEmpty()
-            else -> false
-        }
-    }
-
     companion object {
-        private const val AJOU_UNIV_DEFAULT_EMAIL_FORM = "@ajou.ac.kr"
+        const val AJOU_UNIV_DEFAULT_EMAIL_FORM = "@ajou.ac.kr"
     }
 }

@@ -24,6 +24,7 @@ import com.ajouunia.feature.onboarding.SignUpViewModel
 
 @Composable
 internal fun SignUpRoute(
+    userEmail: String,
     navigateToBack: () -> Unit,
     navigateToOnBoarding: (NavOptions) -> Unit,
     viewModel: SignUpViewModel = hiltViewModel()

@@ -16,6 +16,8 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 internal object NetworkModule {
+    private const val BASE_URL = "http://ec2-43-202-102-96.ap-northeast-2.compute.amazonaws.com:8080/api"
+    private const val VERSION_FIRST = "/v1/"
 
     @Provides
     fun providerAuthInterceptor(): AuthInterceptor = AuthInterceptor()
@@ -38,11 +40,6 @@ internal object NetworkModule {
         .addInterceptor(authInterceptor)
         .build()
 
-    private const val BASE_URL = "http://ec2-43-202-102-96.ap-northeast-2.compute.amazonaws.com:8080"
-
-    @Provides
-    fun provideNullOrEmptyConverterFactory(): NullOrEmptyConverterFactory = NullOrEmptyConverterFactory()
-
     @Provides
     @Singleton
     fun provideRetrofit(
@@ -51,7 +48,7 @@ internal object NetworkModule {
         nullOrEmptyConverterFactory: NullOrEmptyConverterFactory,
         scalarsConverterFactory: ScalarsConverterFactory
     ): Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(BASE_URL + VERSION_FIRST)
         .client(okHttpClient)
         .addConverterFactory(nullOrEmptyConverterFactory)
         .addConverterFactory(scalarsConverterFactory)
@@ -59,9 +56,12 @@ internal object NetworkModule {
         .build()
 
     @Provides
-    fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create(GsonBuilder().setLenient().create())
+    fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Provides
     fun provideScalarConverterFactory(): ScalarsConverterFactory = ScalarsConverterFactory.create()
+
+    @Provides
+    fun provideNullOrEmptyConverterFactory(): NullOrEmptyConverterFactory = NullOrEmptyConverterFactory()
 
 }

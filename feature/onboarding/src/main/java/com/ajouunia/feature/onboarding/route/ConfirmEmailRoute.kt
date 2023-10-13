@@ -29,17 +29,17 @@ import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
 @Composable
 internal fun ConfirmEmailRoute(
     navigateToBack: () -> Unit,
-    navigateToConfirmCode: (NavOptions) -> Unit,
+    navigateToConfirmCode: (NavOptions, String) -> Unit,
     viewModel: ConfirmEmailViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.observeAsState()
 
-    when (uiState) {
+    when (val state = uiState) {
         is ConfirmEmailUIState.Success -> {
             val options = NavOptions.Builder()
                 .setPopUpTo(CONFIRM_EMAIL_NAVIGATION_ROUTE, inclusive = true)
                 .build()
-            navigateToConfirmCode(options)
+            navigateToConfirmCode(options, state.email)
         }
         is ConfirmEmailUIState.Loading -> {
 

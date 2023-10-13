@@ -1,5 +1,5 @@
 package com.ajouunia.core.data.model.response
 
-data class CheckEmailResponse(
+data class IsDuplicateEmailResponse(
     val answer: String
 )

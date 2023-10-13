@@ -1,7 +1,13 @@
 package com.ajouunia.core.data.di
 
-import com.ajouunia.core.data.remote.OnBoardingDataSource
-import com.ajouunia.core.data.remote.OnBoardingDataSourceImpl
+import com.ajouunia.core.data.remote.MemberDataSource
+import com.ajouunia.core.data.remote.ResetPasswordDataSource
+import com.ajouunia.core.data.remote.SignUpDataSource
+import com.ajouunia.core.data.remote.VerificationDataSource
+import com.ajouunia.core.data.remote.impl.MemberDataSourceImpl
+import com.ajouunia.core.data.remote.impl.ResetPasswordDataSourceImpl
+import com.ajouunia.core.data.remote.impl.SignUpDataSourceImpl
+import com.ajouunia.core.data.remote.impl.VerificationDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,8 +20,26 @@ internal abstract class RemoteDataSourceModule {
 
     @Binds
     @Singleton
-    abstract fun bindOnBoardingDataSource(
-        onBoardingDataSourceImpl: OnBoardingDataSourceImpl,
-    ): OnBoardingDataSource
+    abstract fun bindMemberDataSource(
+        memberDataSourceImpl: MemberDataSourceImpl,
+    ): MemberDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindResetPasswordDataSource(
+        resetPasswordDataSourceImpl: ResetPasswordDataSourceImpl,
+    ): ResetPasswordDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindSignUpDataSource(
+        signUpDataSourceImpl: SignUpDataSourceImpl,
+    ): SignUpDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindVerificationDataSource(
+        verificationDataSourceImpl: VerificationDataSourceImpl,
+    ): VerificationDataSource
 
 }

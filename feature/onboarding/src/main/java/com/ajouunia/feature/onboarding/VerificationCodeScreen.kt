@@ -42,7 +42,6 @@ import kotlinx.coroutines.delay
 @Composable
 fun VerificationCodeScreen(
     modifier: Modifier = Modifier,
-    navigateToSignUp: (NavOptions) -> Unit,
 ) {
     val context = LocalContext.current
     var otpText by rememberSaveable { mutableStateOf("") }
@@ -112,10 +111,7 @@ fun VerificationCodeScreen(
             colors = ButtonDefaults.buttonColors(Color(0xFF8354FF)),
             enabled = !isTimeOut,
             onClick = {
-                val options = NavOptions.Builder()
-                    .setPopUpTo(VERIFICATION_CODE_NAVIGATION_ROUTE, inclusive = true)
-                    .build()
-                navigateToSignUp(options)
+                // TODO
             }
         ) {
             Text(
@@ -180,9 +176,5 @@ fun Timer(duration: Long, onFinished: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun VerificationCodeScreenPreview() {
-    VerificationCodeScreen(
-        navigateToSignUp = {
-
-        }
-    )
+    VerificationCodeScreen()
 }
