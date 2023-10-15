@@ -1,6 +1,5 @@
 package com.ajouunia.feature.onboarding.navigation
 
-import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -15,8 +14,10 @@ import com.ajouunia.feature.onboarding.route.VerificationCodeRoute
 const val SIGN_IN_NAVIGATION_ROUTE = "sign_in_route"
 const val AGREEMENT_SERVICE_NAVIGATION_ROUTE = "agreement_service_route"
 const val FORGOT_PASSWORD_NAVIGATION_ROUTE = "forgot_password_route"
-const val CONFIRM_EMAIL_NAVIGATION_ROUTE = "confirm_email_route"
-const val VERIFICATION_CODE_NAVIGATION_ROUTE = "verification_code_route/{userEmail}"
+const val CONFIRM_EMAIL_SIGN_UP_NAVIGATION_ROUTE = "confirm_email_route/sign_up"
+const val CONFIRM_EMAIL_FORGOT_PASSWORD_NAVIGATION_ROUTE = "confirm_email_route/forgot_password"
+const val VERIFICATION_CODE_SIGN_UP_NAVIGATION_ROUTE = "verification_code_route/sign_up/{userEmail}"
+const val VERIFICATION_CODE_FORGOT_PASSWORD_NAVIGATION_ROUTE = "verification_code_route/forgot_password/{userEmail}"
 const val SIGN_UP_NAVIGATION_ROUTE = "sign_up_route/{userEmail}"
 const val ON_BOARDING_NAVIGATION_ROUTE = "on_boarding_route"
 
@@ -29,19 +30,31 @@ fun NavController.navigateToAgreementService(navOptions: NavOptions? = null) {
 }
 
 fun NavController.navigateToForgotPassword(navOptions: NavOptions? = null) {
-    this.navigate(AGREEMENT_SERVICE_NAVIGATION_ROUTE, navOptions)
+    this.navigate(FORGOT_PASSWORD_NAVIGATION_ROUTE, navOptions)
 }
 
-fun NavController.navigateToConfirmEmail(navOptions: NavOptions? = null) {
-    this.navigate(CONFIRM_EMAIL_NAVIGATION_ROUTE, navOptions)
+fun NavController.navigateToConfirmEmailSignUp(navOptions: NavOptions? = null) {
+    this.navigate(CONFIRM_EMAIL_SIGN_UP_NAVIGATION_ROUTE, navOptions)
 }
 
-fun NavController.navigateToVerificationCode(
+fun NavController.navigateToConfirmEmailForgotPassword(navOptions: NavOptions? = null) {
+    this.navigate(CONFIRM_EMAIL_FORGOT_PASSWORD_NAVIGATION_ROUTE, navOptions)
+}
+
+fun NavController.navigateToVerificationCodeSignUp(
     navOptions: NavOptions? = null,
     userEmail: String
 ) {
-    this.navigate(VERIFICATION_CODE_NAVIGATION_ROUTE.replace("userEmail", userEmail), navOptions)
+    this.navigate(VERIFICATION_CODE_SIGN_UP_NAVIGATION_ROUTE.replace("userEmail", userEmail), navOptions)
 }
+
+fun NavController.navigateToVerificationCodeForgotPassword(
+    navOptions: NavOptions? = null,
+    userEmail: String
+) {
+    this.navigate(VERIFICATION_CODE_FORGOT_PASSWORD_NAVIGATION_ROUTE.replace("userEmail", userEmail), navOptions)
+}
+
 
 fun NavController.navigateToSignUp(
     navOptions: NavOptions? = null,
@@ -58,8 +71,10 @@ fun NavGraphBuilder.onBoarding(
     navigateToBack: () -> Unit,
     navigateToAgreementService: (NavOptions) -> Unit,
     navigateToForgotPassword: (NavOptions) -> Unit,
-    navigateToConfirmEmail: (NavOptions) -> Unit,
-    navigateToVerificationCode: (NavOptions, String) -> Unit,
+    navigateToConfirmEmailSignUp: (NavOptions) -> Unit,
+    navigateToConfirmEmailForgotPassword: (NavOptions) -> Unit,
+    navigateToVerificationCodeSignUp: (NavOptions, String) -> Unit,
+    navigateToVerificationCodeForgotPassword: (NavOptions, String) -> Unit,
     navigateToSignUp: (NavOptions, String) -> Unit,
     navigateToOnBoarding: (NavOptions) -> Unit,
     navigateToHome: (NavOptions) -> Unit
@@ -67,7 +82,7 @@ fun NavGraphBuilder.onBoarding(
     composable(route = SIGN_IN_NAVIGATION_ROUTE) {
         SignInRoute(
             navigateToAgreementService = navigateToAgreementService,
-            navigateToForgotPassword = navigateToForgotPassword,
+            navigateToForgotPassword = navigateToConfirmEmailForgotPassword,
             navigateToHome = navigateToHome
         )
     }
@@ -76,20 +91,31 @@ fun NavGraphBuilder.onBoarding(
             navigateToBack = navigateToBack,
             navigateToTerms = {},
             navigateToPrivacy = {},
-            navigateToConfirmEmail = navigateToConfirmEmail
+            navigateToConfirmEmail = navigateToConfirmEmailSignUp
         )
     }
-    composable(route = CONFIRM_EMAIL_NAVIGATION_ROUTE) {
+    composable(route = CONFIRM_EMAIL_SIGN_UP_NAVIGATION_ROUTE) {
         ConfirmEmailRoute(
+            isSignUp = true,
             navigateToBack = navigateToBack,
-            navigateToConfirmCode = navigateToVerificationCode
+            navigateToConfirmCodeSignUp = navigateToVerificationCodeSignUp,
+            navigateToConfirmCodeForgotPassword = navigateToVerificationCodeForgotPassword
         )
     }
-    composable(route = VERIFICATION_CODE_NAVIGATION_ROUTE) {
+    composable(route = CONFIRM_EMAIL_FORGOT_PASSWORD_NAVIGATION_ROUTE) {
+        ConfirmEmailRoute(
+            isSignUp = false,
+            navigateToBack = navigateToBack,
+            navigateToConfirmCodeSignUp = navigateToVerificationCodeSignUp,
+            navigateToConfirmCodeForgotPassword = navigateToVerificationCodeForgotPassword
+        )
+    }
+    composable(route = VERIFICATION_CODE_SIGN_UP_NAVIGATION_ROUTE) {
         VerificationCodeRoute(
             userEmail = it.arguments?.getString("userEmail") ?: "",
             navigateToBack = navigateToBack,
-            navigateToSignUp = navigateToSignUp
+            navigateToSignUp = navigateToSignUp,
+            navigateToResetPassword = null
         )
     }
     composable(route = SIGN_UP_NAVIGATION_ROUTE) {

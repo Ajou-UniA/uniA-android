@@ -1,6 +1,7 @@
 package com.ajouunia.feature.onboarding
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -44,13 +45,12 @@ fun SignInScreen(
     validInfo: Boolean = false,
     changeInputEmail: (String) -> Unit,
     changeInputPassword: (String) -> Unit,
+    changeInputRemember: (Boolean) -> Unit,
     onClickSignIn: () -> Unit,
     navigateToAgreementService: (NavOptions) -> Unit,
     navigateToForgotPassword: (NavOptions) -> Unit,
-    navigateToHome: (NavOptions) -> Unit
 ) {
     val context = LocalContext.current
-    var isRemember by rememberSaveable { mutableStateOf(false) }
 
     Surface(
         modifier = modifier
@@ -124,7 +124,7 @@ fun SignInScreen(
                         color = Color(0xFF000000),
                     )
                 ) {
-                    //TODO Check
+                    changeInputRemember(it)
                 }
 
                 Text(
@@ -136,7 +136,11 @@ fun SignInScreen(
                         fontWeight = FontWeight(600),
                         color = Color(0xFF000000),
                         textAlign = TextAlign.Right,
-                    )
+                    ),
+                    modifier = Modifier.clickable {
+                        val options = NavOptions.Builder().build()
+                        navigateToForgotPassword(options)
+                    }
                 )
             }
             Spacer(modifier = Modifier.height(20.dp))
@@ -199,9 +203,9 @@ fun SignInScreenPreview() {
         uiState = SignInUIState.Init,
         changeInputEmail = {},
         changeInputPassword = {},
+        changeInputRemember = {},
         onClickSignIn = {},
         navigateToAgreementService = {},
         navigateToForgotPassword = {},
-        navigateToHome = {}
     )
 }

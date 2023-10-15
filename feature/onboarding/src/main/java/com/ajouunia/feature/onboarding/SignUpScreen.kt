@@ -35,7 +35,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.component.UniATextField
 import com.ajouunia.core.designsystem.urbanistFamily
-import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_NAVIGATION_ROUTE
 import com.ajouunia.feature.onboarding.navigation.SIGN_UP_NAVIGATION_ROUTE
 
 @Composable

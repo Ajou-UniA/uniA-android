@@ -2,6 +2,7 @@ package com.ajouunia.feature.onboarding.route
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,9 +13,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -23,23 +26,36 @@ import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
 import com.ajouunia.feature.onboarding.ConfirmEmailScreen
 import com.ajouunia.feature.onboarding.ConfirmEmailViewModel
-import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_NAVIGATION_ROUTE
+import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_FORGOT_PASSWORD_NAVIGATION_ROUTE
+import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_SIGN_UP_NAVIGATION_ROUTE
 import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
 
 @Composable
 internal fun ConfirmEmailRoute(
+    isSignUp: Boolean,
     navigateToBack: () -> Unit,
-    navigateToConfirmCode: (NavOptions, String) -> Unit,
+    navigateToConfirmCodeSignUp: (NavOptions, String) -> Unit,
+    navigateToConfirmCodeForgotPassword: (NavOptions, String) -> Unit,
     viewModel: ConfirmEmailViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.observeAsState()
+    val focusManager = LocalFocusManager.current
+    val interactionSource = remember { MutableInteractionSource() }
 
     when (val state = uiState) {
-        is ConfirmEmailUIState.Success -> {
-            val options = NavOptions.Builder()
-                .setPopUpTo(CONFIRM_EMAIL_NAVIGATION_ROUTE, inclusive = true)
-                .build()
-            navigateToConfirmCode(options, state.email)
+        is ConfirmEmailUIState.Success -> when (isSignUp) {
+            true -> {
+                val options = NavOptions.Builder()
+                    .setPopUpTo(CONFIRM_EMAIL_SIGN_UP_NAVIGATION_ROUTE, inclusive = true)
+                    .build()
+                navigateToConfirmCodeSignUp(options, state.email)
+            }
+            false -> {
+                val options = NavOptions.Builder()
+                    .setPopUpTo(CONFIRM_EMAIL_FORGOT_PASSWORD_NAVIGATION_ROUTE, inclusive = true)
+                    .build()
+                navigateToConfirmCodeForgotPassword(options, state.email)
+            }
         }
         is ConfirmEmailUIState.Loading -> {
 
@@ -54,7 +70,13 @@ internal fun ConfirmEmailRoute(
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = Color.White),
+                .background(color = Color.White)
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null,
+                ) {
+                    focusManager.clearFocus()
+                },
             topBar = {
                 Box(
                     modifier = Modifier

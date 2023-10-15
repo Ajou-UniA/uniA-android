@@ -36,15 +36,16 @@ import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.R
 import com.ajouunia.core.designsystem.component.OtpTextField
 import com.ajouunia.core.designsystem.urbanistFamily
-import com.ajouunia.feature.onboarding.navigation.VERIFICATION_CODE_NAVIGATION_ROUTE
+import com.ajouunia.feature.onboarding.state.VerificationCodeUIState
 import kotlinx.coroutines.delay
 
 @Composable
 fun VerificationCodeScreen(
     modifier: Modifier = Modifier,
+    uiState: VerificationCodeUIState,
+    changeInputCode: (String) -> Unit
 ) {
     val context = LocalContext.current
-    var otpText by rememberSaveable { mutableStateOf("") }
     var isTimeOut by rememberSaveable { mutableStateOf(false) }
 
     Column(
@@ -77,10 +78,10 @@ fun VerificationCodeScreen(
         Spacer(modifier = Modifier.height(45.dp))
         OtpTextField(
             modifier = Modifier.fillMaxWidth(),
-            otpText = otpText,
+            otpText = uiState.code,
             otpCount = 4,
             onOtpTextChange = { newValue, verificationLength ->
-                otpText = newValue
+                changeInputCode(newValue)
             }
         )
         Spacer(modifier = Modifier.height(10.dp))
@@ -176,5 +177,8 @@ fun Timer(duration: Long, onFinished: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun VerificationCodeScreenPreview() {
-    VerificationCodeScreen()
+    VerificationCodeScreen(
+        uiState = VerificationCodeUIState.Init,
+        changeInputCode = {}
+    )
 }

@@ -25,6 +25,7 @@ constructor(
     val uiState: LiveData<SignInUIState>
         get() = _uiState
 
+    
     fun changeInputEmail(email: String) {
         _uiState.value = SignInUIState.UpdateInfo(
             email = email.replace(" ", ""),
@@ -38,6 +39,14 @@ constructor(
             email = _uiState.value?.email ?: "",
             password = password.replace(" ", ""),
             rememberSign = _uiState.value?.rememberSign ?: false
+        )
+    }
+
+    fun changeInputRemember(remember: Boolean) {
+        _uiState.value = SignInUIState.UpdateInfo(
+            email = _uiState.value?.email ?: "",
+            password = _uiState.value?.password ?: "",
+            rememberSign = remember
         )
     }
 
