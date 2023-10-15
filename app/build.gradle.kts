@@ -69,6 +69,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":feature:splash"))
     implementation(project(":feature:onboarding"))
+    implementation(project(":feature:mainroot"))
 
     this.usingKotlinStdLibDependencies()
     this.usingCoreKtxDependencies()

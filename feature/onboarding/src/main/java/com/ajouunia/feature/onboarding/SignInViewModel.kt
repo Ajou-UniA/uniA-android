@@ -25,7 +25,7 @@ constructor(
     val uiState: LiveData<SignInUIState>
         get() = _uiState
 
-    
+
     fun changeInputEmail(email: String) {
         _uiState.value = SignInUIState.UpdateInfo(
             email = email.replace(" ", ""),
@@ -86,7 +86,7 @@ constructor(
     private fun remoteFetchIdToken(state: SignInUIState) = viewModelScope.launch {
         findIdTokenByEmailUseCase(state.email).onSuccess {
             Log.d("findIdTokenByEmailUseCase", it.toString())
-            _uiState.value = SignInUIState.MoveHome(
+            _uiState.value = SignInUIState.MoveMain(
                 email = state.email,
                 password = state.password,
                 rememberSign = state.rememberSign

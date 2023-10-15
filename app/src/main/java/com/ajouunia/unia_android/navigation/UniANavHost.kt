@@ -1,8 +1,12 @@
 package com.ajouunia.unia_android.navigation
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
+import com.ajouunia.feature.mainroot.navigation.mainRoot
+import com.ajouunia.feature.mainroot.navigation.navigateToMainRoot
 import com.ajouunia.feature.onboarding.navigation.navigateToAgreementService
 import com.ajouunia.feature.onboarding.navigation.navigateToConfirmEmailForgotPassword
 import com.ajouunia.feature.onboarding.navigation.navigateToConfirmEmailSignUp
@@ -29,6 +33,10 @@ fun UniANavHost(
         modifier = modifier,
         navController = navController,
         startDestination = SPLASH_NAVIGATION_ROUTE,
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { ExitTransition.None }
     ) {
         splashScreen(
             navigateToOnBoarding = navController::navigateToSignIn,
@@ -46,9 +54,10 @@ fun UniANavHost(
             navigateToVerificationCodeForgotPassword = navController::navigateToVerificationCodeForgotPassword,
             navigateToSignUp = navController::navigateToSignUp,
             navigateToOnBoarding = navController::navigateToOnBoarding,
-            navigateToHome = {
-
-            }
+            navigateToMain = navController::navigateToMainRoot
+        )
+        mainRoot(
+            navigateToBack = navController::popBackStack,
         )
     }
 

@@ -39,7 +39,7 @@ sealed class SignInUIState(
         email = email,
         password = password
     )
-    data class MoveHome(
+    data class MoveMain(
         override val email: String = "",
         override val password: String = "",
         override val rememberSign: Boolean

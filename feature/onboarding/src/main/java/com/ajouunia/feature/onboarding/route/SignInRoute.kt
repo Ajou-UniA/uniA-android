@@ -13,13 +13,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavOptions
 import com.ajouunia.feature.onboarding.SignInScreen
 import com.ajouunia.feature.onboarding.SignInViewModel
+import com.ajouunia.feature.onboarding.navigation.AGREEMENT_SERVICE_NAVIGATION_ROUTE
+import com.ajouunia.feature.onboarding.navigation.SIGN_IN_NAVIGATION_ROUTE
 import com.ajouunia.feature.onboarding.state.SignInUIState
 
 @Composable
 internal fun SignInRoute(
     navigateToAgreementService: (NavOptions) -> Unit,
     navigateToForgotPassword: (NavOptions) -> Unit,
-    navigateToHome: (NavOptions) -> Unit,
+    navigateToMain: (NavOptions) -> Unit,
     viewModel: SignInViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.observeAsState()
@@ -37,6 +39,12 @@ internal fun SignInRoute(
         }
         is SignInUIState.Loading -> {
 
+        }
+        is SignInUIState.MoveMain -> {
+            val options = NavOptions.Builder()
+                .setPopUpTo(SIGN_IN_NAVIGATION_ROUTE, inclusive = true)
+                .build()
+            navigateToMain(options)
         }
         else -> Unit
     }

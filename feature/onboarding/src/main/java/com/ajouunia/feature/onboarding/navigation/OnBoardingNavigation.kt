@@ -77,13 +77,13 @@ fun NavGraphBuilder.onBoarding(
     navigateToVerificationCodeForgotPassword: (NavOptions, String) -> Unit,
     navigateToSignUp: (NavOptions, String) -> Unit,
     navigateToOnBoarding: (NavOptions) -> Unit,
-    navigateToHome: (NavOptions) -> Unit
+    navigateToMain: (NavOptions) -> Unit
 ) {
     composable(route = SIGN_IN_NAVIGATION_ROUTE) {
         SignInRoute(
             navigateToAgreementService = navigateToAgreementService,
             navigateToForgotPassword = navigateToConfirmEmailForgotPassword,
-            navigateToHome = navigateToHome
+            navigateToMain = navigateToMain
         )
     }
     composable(route = AGREEMENT_SERVICE_NAVIGATION_ROUTE) {
