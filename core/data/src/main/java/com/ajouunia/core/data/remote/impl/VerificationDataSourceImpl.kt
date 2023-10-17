@@ -23,8 +23,8 @@ constructor(
         )
     }.body
 
-    override suspend fun sendVerificationCode(userEmail: String) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun sendVerificationCode(userEmail: String): Unit? = safeAPICall {
+        service.sendVerificationCode(userEmail = userEmail)
+    }.body
 
 }

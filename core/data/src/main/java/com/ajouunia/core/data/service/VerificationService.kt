@@ -16,6 +16,6 @@ interface VerificationService {
     @GET("verify/{memberEmail}")
     suspend fun sendVerificationCode(
         @Path("memberEmail") userEmail: String
-    )
+    ): Response<Unit>
 
 }

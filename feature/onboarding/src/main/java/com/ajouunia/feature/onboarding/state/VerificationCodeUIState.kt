@@ -7,6 +7,9 @@ sealed class VerificationCodeUIState(
     data class Loading(
         override val code: String
     ) : VerificationCodeUIState(code)
+    data class Resend(
+        override val code: String
+    ) : VerificationCodeUIState(code)
     data class UpdateInfo(
         override val code: String
     ) : VerificationCodeUIState(code)

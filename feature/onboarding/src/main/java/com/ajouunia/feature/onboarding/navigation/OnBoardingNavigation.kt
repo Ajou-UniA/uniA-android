@@ -45,14 +45,14 @@ fun NavController.navigateToVerificationCodeSignUp(
     navOptions: NavOptions? = null,
     userEmail: String
 ) {
-    this.navigate(VERIFICATION_CODE_SIGN_UP_NAVIGATION_ROUTE.replace("userEmail", userEmail), navOptions)
+    this.navigate(VERIFICATION_CODE_SIGN_UP_NAVIGATION_ROUTE.replace("{userEmail}", userEmail), navOptions)
 }
 
 fun NavController.navigateToVerificationCodeForgotPassword(
     navOptions: NavOptions? = null,
     userEmail: String
 ) {
-    this.navigate(VERIFICATION_CODE_FORGOT_PASSWORD_NAVIGATION_ROUTE.replace("userEmail", userEmail), navOptions)
+    this.navigate(VERIFICATION_CODE_FORGOT_PASSWORD_NAVIGATION_ROUTE.replace("{userEmail}", userEmail), navOptions)
 }
 
 
@@ -115,6 +115,14 @@ fun NavGraphBuilder.onBoarding(
             userEmail = it.arguments?.getString("userEmail") ?: "",
             navigateToBack = navigateToBack,
             navigateToSignUp = navigateToSignUp,
+            navigateToResetPassword = null
+        )
+    }
+    composable(route = VERIFICATION_CODE_FORGOT_PASSWORD_NAVIGATION_ROUTE) {
+        VerificationCodeRoute(
+            userEmail = it.arguments?.getString("userEmail") ?: "",
+            navigateToBack = navigateToBack,
+            navigateToSignUp = null,
             navigateToResetPassword = null
         )
     }

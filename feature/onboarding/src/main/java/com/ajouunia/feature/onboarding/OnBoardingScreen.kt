@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ajouunia.core.designsystem.R
 import com.ajouunia.core.designsystem.UniAIconPack
+import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.uniaiconpack.IconLogoName
 import com.ajouunia.core.designsystem.urbanistFamily
 
@@ -53,16 +54,13 @@ fun OnBoardingScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(
+            NonScaleText(
                 text = stringResource(id = R.string.on_boarding_title),
-                style = TextStyle(
-                    fontSize = 30.sp,
-                    lineHeight = 22.sp,
-                    fontFamily = urbanistFamily,
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF000000),
-                    textAlign = TextAlign.Center,
-                )
+                color = Color.Black,
+                fontSize = 30.sp,
+                fontWeight = FontWeight(700),
+                lineHeight = 22.sp,
+                textAlign = TextAlign.Center,
             )
             Spacer(modifier = Modifier.height(130.dp))
             Image(
@@ -88,16 +86,13 @@ fun OnBoardingScreen(
                     navigateToBack()
                 }
             ) {
-                Text(
+                NonScaleText(
                     text = stringResource(id = R.string.on_boarding_btn_sign_in),
-                    style = TextStyle(
-                        fontSize = 15.sp,
-                        lineHeight = 10.sp,
-                        fontFamily = urbanistFamily,
-                        fontWeight = FontWeight(600),
-                        color = Color(0xFFFFFFFF),
-                        textAlign = TextAlign.Center,
-                    )
+                    color = Color.White,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight(600),
+                    lineHeight = 10.sp,
+                    textAlign = TextAlign.Center,
                 )
             }
         }

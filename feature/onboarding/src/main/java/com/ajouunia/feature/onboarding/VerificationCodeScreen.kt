@@ -1,6 +1,8 @@
 package com.ajouunia.feature.onboarding
 
+import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,10 +12,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -26,54 +28,56 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.R
+import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.component.OtpTextField
-import com.ajouunia.core.designsystem.urbanistFamily
 import com.ajouunia.feature.onboarding.state.VerificationCodeUIState
 import kotlinx.coroutines.delay
+
+private const val DEFAULT_DURATION: Long = 5L * 60L * 1000L
 
 @Composable
 fun VerificationCodeScreen(
     modifier: Modifier = Modifier,
+    userEmail: String = "",
     uiState: VerificationCodeUIState,
-    changeInputCode: (String) -> Unit
+    changeInputCode: (String) -> Unit,
+    onClickSubmit: (String) -> Unit,
+    onClickResend: (String) -> Unit
 ) {
     val context = LocalContext.current
     var isTimeOut by rememberSaveable { mutableStateOf(false) }
+    var duration by rememberSaveable { mutableLongStateOf(DEFAULT_DURATION) }
 
+    if (uiState is VerificationCodeUIState.Resend) {
+        duration = DEFAULT_DURATION
+    }
+    
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(color = Color.White)
             .padding(vertical = 50.dp, horizontal = 38.dp),
     ) {
-        Text(
-            text = stringResource(id = com.ajouunia.core.designsystem.R.string.verification_code_title),
-            style = TextStyle(
-                fontSize = 30.sp,
-                lineHeight = 35.sp,
-                fontFamily = urbanistFamily,
-                fontWeight = FontWeight(700),
-                color = Color(0xFF000000),
-            )
+        NonScaleText(
+            text = stringResource(id = R.string.verification_code_title),
+            fontSize = 30.sp,
+            lineHeight = 35.sp,
+            color = Color.Black,
+            fontWeight = FontWeight(700)
         )
         Spacer(modifier = Modifier.height(15.dp))
-        Text(
-            text = stringResource(id = com.ajouunia.core.designsystem.R.string.verification_code_message),
-            style = TextStyle(
-                fontSize = 15.sp,
-                lineHeight = 15.sp,
-                fontFamily = urbanistFamily,
-                fontWeight = FontWeight(500),
-                color = Color(0xFF000000),
-            )
+        NonScaleText(
+            text = stringResource(id = R.string.verification_code_message),
+            color = Color.Black,
+            fontSize = 15.sp,
+            fontWeight = FontWeight(500),
+            lineHeight = 15.sp
         )
         Spacer(modifier = Modifier.height(45.dp))
         OtpTextField(
@@ -86,18 +90,16 @@ fun VerificationCodeScreen(
         )
         Spacer(modifier = Modifier.height(10.dp))
         Row(horizontalArrangement = Arrangement.Center) {
-            Text(
+            NonScaleText(
                 text = stringResource(id = R.string.verification_code_message_time),
-                style = TextStyle(
-                    fontSize = 12.sp,
-                    lineHeight = 13.sp,
-                    fontFamily = urbanistFamily,
-                    fontWeight = FontWeight(600),
-                    color = Color(0xFFDF1818),
-                )
+                color = Color(0xFFDF1818),
+                fontSize = 12.sp,
+                fontWeight = FontWeight(600),
+                lineHeight = 13.sp,
             )
+            Spacer(modifier = Modifier.width(5.dp))
             Timer(
-                duration = 5 * 60 * 1000,
+                duration = duration,
                 onFinished = {
                     isTimeOut = true
                 }
@@ -112,39 +114,37 @@ fun VerificationCodeScreen(
             colors = ButtonDefaults.buttonColors(Color(0xFF8354FF)),
             enabled = !isTimeOut,
             onClick = {
-                // TODO
+                onClickSubmit(userEmail)
             }
         ) {
-            Text(
+            NonScaleText(
                 text = stringResource(id = R.string.verification_code_btn_submit),
-                style = TextStyle(
-                    fontSize = 15.sp,
-                    lineHeight = 10.sp,
-                    fontFamily = urbanistFamily,
-                    fontWeight = FontWeight(600),
-                    color = Color(0xFFFFFFFF),
-                    textAlign = TextAlign.Center,
-                )
+                color = Color.White,
+                fontSize = 15.sp,
+                fontWeight = FontWeight(600),
+                textAlign = TextAlign.Center,
+                lineHeight = 10.sp,
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        Text(
+        NonScaleText(
             text = stringResource(id = R.string.verification_code_btn_resend),
-            modifier = Modifier.fillMaxWidth(),
-            style = TextStyle(
-                fontSize = 15.sp,
-                lineHeight = 13.sp,
-                fontFamily = urbanistFamily,
-                fontWeight = FontWeight(600),
-                color = Color(0xFF000000),
-                textAlign = TextAlign.Center,
-            )
+            modifier = Modifier.fillMaxWidth()
+                .clickable { onClickResend(userEmail) },
+            color = Color.Black,
+            fontSize = 15.sp,
+            fontWeight = FontWeight(600),
+            textAlign = TextAlign.Center,
+            lineHeight = 13.sp,
         )
     }
 }
 
 @Composable
-fun Timer(duration: Long, onFinished: () -> Unit) {
+fun Timer(
+    duration: Long,
+    onFinished: () -> Unit
+) {
     var currentTimerValue by remember(duration) { mutableLongStateOf(duration) }
 
     LaunchedEffect(key1 = currentTimerValue) {
@@ -162,15 +162,12 @@ fun Timer(duration: Long, onFinished: () -> Unit) {
     val minutes = (currentTimerValue / minMilSec)
     val seconds = (currentTimerValue % minMilSec / secMilSec)
 
-    Text(
+    NonScaleText(
         text = String.format("%02d:%02d", minutes, seconds),
-        style = TextStyle(
-            fontSize = 12.sp,
-            lineHeight = 13.sp,
-            fontFamily = urbanistFamily,
-            fontWeight = FontWeight(600),
-            color = Color(0xFFDF1818),
-        )
+        color = Color(0xFFDF1818),
+        fontSize = 12.sp,
+        fontWeight = FontWeight(600),
+        lineHeight = 13.sp,
     )
 }
 
@@ -179,6 +176,8 @@ fun Timer(duration: Long, onFinished: () -> Unit) {
 fun VerificationCodeScreenPreview() {
     VerificationCodeScreen(
         uiState = VerificationCodeUIState.Init,
-        changeInputCode = {}
+        changeInputCode = {},
+        onClickSubmit = {},
+        onClickResend = {}
     )
 }

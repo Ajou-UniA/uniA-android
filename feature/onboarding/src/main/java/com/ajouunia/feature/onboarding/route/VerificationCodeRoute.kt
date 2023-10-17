@@ -1,5 +1,6 @@
 package com.ajouunia.feature.onboarding.route
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -42,13 +43,16 @@ internal fun VerificationCodeRoute(
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
 
-    when (uiState) {
+    when (val state = uiState) {
         is VerificationCodeUIState.Success -> {
             val options = NavOptions.Builder()
                 .setPopUpTo(VERIFICATION_CODE_SIGN_UP_NAVIGATION_ROUTE, inclusive = true)
                 .build()
             navigateToSignUp?.invoke(options, userEmail)
             navigateToResetPassword?.invoke(options, userEmail)
+        }
+        is VerificationCodeUIState.Error -> {
+            Log.d("VerificationCodeUIState", "VerificationCodeUIState.Error ${state.exception?.stackTraceToString() ?: ""}")
         }
         else -> Unit
     }
@@ -80,8 +84,11 @@ internal fun VerificationCodeRoute(
         uiState?.let { state ->
             VerificationCodeScreen(
                 modifier = Modifier.padding(padding),
+                userEmail = userEmail,
                 uiState = state,
-                changeInputCode = viewModel::changeInputCode
+                changeInputCode = viewModel::changeInputCode,
+                onClickSubmit = viewModel::submitCode,
+                onClickResend = viewModel::resendCode
             )
         }
     }
@@ -115,7 +122,9 @@ fun VerificationCodeRoutePreview() {
         VerificationCodeScreen(
             modifier = Modifier.padding(padding),
             uiState = VerificationCodeUIState.Init,
-            changeInputCode = {}
+            changeInputCode = {},
+            onClickSubmit = {},
+            onClickResend = {}
         )
     }
 }

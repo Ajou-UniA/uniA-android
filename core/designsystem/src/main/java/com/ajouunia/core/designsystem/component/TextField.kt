@@ -1,6 +1,8 @@
 package com.ajouunia.core.designsystem.component
 
 import androidx.compose.foundation.*
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -10,7 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -22,7 +27,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ajouunia.core.designsystem.Purple4
 import com.ajouunia.core.designsystem.UniAIconPack
+import com.ajouunia.core.designsystem.extensions.nonScaleSp
 import com.ajouunia.core.designsystem.uniaiconpack.IconEyeHide
 import com.ajouunia.core.designsystem.uniaiconpack.IconEyeShow
 import com.ajouunia.core.designsystem.urbanistFamily
@@ -54,9 +61,13 @@ fun UniATextField(
     description: String? = null,
     singleLine: Boolean = true,
 ) {
-
     var passwordVisible by remember {
         mutableStateOf(false)
+    }
+    val interactionSource = remember { MutableInteractionSource() }
+    val isFocused by interactionSource.collectIsFocusedAsState()
+    val focusRequester = remember {
+        FocusRequester()
     }
 
     Column(
@@ -74,7 +85,15 @@ fun UniATextField(
                     color = backgroundColor,
                     shape = RoundedCornerShape(round)
                 )
-                .border(1.dp, Color(0xFFE3E3E3), RoundedCornerShape(round))
+                .border(
+                    width = 1.dp,
+                    color = when (isFocused) {
+                        true -> Purple4
+                        false -> Color(0xFFE3E3E3)
+                    },
+                    shape = RoundedCornerShape(round)
+                )
+                .focusRequester(focusRequester)
         ) {
             UniABasicTextField(
                 value = value,
@@ -90,6 +109,7 @@ fun UniATextField(
                 round = round,
                 onSideBtnClick = onSideBtnClick,
                 isPassword = isPassword,
+                interactionSource = interactionSource,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = keyboardType,
                     imeAction = imeAction,
@@ -115,6 +135,7 @@ private fun UniABasicTextField(
     round: Dp = DefaultTextFieldRound,
     onSideBtnClick: (() -> Unit)? = null,
     isPassword: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     keyboardOptions: KeyboardOptions = KeyboardOptions(
         keyboardType = KeyboardType.Text,
         imeAction = ImeAction.Default,
@@ -137,9 +158,11 @@ private fun UniABasicTextField(
             fontFamily = urbanistFamily,
             fontWeight = FontWeight(400),
             fontStyle = FontStyle.Normal,
-            fontSize = 13.sp,
-            lineHeight = 19.sp
+            fontSize = 13.sp.nonScaleSp,
+            lineHeight = 19.sp.nonScaleSp
         ),
+        cursorBrush = SolidColor(Purple4),
+        interactionSource = interactionSource,
         decorationBox = @Composable { innerTextField ->
             Box(
                 contentAlignment = Alignment.CenterStart,

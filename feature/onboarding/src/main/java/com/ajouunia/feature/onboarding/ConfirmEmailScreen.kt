@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -26,7 +27,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.component.UniATextField
+import com.ajouunia.core.designsystem.extensions.nonScaleSp
 import com.ajouunia.core.designsystem.urbanistFamily
 import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
 
@@ -46,26 +49,20 @@ fun ConfirmEmailScreen(
             .background(color = Color.White)
             .padding(vertical = 50.dp, horizontal = 38.dp),
     ) {
-        Text(
+        NonScaleText(
             text = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_title),
-            style = TextStyle(
-                fontSize = 30.sp,
-                lineHeight = 35.sp,
-                fontFamily = urbanistFamily,
-                fontWeight = FontWeight(700),
-                color = Color(0xFF000000),
-            )
+            color = Color.Black,
+            fontSize = 30.sp,
+            fontWeight = FontWeight(700),
+            lineHeight = 35.sp,
         )
         Spacer(modifier = Modifier.height(36.dp))
-        Text(
+        NonScaleText(
             text = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_title_email),
-            style = TextStyle(
-                fontSize = 13.sp,
-                lineHeight = 10.sp,
-                fontFamily = urbanistFamily,
-                fontWeight = FontWeight(600),
-                color = Color(0xFF000000),
-            )
+            color = Color.Black,
+            fontSize = 13.sp,
+            fontWeight = FontWeight(600),
+            lineHeight = 10.sp,
         )
         UniATextField(
             value = uiState.email,
@@ -83,50 +80,56 @@ fun ConfirmEmailScreen(
                 onClickSubmit()
             }
         ) {
-            Text(
+            NonScaleText(
                 text = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_btn_confirm),
-                style = TextStyle(
-                    fontSize = 15.sp,
-                    lineHeight = 10.sp,
-                    fontFamily = urbanistFamily,
-                    fontWeight = FontWeight(600),
-                    color = Color(0xFFFFFFFF),
-                    textAlign = TextAlign.Center,
-                )
+                color = Color.White,
+                fontSize = 15.sp,
+                fontWeight = FontWeight(600),
+                lineHeight = 10.sp,
+                textAlign = TextAlign.Center,
             )
         }
         Spacer(modifier = Modifier.height(13.dp))
+
+        val textFirst = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_message_first)
+        val textSecond = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_message_verification_code)
+        val textThird = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_message_second)
+
         Text(
             text = buildAnnotatedString {
                 withStyle(
-                    style = SpanStyle(
-                        fontSize = 13.sp,
-                        fontFamily = urbanistFamily,
-                        fontWeight = FontWeight(500),
-                        color = Color(0xFF000000),
-                    )
+                    style = ParagraphStyle(lineHeight = 14.sp.nonScaleSp)
                 ) {
-                    append(stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_message_first))
-                }
-                withStyle(
-                    style = SpanStyle(
-                        fontSize = 13.sp,
-                        fontFamily = urbanistFamily,
-                        fontWeight = FontWeight(700),
-                        color = Color(0xFF000000),
-                    )
-                ) {
-                    append(stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_message_verification_code))
-                }
-                withStyle(
-                    style = SpanStyle(
-                        fontSize = 13.sp,
-                        fontFamily = urbanistFamily,
-                        fontWeight = FontWeight(500),
-                        color = Color(0xFF000000),
-                    )
-                ) {
-                    append(stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_message_second))
+                    withStyle(
+                        style = SpanStyle(
+                            fontSize = 12.sp,
+                            fontFamily = urbanistFamily,
+                            fontWeight = FontWeight(500),
+                            color = Color(0xFF000000),
+                        )
+                    ) {
+                        append(textFirst)
+                    }
+                    withStyle(
+                        style = SpanStyle(
+                            fontSize = 12.sp,
+                            fontFamily = urbanistFamily,
+                            fontWeight = FontWeight(700),
+                            color = Color(0xFF000000),
+                        )
+                    ) {
+                        append(textSecond)
+                    }
+                    withStyle(
+                        style = SpanStyle(
+                            fontSize = 12.sp,
+                            fontFamily = urbanistFamily,
+                            fontWeight = FontWeight(500),
+                            color = Color(0xFF000000),
+                        )
+                    ) {
+                        append(textThird)
+                    }
                 }
             },
         )

@@ -15,12 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,9 +28,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavOptions
+import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.component.UniACheckbox
 import com.ajouunia.core.designsystem.component.UniATextField
-import com.ajouunia.core.designsystem.urbanistFamily
 import com.ajouunia.feature.onboarding.state.SignInUIState
 
 @Composable
@@ -64,26 +59,21 @@ fun SignInScreen(
                 .background(color = Color.White),
             verticalArrangement = Arrangement.Center
         ) {
-            Text(
+            NonScaleText(
                 text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_title),
-                style = TextStyle(
-                    fontSize = 30.sp,
-                    lineHeight = 22.sp,
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF000000),
-                    textAlign = TextAlign.Center,
-                )
+                color = Color.Black,
+                fontSize = 30.sp,
+                fontWeight = FontWeight(700),
+                lineHeight = 22.sp,
+                textAlign = TextAlign.Center,
             )
             Spacer(modifier = Modifier.height(50.dp))
-            Text(
+            NonScaleText(
                 text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_title_email),
-                style = TextStyle(
-                    fontSize = 13.sp,
-                    lineHeight = 10.sp,
-                    fontFamily = urbanistFamily,
-                    fontWeight = FontWeight(600),
-                    color = Color(0xFF000000),
-                )
+                color = Color.Black,
+                fontSize = 13.sp,
+                fontWeight = FontWeight(600),
+                lineHeight = 10.sp,
             )
             UniATextField(
                 value = uiState.email,
@@ -92,21 +82,19 @@ fun SignInScreen(
                 }
             )
             Spacer(modifier = Modifier.height(22.dp))
-            Text(
+            NonScaleText(
                 text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_title_password),
-                style = TextStyle(
-                    fontSize = 13.sp,
-                    lineHeight = 10.sp,
-                    fontFamily = urbanistFamily,
-                    fontWeight = FontWeight(600),
-                    color = Color(0xFF000000),
-                )
+                color = Color.Black,
+                fontSize = 13.sp,
+                fontWeight = FontWeight(600),
+                lineHeight = 10.sp,
             )
             UniATextField(
                 value = uiState.password,
                 onValueChange = { newValue ->
                     changeInputPassword(newValue)
-                }
+                },
+                isPassword = true
             )
             Spacer(modifier = Modifier.height(24.dp))
             Row(
@@ -119,7 +107,6 @@ fun SignInScreen(
                     labelStyle = TextStyle(
                         fontSize = 13.sp,
                         lineHeight = 22.sp,
-                        fontFamily = urbanistFamily,
                         fontWeight = FontWeight(600),
                         color = Color(0xFF000000),
                     )
@@ -127,20 +114,17 @@ fun SignInScreen(
                     changeInputRemember(it)
                 }
 
-                Text(
+                NonScaleText(
                     text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_title_forgot_password),
-                    style = TextStyle(
-                        fontSize = 13.sp,
-                        lineHeight = 10.sp,
-                        fontFamily = urbanistFamily,
-                        fontWeight = FontWeight(600),
-                        color = Color(0xFF000000),
-                        textAlign = TextAlign.Right,
-                    ),
                     modifier = Modifier.clickable {
                         val options = NavOptions.Builder().build()
                         navigateToForgotPassword(options)
-                    }
+                    },
+                    color = Color.Black,
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight(600),
+                    lineHeight = 10.sp,
+                    textAlign = TextAlign.Right,
                 )
             }
             Spacer(modifier = Modifier.height(20.dp))
@@ -155,16 +139,13 @@ fun SignInScreen(
                     onClickSignIn()
                 }
             ) {
-                Text(
+                NonScaleText(
                     text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_btn_sign_in),
-                    style = TextStyle(
-                        fontSize = 15.sp,
-                        lineHeight = 10.sp,
-                        fontFamily = urbanistFamily,
-                        fontWeight = FontWeight(600),
-                        color = Color(0xFFFFFFFF),
-                        textAlign = TextAlign.Center,
-                    )
+                    color = Color.White,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight(600),
+                    lineHeight = 10.sp,
+                    textAlign = TextAlign.Center,
                 )
             }
             Spacer(modifier = Modifier.height(10.dp))
@@ -179,16 +160,13 @@ fun SignInScreen(
                     navigateToAgreementService(options)
                 }
             ) {
-                Text(
+                NonScaleText(
                     text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_btn_sign_up),
-                    style = TextStyle(
-                        fontSize = 15.sp,
-                        lineHeight = 10.sp,
-                        fontFamily = urbanistFamily,
-                        fontWeight = FontWeight(600),
-                        color = Color(0xFFFFFFFF),
-                        textAlign = TextAlign.Center,
-                    )
+                    color = Color.White,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight(600),
+                    lineHeight = 10.sp,
+                    textAlign = TextAlign.Center,
                 )
             }
         }

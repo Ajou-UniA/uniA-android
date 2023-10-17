@@ -5,6 +5,7 @@ import com.ajouunia.core.data.mapper.toEntity
 import com.ajouunia.core.data.remote.MemberDataSource
 import com.ajouunia.core.data.remote.ResetPasswordDataSource
 import com.ajouunia.core.data.remote.SignUpDataSource
+import com.ajouunia.core.data.remote.VerificationDataSource
 import com.ajouunia.core.domain.entity.BaseConditionEntity
 import com.ajouunia.core.domain.repository.OnBoardingRepository
 import javax.inject.Inject
@@ -15,7 +16,8 @@ constructor(
     private val memberDataSource: MemberDataSource,
     private val signUpDataSource: SignUpDataSource,
     private val resetPasswordDataSource: ResetPasswordDataSource,
-    private val localUserDataSource: LocalUserDataSource
+    private val localUserDataSource: LocalUserDataSource,
+    private val verificationDataSource: VerificationDataSource
 ) : OnBoardingRepository {
     override suspend fun signIn(
         userEmail: String,
@@ -26,6 +28,7 @@ constructor(
     )?.toEntity()
 
     override suspend fun checkEmail(userEmail: String): BaseConditionEntity? = signUpDataSource.isDuplicateEmail(userEmail)?.toEntity()
+
     override suspend fun findIdTokenByEmail(email: String): BaseConditionEntity? = when (val value = resetPasswordDataSource.findIdTokenByEmail(email = email)) {
         null -> null
         -1L -> BaseConditionEntity(false)
@@ -34,5 +37,14 @@ constructor(
             BaseConditionEntity(true)
         }
     }
+
+    override suspend fun sendVerificationCode(userEmail: String): Unit? = verificationDataSource.sendVerificationCode(
+        userEmail = userEmail
+    )
+
+    override suspend fun isVerifyCode(userEmail: String, code: String): Unit? = verificationDataSource.isVerifyCode(
+        userEmail = userEmail,
+        code = code
+    )
 
 }

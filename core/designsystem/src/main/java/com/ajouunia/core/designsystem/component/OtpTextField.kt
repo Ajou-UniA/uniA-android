@@ -75,7 +75,8 @@ private fun CharView(
         index > text.length -> ""
         else -> text[index].toString()
     }
-    Text(
+    NonScaleText(
+        text = char,
         modifier = Modifier
             .width(65.dp)
             .height(48.dp)
@@ -88,21 +89,44 @@ private fun CharView(
                 shape = RoundedCornerShape(8.dp)
             )
             .padding(2.dp),
-        text = char,
-        style = TextStyle(
-            fontSize = 30.sp,
-            lineHeight = 22.sp,
-            fontFamily = urbanistFamily,
-            fontWeight = FontWeight(700),
-            color = Color(0xFF000000),
-        ),
         color = if (isFocused) {
             Color(0xFFB5B6BA)
         } else {
             Color(0xFF60626C)
         },
+        fontSize = 30.sp,
+        lineHeight = 22.sp,
+        fontWeight = FontWeight(700),
         textAlign = TextAlign.Center
     )
+//    Text(
+//        modifier = Modifier
+//            .width(65.dp)
+//            .height(48.dp)
+//            .border(
+//                width = 1.dp,
+//                color = when {
+//                    isFocused -> Purple4
+//                    else -> Color(0xFFE3E3E3)
+//                },
+//                shape = RoundedCornerShape(8.dp)
+//            )
+//            .padding(2.dp),
+//        text = char,
+//        style = TextStyle(
+//            fontSize = 30.sp,
+//            lineHeight = 22.sp,
+//            fontFamily = urbanistFamily,
+//            fontWeight = FontWeight(700),
+//            color = Color(0xFF000000),
+//        ),
+//        color = if (isFocused) {
+//            Color(0xFFB5B6BA)
+//        } else {
+//            Color(0xFF60626C)
+//        },
+//        textAlign = TextAlign.Center
+//    )
 }
 
 @Preview(

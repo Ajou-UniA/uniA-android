@@ -22,14 +22,6 @@ sealed class SignInUIState(
         email = email,
         password = password
     )
-    data class SuccessSignIn(
-        override val email: String,
-        override val password: String,
-        override val rememberSign: Boolean
-    ) : SignInUIState(
-        email = email,
-        password = password
-    )
     data class FailSignIn(
         override val email: String,
         override val password: String,

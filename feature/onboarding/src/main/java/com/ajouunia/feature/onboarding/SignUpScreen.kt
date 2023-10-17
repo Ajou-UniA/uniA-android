@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavOptions
+import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.component.UniATextField
 import com.ajouunia.core.designsystem.urbanistFamily
 import com.ajouunia.feature.onboarding.navigation.SIGN_UP_NAVIGATION_ROUTE
@@ -56,15 +57,12 @@ fun SignUpScreen(
             .padding(vertical = 50.dp, horizontal = 38.dp)
             .verticalScroll(scrollState),
     ) {
-        Text(
+        NonScaleText(
             text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_up_title),
-            style = TextStyle(
-                fontSize = 30.sp,
-                lineHeight = 22.sp,
-                fontFamily = urbanistFamily,
-                fontWeight = FontWeight(700),
-                color = Color(0xFF000000),
-            )
+            color = Color.Black,
+            fontSize = 30.sp,
+            fontWeight = FontWeight(700),
+            lineHeight = 22.sp
         )
         Spacer(modifier = Modifier.height(35.dp))
         Text(

@@ -116,12 +116,15 @@ fun UniACheckbox(
                 }
             }
         }
-        Text(
+        NonScaleText(
+            text = label,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
                 .padding(start = 8.dp),
-            text = label,
-            style = labelStyle
+            color = labelStyle.color,
+            fontSize = labelStyle.fontSize,
+            fontWeight = labelStyle.fontWeight ?: FontWeight(500),
+            lineHeight = labelStyle.lineHeight
         )
     }
 }

@@ -25,7 +25,6 @@ constructor(
     val uiState: LiveData<SignInUIState>
         get() = _uiState
 
-
     fun changeInputEmail(email: String) {
         _uiState.value = SignInUIState.UpdateInfo(
             email = email.replace(" ", ""),
@@ -47,6 +46,14 @@ constructor(
             email = _uiState.value?.email ?: "",
             password = _uiState.value?.password ?: "",
             rememberSign = remember
+        )
+    }
+
+    fun clearState() {
+        _uiState.value = SignInUIState.UpdateInfo(
+            email = "",
+            password = "",
+            rememberSign = false
         )
     }
 
@@ -79,24 +86,28 @@ constructor(
             remoteFetchIdToken(state)
         }.onFailure {
             Log.d("signInUseCase", it.toString())
-            remoteFetchIdToken(state)
+            _uiState.value = SignInUIState.FailSignIn(
+                email = state.email,
+                password = state.password,
+                rememberSign = state.rememberSign,
+                error = it
+            )
         }
     }
 
     private fun remoteFetchIdToken(state: SignInUIState) = viewModelScope.launch {
         findIdTokenByEmailUseCase(state.email).onSuccess {
-            Log.d("findIdTokenByEmailUseCase", it.toString())
             _uiState.value = SignInUIState.MoveMain(
                 email = state.email,
                 password = state.password,
                 rememberSign = state.rememberSign
             )
         }.onFailure {
-            Log.d("findIdTokenByEmailUseCase", it.toString())
             _uiState.value = SignInUIState.FailSignIn(
                 email = state.email,
                 password = state.password,
-                rememberSign = state.rememberSign
+                rememberSign = state.rememberSign,
+                error = it
             )
         }
     }

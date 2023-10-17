@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavOptions
+import com.ajouunia.core.designsystem.component.UniASingleButtonDialog
 import com.ajouunia.feature.onboarding.SignInScreen
 import com.ajouunia.feature.onboarding.SignInViewModel
 import com.ajouunia.feature.onboarding.navigation.AGREEMENT_SERVICE_NAVIGATION_ROUTE
@@ -28,14 +29,16 @@ internal fun SignInRoute(
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
 
-    Log.d("SignInState", uiState?.toString() ?: "")
-
-    when (uiState) {
-        is SignInUIState.SuccessSignIn -> {
-
-        }
+    when (val state = uiState) {
         is SignInUIState.FailSignIn -> {
-
+            when (state.error) {
+                else -> UniASingleButtonDialog(
+                    title = "Login failed",
+                    message = "Sorry, incorrect email or password."
+                ) {
+                    viewModel.clearState()
+                }
+            }
         }
         is SignInUIState.Loading -> {
 

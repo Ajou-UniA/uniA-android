@@ -12,4 +12,11 @@ interface OnBoardingRepository {
         email: String
     ): BaseConditionEntity?
 
+    suspend fun sendVerificationCode(userEmail: String): Unit?
+
+    suspend fun isVerifyCode(
+        userEmail: String,
+        code: String
+    ): Unit?
+
 }

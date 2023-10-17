@@ -9,6 +9,6 @@ interface VerificationDataSource {
 
     suspend fun sendVerificationCode(
         userEmail: String
-    )
+    ): Unit?
 
 }
