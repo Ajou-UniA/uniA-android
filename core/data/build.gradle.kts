@@ -47,6 +47,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:domain"))
+
     usingKotlinStdLibDependencies()
     usingCoroutinesDependencies()
     usingCoreKtxDependencies()

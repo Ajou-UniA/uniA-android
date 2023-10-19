@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--  SignIn Screen  -->
+    <string name="sign_in_title">Welcome</string>
+    <string name="sign_in_title_email">Email</string>
+    <string name="sign_in_title_password">Password</string>
+    <string name="sign_in_title_remember_account">Remember-me</string>
+    <string name="sign_in_title_forgot_password">Forgot password?</string>
+    <string name="sign_in_btn_sign_in">Sign In</string>
+    <string name="sign_in_btn_sign_up">Sign Up</string>
+
+<!-- AgreementService Screen   -->
+    <string name="agreement_service_title">To access UniA\'s services, please agree to the terms and conditions.</string>
+    <string name="agreement_service_agree_message">I agree and accept\t</string>
+    <string name="agreement_service_terms">Terms of Use</string>
+    <string name="agreement_service_privacy">Privacy Policy</string>
+    <string name="agreement_service_agree">Agree and continue</string>
+
+<!--  ConfirmEmail Screen  -->
+    <string name="confirm_email_title">Confirm Your\nAjou University Email</string>
+    <string name="confirm_email_title_email">Email</string>
+    <string name="confirm_email_btn_confirm">Confirm</string>
+    <string name="confirm_email_message_first">When your Ajou University email verification is complete, we will send you a\t</string>
+    <string name="confirm_email_message_verification_code">verification code</string>
+    <string name="confirm_email_message_second">\tvia your email.</string>
+
+<!--  VerificationCode Screen  -->
+    <string name="verification_code_title">Verification Code</string>
+    <string name="verification_code_message">Enter code that we have sent to your Ajou University email.</string>
+    <string name="verification_code_message_time">Time remaining\t</string>
+    <string name="verification_code_btn_submit">Submit</string>
+    <string name="verification_code_btn_resend">Resend Code</string>
+
+<!--  SignUp Screen  -->
+    <string name="sign_up_title">Create Account</string>
+    <string name="sign_up_first_name">First Name</string>
+    <string name="sign_up_last_name">Last Name</string>
+    <string name="sign_up_student_id">Student ID</string>
+    <string name="sign_up_department">Department</string>
+    <string name="sign_up_password">Password</string>
+    <string name="sign_up_confirm_password">Confirm Password</string>
+    <string name="sign_up_btn_submit">Submit</string>
+    <string name="sign_up_message_first">By signing up, you agree to the\t</string>
+    <string name="sign_up_message_second">User Agreement &amp; Privace Policy.</string>
+
+<!--  OnBoarding Screen  -->
+    <string name="on_boarding_title">Congratulations!</string>
+    <string name="on_boarding_btn_sign_in">Sign In</string>
+
+</resources>

@@ -1,17 +1,23 @@
+import Dependencies.usingHiltDependencies
+import Dependencies.usingOkHttpDependencies
+import Dependencies.usingRetrofitDependencies
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
     namespace = "com.ajouunia.core.network"
-    compileSdk = 33
+    compileSdk = AppConfig.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 24
+        minSdk = AppConfig.MIN_SDK
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+        testInstrumentationRunner = AppConfig.ANDROID_TEST_INSTRUMENTATION_RUNNER
+        consumerProguardFiles(AppConfig.CONSUMER_PROGUARD_RULES)
     }
 
     buildTypes {
@@ -24,20 +30,22 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = AppConfig.SOURCE_COMPATIBILITY
+        targetCompatibility = AppConfig.TARGET_COMPATIBILITY
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = AppConfig.JVM_TARGET
     }
 }
 
 dependencies {
+    implementation(project(":core:data"))
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    usingHiltDependencies()
+    usingOkHttpDependencies()
+    usingRetrofitDependencies()
+}
+
+kapt {
+    correctErrorTypes = true
 }

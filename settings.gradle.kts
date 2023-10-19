@@ -23,5 +23,12 @@ include(
     ":core:network",
     ":core:loggingsystem",
 
-    ":feature:onborading"
+    ":feature:splash",
+    ":feature:onboarding",
+    ":feature:mainroot",
+    ":feature:task",
+    ":feature:mypage",
+    ":feature:home",
+    ":feature:guide",
+    ":feature:community",
 )

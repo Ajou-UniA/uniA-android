@@ -1,5 +1,5 @@
 object LibVersions {
-    const val KOTLIN = "1.8.20"
+    const val KOTLIN = "1.8.10"
     const val CORE = "1.12.0"
     const val COROUTINES = "1.7.3"
     const val LIFECYCLE = "2.6.2"
