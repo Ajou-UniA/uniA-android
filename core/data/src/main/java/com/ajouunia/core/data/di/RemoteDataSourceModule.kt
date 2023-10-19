@@ -1,9 +1,11 @@
 package com.ajouunia.core.data.di
 
+import com.ajouunia.core.data.remote.GuideDataSource
 import com.ajouunia.core.data.remote.MemberDataSource
 import com.ajouunia.core.data.remote.ResetPasswordDataSource
 import com.ajouunia.core.data.remote.SignUpDataSource
 import com.ajouunia.core.data.remote.VerificationDataSource
+import com.ajouunia.core.data.remote.impl.GuideDataSourceImpl
 import com.ajouunia.core.data.remote.impl.MemberDataSourceImpl
 import com.ajouunia.core.data.remote.impl.ResetPasswordDataSourceImpl
 import com.ajouunia.core.data.remote.impl.SignUpDataSourceImpl
@@ -41,5 +43,11 @@ internal abstract class RemoteDataSourceModule {
     abstract fun bindVerificationDataSource(
         verificationDataSourceImpl: VerificationDataSourceImpl,
     ): VerificationDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindGuideDataSource(
+        guideDataSourceImpl: GuideDataSourceImpl,
+    ): GuideDataSource
 
 }

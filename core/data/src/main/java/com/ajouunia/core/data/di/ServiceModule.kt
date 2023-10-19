@@ -1,5 +1,6 @@
 package com.ajouunia.core.data.di
 
+import com.ajouunia.core.data.service.GuideService
 import com.ajouunia.core.data.service.MemberService
 import com.ajouunia.core.data.service.ResetPasswordService
 import com.ajouunia.core.data.service.SignUpService
@@ -37,6 +38,12 @@ object ServiceModule {
     @Provides
     internal fun provideVerificationService(retrofit: Retrofit): VerificationService {
         return retrofit.create(VerificationService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    internal fun provideGuideService(retrofit: Retrofit): GuideService {
+        return retrofit.create(GuideService::class.java)
     }
 
 }

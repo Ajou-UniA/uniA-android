@@ -1,5 +1,6 @@
 package com.ajouunia.core.network
 
+import com.ajouunia.core.data.local.LocalUserDataSource
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -20,7 +21,7 @@ internal object NetworkModule {
     private const val VERSION_FIRST = "/v1/"
 
     @Provides
-    fun providerAuthInterceptor(): AuthInterceptor = AuthInterceptor()
+    fun providerAuthInterceptor(localUserDataSource: LocalUserDataSource): AuthInterceptor = AuthInterceptor(localUserDataSource = localUserDataSource)
 
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {

@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.ajouunia.core.designsystem.Purple4
 
 @Composable
 fun UniATwoButtonDialog(
@@ -79,7 +80,7 @@ fun UniATwoButtonDialog(
                             fontSize = 15.sp,
                             lineHeight = 10.sp,
                             fontWeight = FontWeight(600),
-                            color = Color(0xFF8354FF),
+                            color = Purple4,
                             textAlign = TextAlign.Center,
                         )
                     }
@@ -95,7 +96,7 @@ fun UniATwoButtonDialog(
                         fontSize = 15.sp,
                         lineHeight = 10.sp,
                         fontWeight = FontWeight(600),
-                        color = Color(0xFF8354FF),
+                        color = Purple4,
                         textAlign = TextAlign.Center,
                     )
                 }

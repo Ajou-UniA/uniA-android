@@ -3,6 +3,7 @@ package com.ajouunia.core.designsystem
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.ajouunia.core.designsystem.uniaiconpack.IcAjouGuide
 import com.ajouunia.core.designsystem.uniaiconpack.IcCommunity
+import com.ajouunia.core.designsystem.uniaiconpack.IcHamMenu
 import com.ajouunia.core.designsystem.uniaiconpack.IcHome
 import com.ajouunia.core.designsystem.uniaiconpack.IcMyPage
 import com.ajouunia.core.designsystem.uniaiconpack.IcMyTasks
@@ -32,7 +33,7 @@ public val UniAIconPack.UniAAllIcons: ____KtList<ImageVector>
     }
     __UniAAllIcons= listOf(IcUnselectedCircle, IconBackArrow, IcHome, IcSelectedAjouGuide,
         IcMyTasks, IconLogoName, IcMyPage, IcCommunity, IcSelectedMyPage, IcAjouGuide,
-        IconUncheckEllipse, IcSelectedCommunity, IcSelectedMyTaks, IcSelectedCircle, IconArrow,
-        IcSelectedHome, IconEyeHide, IconEyeShow)
+        IconUncheckEllipse, IcSelectedCommunity, IcSelectedMyTaks, IcHamMenu, IcSelectedCircle,
+        IconArrow, IcSelectedHome, IconEyeHide, IconEyeShow)
     return __UniAAllIcons!!
   }
