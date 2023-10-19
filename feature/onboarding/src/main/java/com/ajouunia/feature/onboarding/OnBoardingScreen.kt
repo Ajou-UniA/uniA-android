@@ -57,9 +57,9 @@ fun OnBoardingScreen(
             NonScaleText(
                 text = stringResource(id = R.string.on_boarding_title),
                 color = Color.Black,
-                fontSize = 30.sp,
+                fontSize = 28.sp,
                 fontWeight = FontWeight(700),
-                lineHeight = 22.sp,
+                lineHeight = 20.sp,
                 textAlign = TextAlign.Center,
             )
             Spacer(modifier = Modifier.height(130.dp))
@@ -89,9 +89,9 @@ fun OnBoardingScreen(
                 NonScaleText(
                     text = stringResource(id = R.string.on_boarding_btn_sign_in),
                     color = Color.White,
-                    fontSize = 15.sp,
+                    fontSize = 13.sp,
                     fontWeight = FontWeight(600),
-                    lineHeight = 10.sp,
+                    lineHeight = 8.sp,
                     textAlign = TextAlign.Center,
                 )
             }

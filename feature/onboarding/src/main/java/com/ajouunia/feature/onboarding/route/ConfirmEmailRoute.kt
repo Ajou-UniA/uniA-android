@@ -23,12 +23,15 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.UniAIconPack
+import com.ajouunia.core.designsystem.component.UniASelectDialog
+import com.ajouunia.core.designsystem.component.UniATwoButtonDialog
 import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
 import com.ajouunia.feature.onboarding.ConfirmEmailScreen
 import com.ajouunia.feature.onboarding.ConfirmEmailViewModel
 import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_FORGOT_PASSWORD_NAVIGATION_ROUTE
 import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_SIGN_UP_NAVIGATION_ROUTE
 import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
+import com.ajouunia.feature.onboarding.utils.exceptions.InValidEmailException
 
 @Composable
 internal fun ConfirmEmailRoute(
@@ -61,40 +64,52 @@ internal fun ConfirmEmailRoute(
 
         }
         is ConfirmEmailUIState.Error -> {
-
+//            when (state.error) {
+//                is InValidEmailException -> {
+//
+//                }
+//                else -> viewModel.changeInputEmail("")
+//            }
+            UniATwoButtonDialog(
+                title = "Invalid email address",
+                message = "Please use a valid email domain in\nthe format of @ajou.ac.kr.",
+                onClickConfirm = {
+                    viewModel.changeInputEmail("")
+                }
+            )
         }
         else -> Unit
     }
 
-    uiState?.let { state ->
-        Scaffold(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(color = Color.White)
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = null,
-                ) {
-                    focusManager.clearFocus()
-                },
-            topBar = {
-                Box(
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.White)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null,
+            ) {
+                focusManager.clearFocus()
+            },
+        topBar = {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .statusBarsPadding()
+                    .background(Color.White),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                Icon(
+                    UniAIconPack.IconBackArrow,
+                    contentDescription = "back",
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .statusBarsPadding()
-                        .background(Color.White),
-                    contentAlignment = Alignment.CenterStart
-                ) {
-                    Icon(
-                        UniAIconPack.IconBackArrow,
-                        contentDescription = "back",
-                        modifier = Modifier
-                            .padding(start = 24.dp, top = 60.dp)
-                            .clickable { navigateToBack() },
-                    )
-                }
+                        .padding(start = 24.dp, top = 60.dp)
+                        .clickable { navigateToBack() },
+                )
             }
-        ) { padding ->
+        }
+    ) { padding ->
+        uiState?.let { state ->
             ConfirmEmailScreen(
                 modifier = Modifier.padding(padding),
                 uiState = state,
@@ -126,7 +141,7 @@ fun ConfirmEmailRoutePreview() {
                     contentDescription = "back",
                     modifier = Modifier
                         .padding(start = 24.dp, top = 60.dp)
-                        .clickable {  },
+                        .clickable { },
                 )
             }
         }

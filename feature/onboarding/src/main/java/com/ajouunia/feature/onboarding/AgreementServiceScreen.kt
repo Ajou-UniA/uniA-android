@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -30,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.R
 import com.ajouunia.core.designsystem.UniAIconPack
+import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.uniaiconpack.IconArrow
 import com.ajouunia.core.designsystem.uniaiconpack.IconUncheckEllipse
 import com.ajouunia.core.designsystem.urbanistFamily
@@ -49,21 +51,17 @@ fun AgreementServiceScreen(
             .padding(bottom = 20.dp, start = 38.dp, end = 38.dp),
         verticalArrangement = Arrangement.SpaceAround,
     ) {
-        Text(
+        NonScaleText(
             text = stringResource(id = R.string.agreement_service_title),
-            style = TextStyle(
-                fontSize = 30.sp,
-                lineHeight = 35.sp,
-                fontFamily = urbanistFamily,
-                fontWeight = FontWeight(700),
-                color = Color(0xFF000000),
-            )
+            color = Color.Black,
+            fontSize = 28.sp,
+            fontWeight = FontWeight(700),
+            lineHeight = 33.sp,
         )
-        Column {
+        Column(modifier = Modifier.fillMaxWidth()) {
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp),
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -72,25 +70,20 @@ fun AgreementServiceScreen(
                     contentDescription = null,
                 )
                 Row {
-                    Text(
+                    NonScaleText(
                         text = stringResource(id = R.string.agreement_service_agree_message),
-                        style = TextStyle(
-                            fontSize = 15.sp,
-                            lineHeight = 18.sp,
-                            fontFamily = urbanistFamily,
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFF000000),
-                        )
+                        lineHeight = 16.sp,
+                        fontWeight = FontWeight(600),
+                        color = Color.Black,
+                        fontSize = 13.sp,
                     )
-                    Text(
+                    Spacer(modifier = Modifier.width(4.dp))
+                    NonScaleText(
                         text = stringResource(id = R.string.agreement_service_terms),
-                        style = TextStyle(
-                            fontSize = 15.sp,
-                            lineHeight = 18.sp,
-                            fontFamily = urbanistFamily,
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFF8354FF),
-                        )
+                        fontSize = 13.sp,
+                        lineHeight = 16.sp,
+                        fontWeight = FontWeight(600),
+                        color = Color(0xFF8354FF),
                     )
                 }
                 Image(
@@ -103,8 +96,7 @@ fun AgreementServiceScreen(
 
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp),
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -113,25 +105,20 @@ fun AgreementServiceScreen(
                     contentDescription = null,
                 )
                 Row {
-                    Text(
+                    NonScaleText(
                         text = stringResource(id = R.string.agreement_service_agree_message),
-                        style = TextStyle(
-                            fontSize = 15.sp,
-                            lineHeight = 18.sp,
-                            fontFamily = urbanistFamily,
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFF000000),
-                        )
+                        fontSize = 13.sp,
+                        lineHeight = 16.sp,
+                        fontWeight = FontWeight(600),
+                        color = Color(0xFF000000),
                     )
-                    Text(
+                    Spacer(modifier = Modifier.width(4.dp))
+                    NonScaleText(
                         text = stringResource(id = R.string.agreement_service_privacy),
-                        style = TextStyle(
-                            fontSize = 15.sp,
-                            lineHeight = 18.sp,
-                            fontFamily = urbanistFamily,
-                            fontWeight = FontWeight(600),
-                            color = Color(0xFF8354FF),
-                        )
+                        fontSize = 13.sp,
+                        lineHeight = 16.sp,
+                        fontWeight = FontWeight(600),
+                        color = Color(0xFF8354FF),
                     )
                 }
                 Image(
@@ -155,16 +142,13 @@ fun AgreementServiceScreen(
                     navigateToConfirmEmail(options)
                 }
             ) {
-                Text(
+                NonScaleText(
                     text = stringResource(id = R.string.agreement_service_agree),
-                    style = TextStyle(
-                        fontSize = 15.sp,
-                        lineHeight = 10.sp,
-                        fontFamily = urbanistFamily,
-                        fontWeight = FontWeight(600),
-                        color = Color(0xFFFFFFFF),
-                        textAlign = TextAlign.Center,
-                    )
+                    fontSize = 13.sp,
+                    lineHeight = 8.sp,
+                    fontWeight = FontWeight(600),
+                    color = Color(0xFFFFFFFF),
+                    textAlign = TextAlign.Center,
                 )
             }
         }

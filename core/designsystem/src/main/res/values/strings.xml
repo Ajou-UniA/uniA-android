@@ -11,7 +11,7 @@
     <string name="sign_in_btn_sign_up">Sign Up</string>
 
 <!-- AgreementService Screen   -->
-    <string name="agreement_service_title">To access UniA\'s\nservices, please agree\nto the terms and\nconditions.</string>
+    <string name="agreement_service_title">To access UniA\'s services, please agree to the terms and conditions.</string>
     <string name="agreement_service_agree_message">I agree and accept\t</string>
     <string name="agreement_service_terms">Terms of Use</string>
     <string name="agreement_service_privacy">Privacy Policy</string>
@@ -37,6 +37,7 @@
     <string name="sign_up_first_name">First Name</string>
     <string name="sign_up_last_name">Last Name</string>
     <string name="sign_up_student_id">Student ID</string>
+    <string name="sign_up_department">Department</string>
     <string name="sign_up_password">Password</string>
     <string name="sign_up_confirm_password">Confirm Password</string>
     <string name="sign_up_btn_submit">Submit</string>

@@ -66,8 +66,8 @@ fun VerificationCodeScreen(
     ) {
         NonScaleText(
             text = stringResource(id = R.string.verification_code_title),
-            fontSize = 30.sp,
-            lineHeight = 35.sp,
+            fontSize = 28.sp,
+            lineHeight = 33.sp,
             color = Color.Black,
             fontWeight = FontWeight(700)
         )
@@ -75,9 +75,9 @@ fun VerificationCodeScreen(
         NonScaleText(
             text = stringResource(id = R.string.verification_code_message),
             color = Color.Black,
-            fontSize = 15.sp,
+            fontSize = 13.sp,
             fontWeight = FontWeight(500),
-            lineHeight = 15.sp
+            lineHeight = 13.sp
         )
         Spacer(modifier = Modifier.height(45.dp))
         OtpTextField(
@@ -93,9 +93,9 @@ fun VerificationCodeScreen(
             NonScaleText(
                 text = stringResource(id = R.string.verification_code_message_time),
                 color = Color(0xFFDF1818),
-                fontSize = 12.sp,
+                fontSize = 10.sp,
                 fontWeight = FontWeight(600),
-                lineHeight = 13.sp,
+                lineHeight = 11.sp,
             )
             Spacer(modifier = Modifier.width(5.dp))
             Timer(
@@ -120,10 +120,10 @@ fun VerificationCodeScreen(
             NonScaleText(
                 text = stringResource(id = R.string.verification_code_btn_submit),
                 color = Color.White,
-                fontSize = 15.sp,
+                fontSize = 13.sp,
                 fontWeight = FontWeight(600),
                 textAlign = TextAlign.Center,
-                lineHeight = 10.sp,
+                lineHeight = 8.sp,
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
@@ -132,10 +132,10 @@ fun VerificationCodeScreen(
             modifier = Modifier.fillMaxWidth()
                 .clickable { onClickResend(userEmail) },
             color = Color.Black,
-            fontSize = 15.sp,
+            fontSize = 13.sp,
             fontWeight = FontWeight(600),
             textAlign = TextAlign.Center,
-            lineHeight = 13.sp,
+            lineHeight = 11.sp,
         )
     }
 }
@@ -165,9 +165,9 @@ fun Timer(
     NonScaleText(
         text = String.format("%02d:%02d", minutes, seconds),
         color = Color(0xFFDF1818),
-        fontSize = 12.sp,
+        fontSize = 10.sp,
         fontWeight = FontWeight(600),
-        lineHeight = 13.sp,
+        lineHeight = 11.sp,
     )
 }
 

@@ -1,4 +1,4 @@
-package com.ajouunia.feature.onboarding.utils
+package com.ajouunia.feature.onboarding.utils.extensions
 
 import com.ajouunia.feature.onboarding.ConfirmEmailViewModel
 

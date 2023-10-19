@@ -62,7 +62,7 @@ fun SignInScreen(
             NonScaleText(
                 text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_title),
                 color = Color.Black,
-                fontSize = 30.sp,
+                fontSize = 28.sp,
                 fontWeight = FontWeight(700),
                 lineHeight = 22.sp,
                 textAlign = TextAlign.Center,
@@ -71,7 +71,7 @@ fun SignInScreen(
             NonScaleText(
                 text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_title_email),
                 color = Color.Black,
-                fontSize = 13.sp,
+                fontSize = 11.sp,
                 fontWeight = FontWeight(600),
                 lineHeight = 10.sp,
             )
@@ -85,9 +85,9 @@ fun SignInScreen(
             NonScaleText(
                 text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_title_password),
                 color = Color.Black,
-                fontSize = 13.sp,
+                fontSize = 11.sp,
                 fontWeight = FontWeight(600),
-                lineHeight = 10.sp,
+                lineHeight = 8.sp,
             )
             UniATextField(
                 value = uiState.password,
@@ -105,8 +105,8 @@ fun SignInScreen(
                 UniACheckbox(
                     label = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_title_remember_account),
                     labelStyle = TextStyle(
-                        fontSize = 13.sp,
-                        lineHeight = 22.sp,
+                        fontSize = 11.sp,
+                        lineHeight = 20.sp,
                         fontWeight = FontWeight(600),
                         color = Color(0xFF000000),
                     )
@@ -121,9 +121,9 @@ fun SignInScreen(
                         navigateToForgotPassword(options)
                     },
                     color = Color.Black,
-                    fontSize = 13.sp,
+                    fontSize = 11.sp,
                     fontWeight = FontWeight(600),
-                    lineHeight = 10.sp,
+                    lineHeight = 8.sp,
                     textAlign = TextAlign.Right,
                 )
             }
@@ -142,9 +142,9 @@ fun SignInScreen(
                 NonScaleText(
                     text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_btn_sign_in),
                     color = Color.White,
-                    fontSize = 15.sp,
+                    fontSize = 13.sp,
                     fontWeight = FontWeight(600),
-                    lineHeight = 10.sp,
+                    lineHeight = 8.sp,
                     textAlign = TextAlign.Center,
                 )
             }
@@ -163,9 +163,9 @@ fun SignInScreen(
                 NonScaleText(
                     text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_btn_sign_up),
                     color = Color.White,
-                    fontSize = 15.sp,
+                    fontSize = 13.sp,
                     fontWeight = FontWeight(600),
-                    lineHeight = 10.sp,
+                    lineHeight = 8.sp,
                     textAlign = TextAlign.Center,
                 )
             }

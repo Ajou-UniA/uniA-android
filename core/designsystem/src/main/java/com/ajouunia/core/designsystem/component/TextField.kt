@@ -55,6 +55,7 @@ fun UniATextField(
     round: Dp = DefaultTextFieldRound,
     onSideBtnClick: (() -> Unit)? = null,
     error: String? = null,
+    success: String? = null,
     isPassword: Boolean = false,
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Default,
@@ -87,9 +88,15 @@ fun UniATextField(
                 )
                 .border(
                     width = 1.dp,
-                    color = when (isFocused) {
-                        true -> Purple4
-                        false -> Color(0xFFE3E3E3)
+                    color = when (error) {
+                        null -> when (isFocused) {
+                            true -> Purple4
+                            false -> when (success) {
+                                null -> Color(0xFFE3E3E3)
+                                else -> Color(0xFF21D749)
+                            }
+                        }
+                        else -> Color.Red
                     },
                     shape = RoundedCornerShape(round)
                 )
@@ -117,9 +124,28 @@ fun UniATextField(
                 singleLine = singleLine,
             )
         }
+
+        error?.let { errorMsg ->
+            NonScaleText(
+                text = errorMsg,
+                color = Color.Red,
+                fontSize = 10.sp,
+                fontWeight = FontWeight(600),
+                lineHeight = 10.sp
+            )
+        }
+
+        success?.let { successMsg ->
+            NonScaleText(
+                text = successMsg,
+                color = Color(0xFF21D749),
+                fontSize = 10.sp,
+                fontWeight = FontWeight(600),
+                lineHeight = 10.sp
+            )
+        }
+
     }
-
-
 }
 
 @Composable
@@ -158,8 +184,8 @@ private fun UniABasicTextField(
             fontFamily = urbanistFamily,
             fontWeight = FontWeight(400),
             fontStyle = FontStyle.Normal,
-            fontSize = 13.sp.nonScaleSp,
-            lineHeight = 19.sp.nonScaleSp
+            fontSize = 11.sp.nonScaleSp,
+            lineHeight = 17.sp.nonScaleSp
         ),
         cursorBrush = SolidColor(Purple4),
         interactionSource = interactionSource,
@@ -223,11 +249,18 @@ fun PreviewUniATextField() {
             isPassword = true
         )
 
+        // success text field
+        UniATextField(
+            value = value3 ?: "",
+            onValueChange = { value3 = it },
+            success = "Your password is great."
+        )
+
         // error text field
         UniATextField(
             value = value3 ?: "",
             onValueChange = { value3 = it },
-            error = "특수문자는 사용할 수 없습니다!"
+            error = "The password does not match."
         )
 
     }

@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.ajouunia.core.domain.usecase.FindIdTokenByEmailUseCase
 import com.ajouunia.core.domain.usecase.SignInUseCase
 import com.ajouunia.feature.onboarding.state.SignInUIState
-import com.ajouunia.feature.onboarding.utils.isAjouUnivEmail
-import com.ajouunia.feature.onboarding.utils.isEmptyId
+import com.ajouunia.feature.onboarding.utils.extensions.isAjouUnivEmail
+import com.ajouunia.feature.onboarding.utils.extensions.isEmptyId
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

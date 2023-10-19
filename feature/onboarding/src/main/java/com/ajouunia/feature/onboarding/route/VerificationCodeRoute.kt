@@ -60,7 +60,13 @@ internal fun VerificationCodeRoute(
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.White),
+            .background(color = Color.White)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null,
+            ) {
+                focusManager.clearFocus()
+            },
         topBar = {
             Box(
                 modifier = Modifier

@@ -94,8 +94,8 @@ private fun CharView(
         } else {
             Color(0xFF60626C)
         },
-        fontSize = 30.sp,
-        lineHeight = 22.sp,
+        fontSize = 28.sp,
+        lineHeight = 20.sp,
         fontWeight = FontWeight(700),
         textAlign = TextAlign.Center
     )

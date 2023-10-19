@@ -7,8 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.ajouunia.core.domain.usecase.IsDuplicateEmailUseCase
 import com.ajouunia.core.domain.usecase.SendVerificationCodeUseCase
 import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
-import com.ajouunia.feature.onboarding.utils.isAjouUnivEmail
-import com.ajouunia.feature.onboarding.utils.isEmptyId
+import com.ajouunia.feature.onboarding.utils.exceptions.InValidEmailException
+import com.ajouunia.feature.onboarding.utils.extensions.isAjouUnivEmail
+import com.ajouunia.feature.onboarding.utils.extensions.isEmptyId
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -45,7 +46,12 @@ constructor(
         isDuplicateEmailUseCase(userEmail = email).onSuccess {
             when (it.result) {
                 true -> remoteSendCode(email = email)
-                false -> _uiState.postValue(ConfirmEmailUIState.Error(email))
+                false -> _uiState.postValue(
+                    ConfirmEmailUIState.Error(
+                        email = email,
+                        error = InValidEmailException()
+                    )
+                )
             }
         }.onFailure {
             _uiState.postValue(ConfirmEmailUIState.Error(email, it))
@@ -54,11 +60,12 @@ constructor(
 
     private fun remoteSendCode(email: String) = viewModelScope.launch {
         // TODO
-        sendVerificationCodeUseCase(email).onSuccess {
-            _uiState.postValue(ConfirmEmailUIState.Success(email = email))
-        }.onFailure {
-            _uiState.postValue(ConfirmEmailUIState.Success(email = email))
-        }
+        _uiState.postValue(ConfirmEmailUIState.Success(email = email))
+//        sendVerificationCodeUseCase(email).onSuccess {
+//            _uiState.postValue(ConfirmEmailUIState.Success(email = email))
+//        }.onFailure {
+//            _uiState.postValue(ConfirmEmailUIState.Success(email = email))
+//        }
     }
 
     fun isValidEmail(): Boolean = _uiState.value?.email?.let {

@@ -52,17 +52,17 @@ fun ConfirmEmailScreen(
         NonScaleText(
             text = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_title),
             color = Color.Black,
-            fontSize = 30.sp,
+            fontSize = 28.sp,
             fontWeight = FontWeight(700),
-            lineHeight = 35.sp,
+            lineHeight = 33.sp,
         )
         Spacer(modifier = Modifier.height(36.dp))
         NonScaleText(
             text = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_title_email),
             color = Color.Black,
-            fontSize = 13.sp,
+            fontSize = 11.sp,
             fontWeight = FontWeight(600),
-            lineHeight = 10.sp,
+            lineHeight = 8.sp,
         )
         UniATextField(
             value = uiState.email,
@@ -83,9 +83,9 @@ fun ConfirmEmailScreen(
             NonScaleText(
                 text = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_btn_confirm),
                 color = Color.White,
-                fontSize = 15.sp,
+                fontSize = 13.sp,
                 fontWeight = FontWeight(600),
-                lineHeight = 10.sp,
+                lineHeight = 8.sp,
                 textAlign = TextAlign.Center,
             )
         }
@@ -94,6 +94,7 @@ fun ConfirmEmailScreen(
         val textFirst = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_message_first)
         val textSecond = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_message_verification_code)
         val textThird = stringResource(id = com.ajouunia.core.designsystem.R.string.confirm_email_message_second)
+        val fontSize = 10.sp.nonScaleSp
 
         Text(
             text = buildAnnotatedString {
@@ -102,7 +103,7 @@ fun ConfirmEmailScreen(
                 ) {
                     withStyle(
                         style = SpanStyle(
-                            fontSize = 12.sp,
+                            fontSize = fontSize,
                             fontFamily = urbanistFamily,
                             fontWeight = FontWeight(500),
                             color = Color(0xFF000000),
@@ -112,7 +113,7 @@ fun ConfirmEmailScreen(
                     }
                     withStyle(
                         style = SpanStyle(
-                            fontSize = 12.sp,
+                            fontSize = fontSize,
                             fontFamily = urbanistFamily,
                             fontWeight = FontWeight(700),
                             color = Color(0xFF000000),
@@ -122,7 +123,7 @@ fun ConfirmEmailScreen(
                     }
                     withStyle(
                         style = SpanStyle(
-                            fontSize = 12.sp,
+                            fontSize = fontSize,
                             fontFamily = urbanistFamily,
                             fontWeight = FontWeight(500),
                             color = Color(0xFF000000),
