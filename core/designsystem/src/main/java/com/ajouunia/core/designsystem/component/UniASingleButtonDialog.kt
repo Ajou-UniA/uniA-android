@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.ajouunia.core.designsystem.Purple2
+import com.ajouunia.core.designsystem.Purple4
 import com.ajouunia.core.designsystem.urbanistFamily
 
 @Composable
@@ -89,7 +90,7 @@ fun UniASingleButtonDialog(
                             lineHeight = 10.sp,
                             fontFamily = urbanistFamily,
                             fontWeight = FontWeight(600),
-                            color = Color(0xFF8354FF),
+                            color = Purple4,
                             textAlign = TextAlign.Center,
                         )
                     )

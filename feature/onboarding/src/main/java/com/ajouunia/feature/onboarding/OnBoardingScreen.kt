@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ajouunia.core.designsystem.Purple4
 import com.ajouunia.core.designsystem.R
 import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.component.NonScaleText
@@ -81,7 +82,7 @@ fun OnBoardingScreen(
                     .fillMaxWidth()
                     .heightIn(min = 52.dp),
                 shape = RoundedCornerShape(size = 10.dp),
-                colors = ButtonDefaults.buttonColors(Color(0xFF8354FF)),
+                colors = ButtonDefaults.buttonColors(Purple4),
                 onClick = {
                     navigateToBack()
                 }

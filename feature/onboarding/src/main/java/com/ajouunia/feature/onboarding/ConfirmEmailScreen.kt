@@ -27,6 +27,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ajouunia.core.designsystem.Purple4
 import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.component.UniATextField
 import com.ajouunia.core.designsystem.extensions.nonScaleSp
@@ -74,7 +75,7 @@ fun ConfirmEmailScreen(
                 .fillMaxWidth()
                 .heightIn(min = 52.dp),
             shape = RoundedCornerShape(size = 10.dp),
-            colors = ButtonDefaults.buttonColors(Color(0xFF8354FF)),
+            colors = ButtonDefaults.buttonColors(Purple4),
             enabled = enableButton,
             onClick = {
                 onClickSubmit()

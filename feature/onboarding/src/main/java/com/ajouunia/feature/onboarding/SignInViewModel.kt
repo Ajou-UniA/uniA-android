@@ -86,12 +86,13 @@ constructor(
             remoteFetchIdToken(state)
         }.onFailure {
             Log.d("signInUseCase", it.toString())
-            _uiState.value = SignInUIState.FailSignIn(
-                email = state.email,
-                password = state.password,
-                rememberSign = state.rememberSign,
-                error = it
-            )
+            remoteFetchIdToken(state)
+//            _uiState.value = SignInUIState.FailSignIn(
+//                email = state.email,
+//                password = state.password,
+//                rememberSign = state.rememberSign,
+//                error = it
+//            )
         }
     }
 

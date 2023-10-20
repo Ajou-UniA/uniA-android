@@ -35,6 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavOptions
+import com.ajouunia.core.designsystem.Purple4
 import com.ajouunia.core.designsystem.R
 import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.component.UniATextField
@@ -207,7 +208,7 @@ fun SignUpScreen(
                 .fillMaxWidth()
                 .heightIn(min = 52.dp),
             shape = RoundedCornerShape(size = 10.dp),
-            colors = ButtonDefaults.buttonColors(Color(0xFF8354FF)),
+            colors = ButtonDefaults.buttonColors(Purple4),
             onClick = {
                 val options = NavOptions.Builder()
                     .setPopUpTo(SIGN_UP_NAVIGATION_ROUTE, inclusive = true)

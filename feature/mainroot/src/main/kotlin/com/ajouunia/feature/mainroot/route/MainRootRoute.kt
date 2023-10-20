@@ -44,6 +44,8 @@ import com.ajouunia.feature.community.navigation.COMMUNITY_NAVIGATION_ROUTE
 import com.ajouunia.feature.community.navigation.community
 import com.ajouunia.feature.guide.navigation.GUIDE_NAVIGATION_ROUTE
 import com.ajouunia.feature.guide.navigation.guide
+import com.ajouunia.feature.guide.navigation.navigateToGuide
+import com.ajouunia.feature.guide.navigation.navigateToGuideInfo
 import com.ajouunia.feature.home.navigation.HOME_NAVIGATION_ROUTE
 import com.ajouunia.feature.home.navigation.home
 import com.ajouunia.feature.mainroot.state.BottomNavigationItem
@@ -142,7 +144,10 @@ internal fun MainRootRoute(
             popExitTransition = { ExitTransition.None }
         ) {
             task()
-            guide()
+            guide(
+                navigateToBack = navController::popBackStack,
+                navigateToGuideInfo = navController::navigateToGuideInfo
+            )
             home()
             community()
             myPage()
