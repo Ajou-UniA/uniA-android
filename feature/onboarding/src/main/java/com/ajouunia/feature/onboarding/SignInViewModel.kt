@@ -83,32 +83,56 @@ constructor(
             )
         ).onSuccess {
             Log.d("signInUseCase", it.toString())
-            remoteFetchIdToken(state)
+            when (it.result) {
+                true -> remoteFetchIdToken(state)
+                false -> remoteFetchIdToken(state)
+//                    _uiState.postValue(
+//                    SignInUIState.FailSignIn(
+//                        email = state.email,
+//                        password = state.password,
+//                        rememberSign = state.rememberSign,
+//                    )
+//                )
+            }
         }.onFailure {
             Log.d("signInUseCase", it.toString())
             remoteFetchIdToken(state)
-//            _uiState.value = SignInUIState.FailSignIn(
-//                email = state.email,
-//                password = state.password,
-//                rememberSign = state.rememberSign,
-//                error = it
+//            _uiState.postValue(
+//                SignInUIState.FailSignIn(
+//                    email = state.email,
+//                    password = state.password,
+//                    rememberSign = state.rememberSign,
+//                    error = it
+//                )
 //            )
         }
     }
 
     private fun remoteFetchIdToken(state: SignInUIState) = viewModelScope.launch {
         findIdTokenByEmailUseCase(state.email).onSuccess {
-            _uiState.value = SignInUIState.MoveMain(
-                email = state.email,
-                password = state.password,
-                rememberSign = state.rememberSign
+            _uiState.postValue(
+                when (it.result) {
+                    true -> SignInUIState.MoveMain(
+                        email = state.email,
+                        password = state.password,
+                        rememberSign = state.rememberSign
+                    )
+                    false -> SignInUIState.FailSignIn(
+                        email = state.email,
+                        password = state.password,
+                        rememberSign = state.rememberSign,
+                        error = null
+                    )
+                }
             )
         }.onFailure {
-            _uiState.value = SignInUIState.FailSignIn(
-                email = state.email,
-                password = state.password,
-                rememberSign = state.rememberSign,
-                error = it
+            _uiState.postValue(
+                SignInUIState.FailSignIn(
+                    email = state.email,
+                    password = state.password,
+                    rememberSign = state.rememberSign,
+                    error = it
+                )
             )
         }
     }

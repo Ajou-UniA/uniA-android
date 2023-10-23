@@ -9,6 +9,7 @@ import Dependencies.usingRetrofitDependencies
 import Dependencies.usingRoomDependencies
 import Dependencies.usingTimberDependencies
 import Dependencies.usingUnitTestDependencies
+import Dependencies.usingTimeDependencies
 
 plugins {
     kotlin("android")
@@ -60,6 +61,7 @@ dependencies {
     usingUnitTestDependencies()
     usingAndroidTestDependencies()
     usingTimberDependencies()
+    usingTimeDependencies()
 }
 
 kapt {

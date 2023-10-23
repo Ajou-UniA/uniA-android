@@ -4,6 +4,7 @@ import com.ajouunia.core.data.service.GuideService
 import com.ajouunia.core.data.service.MemberService
 import com.ajouunia.core.data.service.ResetPasswordService
 import com.ajouunia.core.data.service.SignUpService
+import com.ajouunia.core.data.service.TaskService
 import com.ajouunia.core.data.service.VerificationService
 import dagger.Module
 import dagger.Provides
@@ -44,6 +45,12 @@ object ServiceModule {
     @Provides
     internal fun provideGuideService(retrofit: Retrofit): GuideService {
         return retrofit.create(GuideService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    internal fun provideTaskService(retrofit: Retrofit): TaskService {
+        return retrofit.create(TaskService::class.java)
     }
 
 }
