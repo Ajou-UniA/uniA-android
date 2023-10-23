@@ -1,4 +1,4 @@
-package com.ajouunia.feature.onboarding
+package com.ajouunia.feature.onboarding.vm
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -8,8 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.ajouunia.core.domain.usecase.FindIdTokenByEmailUseCase
 import com.ajouunia.core.domain.usecase.SignInUseCase
 import com.ajouunia.feature.onboarding.state.SignInUIState
-import com.ajouunia.feature.onboarding.utils.extensions.isAjouUnivEmail
-import com.ajouunia.feature.onboarding.utils.extensions.isEmptyId
+import com.ajouunia.feature.onboarding.vm.ConfirmEmailViewModel.Companion.AJOU_UNIV_DEFAULT_EMAIL_FORM
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,9 +24,9 @@ constructor(
     val uiState: LiveData<SignInUIState>
         get() = _uiState
 
-    fun changeInputEmail(email: String) {
+    fun changeInputId(id: String) {
         _uiState.value = SignInUIState.UpdateInfo(
-            email = email.replace(" ", ""),
+            id = id.replace(" ", ""),
             password = _uiState.value?.password ?: "",
             rememberSign = _uiState.value?.rememberSign ?: false
         )
@@ -35,7 +34,7 @@ constructor(
 
     fun changeInputPassword(password: String) {
         _uiState.value = SignInUIState.UpdateInfo(
-            email = _uiState.value?.email ?: "",
+            id = _uiState.value?.id ?: "",
             password = password.replace(" ", ""),
             rememberSign = _uiState.value?.rememberSign ?: false
         )
@@ -43,7 +42,7 @@ constructor(
 
     fun changeInputRemember(remember: Boolean) {
         _uiState.value = SignInUIState.UpdateInfo(
-            email = _uiState.value?.email ?: "",
+            id = _uiState.value?.id ?: "",
             password = _uiState.value?.password ?: "",
             rememberSign = remember
         )
@@ -51,13 +50,13 @@ constructor(
 
     fun clearState() {
         _uiState.value = SignInUIState.UpdateInfo(
-            email = "",
+            id = "",
             password = "",
             rememberSign = false
         )
     }
 
-    fun isAvailableSignIn() = isValidEmail() and isValidPassword()
+    fun isAvailableSignIn() = isValidId() and isValidPassword()
 
     fun signIn() {
         val state = _uiState.value ?: return
@@ -67,7 +66,7 @@ constructor(
         }
 
         _uiState.value = SignInUIState.Loading(
-            email = state.email,
+            id = state.id,
             password = state.password,
             rememberSign = state.rememberSign
         )
@@ -78,7 +77,7 @@ constructor(
     private fun remoteSignIn(state: SignInUIState) = viewModelScope.launch {
         signInUseCase(
             params = SignInUseCase.Params(
-                userEmail = state.email,
+                userEmail = state.id + AJOU_UNIV_DEFAULT_EMAIL_FORM,
                 password = state.password
             )
         ).onSuccess {
@@ -109,16 +108,18 @@ constructor(
     }
 
     private fun remoteFetchIdToken(state: SignInUIState) = viewModelScope.launch {
-        findIdTokenByEmailUseCase(state.email).onSuccess {
+        findIdTokenByEmailUseCase(
+            state.id + AJOU_UNIV_DEFAULT_EMAIL_FORM
+        ).onSuccess {
             _uiState.postValue(
                 when (it.result) {
                     true -> SignInUIState.MoveMain(
-                        email = state.email,
+                        id = state.id,
                         password = state.password,
                         rememberSign = state.rememberSign
                     )
                     false -> SignInUIState.FailSignIn(
-                        email = state.email,
+                        id = state.id,
                         password = state.password,
                         rememberSign = state.rememberSign,
                         error = null
@@ -128,7 +129,7 @@ constructor(
         }.onFailure {
             _uiState.postValue(
                 SignInUIState.FailSignIn(
-                    email = state.email,
+                    id = state.id,
                     password = state.password,
                     rememberSign = state.rememberSign,
                     error = it
@@ -137,9 +138,7 @@ constructor(
         }
     }
 
-    private fun isValidEmail(): Boolean = _uiState.value?.email?.let { email ->
-        email.isAjouUnivEmail() && email.isEmptyId()
-    } ?: false
+    private fun isValidId(): Boolean = _uiState.value?.id?.isNotEmpty() ?: false
 
     private fun isValidPassword(): Boolean = _uiState.value?.password?.let { password ->
         password.length in 4..12

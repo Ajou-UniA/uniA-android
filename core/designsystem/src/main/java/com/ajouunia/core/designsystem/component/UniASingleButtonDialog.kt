@@ -26,6 +26,7 @@ import com.ajouunia.core.designsystem.Purple2
 import com.ajouunia.core.designsystem.Purple4
 import com.ajouunia.core.designsystem.urbanistFamily
 
+@Deprecated("Not used it, Change UniATwoButtonDialog.kt")
 @Composable
 fun UniASingleButtonDialog(
     modifier: Modifier = Modifier,

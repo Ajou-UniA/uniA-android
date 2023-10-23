@@ -1,4 +1,4 @@
-package com.ajouunia.feature.onboarding
+package com.ajouunia.feature.onboarding.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,8 +8,6 @@ import com.ajouunia.core.domain.usecase.IsDuplicateEmailUseCase
 import com.ajouunia.core.domain.usecase.SendVerificationCodeUseCase
 import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
 import com.ajouunia.feature.onboarding.utils.exceptions.InValidEmailException
-import com.ajouunia.feature.onboarding.utils.extensions.isAjouUnivEmail
-import com.ajouunia.feature.onboarding.utils.extensions.isEmptyId
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,47 +28,62 @@ constructor(
             return
         }
 
-        _uiState.value = ConfirmEmailUIState.UpdateInfo(email = email.replace(" ", ""))
+        _uiState.value = ConfirmEmailUIState.UpdateInfo(id = email.replace(" ", ""))
     }
 
     fun submitEmail() {
-        val email = _uiState.value?.email ?: return
-        if (!email.isAjouUnivEmail() && email.isEmptyId()) {
+        val id = _uiState.value?.id ?: return
+        if (id.isEmpty()) {
             return
         }
-        _uiState.value = ConfirmEmailUIState.Loading(email = email)
-        remoteSubmitEmail(email)
+        _uiState.value = ConfirmEmailUIState.Loading(id = id)
+        remoteSubmitEmail(id)
     }
 
-    private fun remoteSubmitEmail(email: String) = viewModelScope.launch {
-        isDuplicateEmailUseCase(userEmail = email).onSuccess {
+    private fun remoteSubmitEmail(id: String) = viewModelScope.launch {
+        isDuplicateEmailUseCase(
+            userEmail = id + AJOU_UNIV_DEFAULT_EMAIL_FORM
+        ).onSuccess {
             when (it.result) {
-                true -> remoteSendCode(email = email)
+                true -> remoteSendCode(id = id)
                 false -> _uiState.postValue(
                     ConfirmEmailUIState.Error(
-                        email = email,
+                        id = id,
                         error = InValidEmailException()
                     )
                 )
             }
         }.onFailure {
-            _uiState.postValue(ConfirmEmailUIState.Error(email, it))
+            _uiState.postValue(ConfirmEmailUIState.Error(id, it))
         }
     }
 
-    private fun remoteSendCode(email: String) = viewModelScope.launch {
+    private fun remoteSendCode(id: String) = viewModelScope.launch {
         // TODO
-        _uiState.postValue(ConfirmEmailUIState.Success(email = email))
-//        sendVerificationCodeUseCase(email).onSuccess {
-//            _uiState.postValue(ConfirmEmailUIState.Success(email = email))
-//        }.onFailure {
-//            _uiState.postValue(ConfirmEmailUIState.Success(email = email))
-//        }
+//        _uiState.postValue(
+//            ConfirmEmailUIState.Success(
+//                id = id + AJOU_UNIV_DEFAULT_EMAIL_FORM
+//            )
+//        )
+        sendVerificationCodeUseCase(
+            userEmail = id + AJOU_UNIV_DEFAULT_EMAIL_FORM
+        ).onSuccess {
+            _uiState.postValue(
+                ConfirmEmailUIState.Success(
+                    id = id + AJOU_UNIV_DEFAULT_EMAIL_FORM
+                )
+            )
+        }.onFailure {
+            _uiState.postValue(
+                ConfirmEmailUIState.Error(
+                    id = id,
+                    error = it
+                )
+            )
+        }
     }
 
-    fun isValidEmail(): Boolean = _uiState.value?.email?.let {
-        it.isAjouUnivEmail() and it.isEmptyId()
-    } ?: false
+    fun isValidEmail(): Boolean = _uiState.value?.id?.isNotEmpty() ?: false
 
     companion object {
         const val AJOU_UNIV_DEFAULT_EMAIL_FORM = "@ajou.ac.kr"

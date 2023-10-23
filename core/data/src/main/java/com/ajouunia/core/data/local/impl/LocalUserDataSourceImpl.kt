@@ -12,12 +12,22 @@ constructor(
 ) : LocalUserDataSource {
     override fun fetchIdToken(): Flow<Long> = dataStoreDataSource.fetchIdToken()
 
-    override suspend fun saveIdToken(idToken: Long) {
-        dataStoreDataSource.saveIdToken(token = idToken)
-    }
+    override fun fetchRememberToken(): Flow<Boolean> = dataStoreDataSource.fetchRememberToken()
+
+    override suspend fun saveIdToken(idToken: Long) = dataStoreDataSource.saveIdToken(idToken)
+
+    override suspend fun saveRememberToken(token: Boolean) = dataStoreDataSource.saveRememberToken(token)
 
     override suspend fun clearIdToken() {
         dataStoreDataSource.clearIdToken()
+    }
+
+    override suspend fun clearRememberToken() {
+        dataStoreDataSource.clearRememberToken()
+    }
+
+    override suspend fun clearAll() {
+        dataStoreDataSource.clearAll()
     }
 
 }

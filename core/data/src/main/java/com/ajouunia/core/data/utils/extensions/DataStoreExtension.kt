@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import com.ajouunia.core.data.local.datastore
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -21,12 +22,18 @@ internal suspend fun dataEmptyException(
 
 internal fun Context.fetchStringPreference(
     key: Preferences.Key<String>
-) = this.datastore.data.catch { exception ->
+): Flow<String> = this.datastore.data.catch { exception ->
     dataEmptyException(exception = exception)
 }.map { preference -> preference[key] ?: "" }
 
 internal fun Context.fetchLongPreference(
     key: Preferences.Key<Long>
-) = this.datastore.data.catch { exception ->
+): Flow<Long> = this.datastore.data.catch { exception ->
     dataEmptyException(exception = exception)
 }.map { preference -> preference[key] ?: -1L }
+
+internal fun Context.fetchBooleanPreference(
+    key: Preferences.Key<Boolean>
+): Flow<Boolean> = this.datastore.data.catch { exception ->
+    dataEmptyException(exception = exception)
+}.map { preference -> preference[key] ?: false }

@@ -23,15 +23,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.UniAIconPack
-import com.ajouunia.core.designsystem.component.UniASelectDialog
 import com.ajouunia.core.designsystem.component.UniATwoButtonDialog
 import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
-import com.ajouunia.feature.onboarding.ConfirmEmailScreen
-import com.ajouunia.feature.onboarding.ConfirmEmailViewModel
+import com.ajouunia.feature.onboarding.ui.ConfirmEmailScreen
+import com.ajouunia.feature.onboarding.vm.ConfirmEmailViewModel
 import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_FORGOT_PASSWORD_NAVIGATION_ROUTE
 import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_SIGN_UP_NAVIGATION_ROUTE
 import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
-import com.ajouunia.feature.onboarding.utils.exceptions.InValidEmailException
 
 @Composable
 internal fun ConfirmEmailRoute(
@@ -51,13 +49,13 @@ internal fun ConfirmEmailRoute(
                 val options = NavOptions.Builder()
                     .setPopUpTo(CONFIRM_EMAIL_SIGN_UP_NAVIGATION_ROUTE, inclusive = true)
                     .build()
-                navigateToConfirmCodeSignUp(options, state.email)
+                navigateToConfirmCodeSignUp(options, state.id)
             }
             false -> {
                 val options = NavOptions.Builder()
                     .setPopUpTo(CONFIRM_EMAIL_FORGOT_PASSWORD_NAVIGATION_ROUTE, inclusive = true)
                     .build()
-                navigateToConfirmCodeForgotPassword(options, state.email)
+                navigateToConfirmCodeForgotPassword(options, state.id)
             }
         }
         is ConfirmEmailUIState.Loading -> {

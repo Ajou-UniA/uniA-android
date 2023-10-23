@@ -17,6 +17,7 @@ import com.ajouunia.core.designsystem.uniaiconpack.IcSelectedMyTaks
 import com.ajouunia.core.designsystem.uniaiconpack.IcUnselectedCircle
 import com.ajouunia.core.designsystem.uniaiconpack.IconArrow
 import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
+import com.ajouunia.core.designsystem.uniaiconpack.IconCheckedEllipse
 import com.ajouunia.core.designsystem.uniaiconpack.IconEyeHide
 import com.ajouunia.core.designsystem.uniaiconpack.IconEyeShow
 import com.ajouunia.core.designsystem.uniaiconpack.IconLogoName
@@ -34,7 +35,7 @@ public val UniAIconPack.UniAAllIcons: ____KtList<ImageVector>
     }
     __UniAAllIcons= listOf(IcUnselectedCircle, IconBackArrow, IcHome, IcSelectedAjouGuide,
         IcMyTasks, IconLogoName, IcMyPage, IcCommunity, IcMoreSee, IcSelectedMyPage, IcAjouGuide,
-        IconUncheckEllipse, IcSelectedCommunity, IcSelectedMyTaks, IcHamMenu, IcSelectedCircle,
-        IconArrow, IcSelectedHome, IconEyeHide, IconEyeShow)
+        IconUncheckEllipse, IcSelectedCommunity, IconCheckedEllipse, IcSelectedMyTaks, IcHamMenu,
+        IcSelectedCircle, IconArrow, IcSelectedHome, IconEyeHide, IconEyeShow)
     return __UniAAllIcons!!
   }

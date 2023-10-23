@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Icon
@@ -22,8 +21,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
-import com.ajouunia.feature.onboarding.AgreementServiceScreen
-import com.ajouunia.feature.onboarding.AgreementServiceViewModel
+import com.ajouunia.feature.onboarding.state.AgreementServiceUIState
+import com.ajouunia.feature.onboarding.ui.AgreementServiceScreen
+import com.ajouunia.feature.onboarding.vm.AgreementServiceViewModel
 
 @Composable
 internal fun AgreementServiceRoute(
@@ -34,35 +34,39 @@ internal fun AgreementServiceRoute(
     viewModel: AgreementServiceViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.observeAsState()
-
-    uiState?.let { state ->
-        Scaffold(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(color = Color.White),
-            topBar = {
-                Box(
-                    modifier = Modifier.fillMaxWidth()
-                        .statusBarsPadding()
-                        .background(Color.White),
-                    contentAlignment = Alignment.CenterStart
-                ) {
-                    Icon(
-                        UniAIconPack.IconBackArrow,
-                        contentDescription = "back",
-                        modifier = Modifier
-                            .padding(start = 24.dp, top = 60.dp)
-                            .clickable { navigateToBack() },
-                    )
-                }
+    
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.White),
+        topBar = {
+            Box(
+                modifier = Modifier.fillMaxWidth()
+                    .statusBarsPadding()
+                    .background(Color.White),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                Icon(
+                    UniAIconPack.IconBackArrow,
+                    contentDescription = "back",
+                    modifier = Modifier
+                        .padding(start = 24.dp, top = 60.dp)
+                        .clickable { navigateToBack() },
+                )
             }
-        ) { padding ->
+        }
+    ) { padding ->
+        uiState?.let { state ->
             AgreementServiceScreen(
                 modifier = Modifier.padding(padding),
+                uiState = state,
+                changeInputTermsOfUse = viewModel::changeInputTermsOfUse,
+                changeInputPrivacyPolicy = viewModel::changeInputPrivacyPolicy,
                 navigateToConfirmEmail = navigateToConfirmEmail
             )
         }
     }
+
 }
 
 @Preview(showBackground = true)
@@ -91,6 +95,10 @@ fun AgreementServiceRoutePreview() {
     ) { padding ->
         AgreementServiceScreen(
             modifier = Modifier.padding(padding),
+            uiState = AgreementServiceUIState.UpdateInfo(
+                acceptTermsOfUse = true,
+                acceptPrivacyPolicy = false
+            ),
             navigateToConfirmEmail = {}
         )
     }

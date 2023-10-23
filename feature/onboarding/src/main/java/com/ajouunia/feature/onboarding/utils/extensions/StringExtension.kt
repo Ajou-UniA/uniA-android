@@ -1,12 +1,12 @@
 package com.ajouunia.feature.onboarding.utils.extensions
 
-import com.ajouunia.feature.onboarding.ConfirmEmailViewModel
+//import com.ajouunia.feature.onboarding.vm.ConfirmEmailViewModel
 
-internal fun String.isAjouUnivEmail(): Boolean = this.contains(ConfirmEmailViewModel.AJOU_UNIV_DEFAULT_EMAIL_FORM)
+//internal fun String.isAjouUnivEmail(): Boolean = this.contains(ConfirmEmailViewModel.AJOU_UNIV_DEFAULT_EMAIL_FORM)
 
-internal fun String.isEmptyId(): Boolean = this.split(ConfirmEmailViewModel.AJOU_UNIV_DEFAULT_EMAIL_FORM).let { list ->
-    return@let when (list.size) {
-        2 -> list[0].isNotEmpty() && list[1].isEmpty()
-        else -> false
-    }
-}
+//internal fun String.isEmptyId(): Boolean = this.split(ConfirmEmailViewModel.AJOU_UNIV_DEFAULT_EMAIL_FORM).let { list ->
+//    return@let when (list.size) {
+//        2 -> list[0].isNotEmpty() && list[1].isEmpty()
+//        else -> false
+//    }
+//}

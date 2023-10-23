@@ -1,4 +1,4 @@
-package com.ajouunia.feature.onboarding
+package com.ajouunia.feature.onboarding.vm
 
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
@@ -56,22 +56,22 @@ constructor(
         userEmail: String,
         code: String
     ) = viewModelScope.launch {
-        _uiState.postValue(VerificationCodeUIState.Success(code))
-//        isVerifyCodeUseCase(
-//            params = IsVerifyCodeUseCase.Params(
-//                userEmail = userEmail,
-//                code = code
-//            )
-//        ).onSuccess {
-//            _uiState.postValue(VerificationCodeUIState.Success(code))
-//        }.onFailure {
-//            _uiState.postValue(
-//                VerificationCodeUIState.Error(
-//                    code = code,
-//                    exception = it
-//                )
-//            )
-//        }
+//        _uiState.postValue(VerificationCodeUIState.Success(code))
+        isVerifyCodeUseCase(
+            params = IsVerifyCodeUseCase.Params(
+                userEmail = userEmail,
+                code = code
+            )
+        ).onSuccess {
+            _uiState.postValue(VerificationCodeUIState.Success(code))
+        }.onFailure {
+            _uiState.postValue(
+                VerificationCodeUIState.Error(
+                    code = code,
+                    exception = it
+                )
+            )
+        }
     }
 
     fun resendCode(userEmail: String) {
