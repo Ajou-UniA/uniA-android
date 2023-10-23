@@ -1,8 +1,11 @@
-package com.ajouunia.feature.onboarding
+package com.ajouunia.feature.onboarding.ui
 
+import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -33,6 +37,7 @@ import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.component.UniACheckbox
 import com.ajouunia.core.designsystem.component.UniATextField
 import com.ajouunia.feature.onboarding.state.SignInUIState
+import com.ajouunia.feature.onboarding.vm.ConfirmEmailViewModel.Companion.AJOU_UNIV_DEFAULT_EMAIL_FORM
 
 @Composable
 fun SignInScreen(
@@ -47,6 +52,8 @@ fun SignInScreen(
     navigateToForgotPassword: (NavOptions) -> Unit,
 ) {
     val context = LocalContext.current
+    
+    Log.d("SignInScreen", uiState.toString())
 
     Surface(
         modifier = modifier
@@ -76,12 +83,39 @@ fun SignInScreen(
                 fontWeight = FontWeight(600),
                 lineHeight = 10.sp,
             )
-            UniATextField(
-                value = uiState.email,
-                onValueChange = { newValue ->
-                    changeInputEmail(newValue)
+            Row {
+                UniATextField(
+                    modifier = Modifier.weight(0.5f),
+                    value = uiState.id,
+                    onValueChange = { newValue ->
+                        changeInputEmail(newValue)
+                    }
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Box(
+                    modifier = Modifier
+                        .weight(0.5f)
+                        .heightIn(min = 52.dp)
+                        .background(
+                            color = Color(0xffF5F5F5),
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                        .border(
+                            width = 1.dp,
+                            color = Color(0xffE3E3E3),
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                        .padding(horizontal = 15.dp),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    NonScaleText(
+                        text = AJOU_UNIV_DEFAULT_EMAIL_FORM,
+                        color = Color(0xFF8A8A8A),
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight(600),
+                    )
                 }
-            )
+            }
             Spacer(modifier = Modifier.height(22.dp))
             NonScaleText(
                 text = stringResource(id = com.ajouunia.core.designsystem.R.string.sign_in_title_password),

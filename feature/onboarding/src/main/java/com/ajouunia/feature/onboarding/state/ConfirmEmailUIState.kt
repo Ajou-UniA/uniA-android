@@ -1,20 +1,20 @@
 package com.ajouunia.feature.onboarding.state
 
 sealed class ConfirmEmailUIState(
-    open val email: String
+    open val id: String
 ) {
-    object Init : ConfirmEmailUIState(email = "")
+    object Init : ConfirmEmailUIState(id = "")
     data class Loading(
-        override val email: String
-    ) : ConfirmEmailUIState(email = email)
+        override val id: String
+    ) : ConfirmEmailUIState(id = id)
     data class UpdateInfo(
-        override val email: String
-    ) : ConfirmEmailUIState(email = email)
+        override val id: String
+    ) : ConfirmEmailUIState(id = id)
     data class Success(
-        override val email: String
-    ) : ConfirmEmailUIState(email = email)
+        override val id: String
+    ) : ConfirmEmailUIState(id = id)
     data class Error(
-        override val email: String,
+        override val id: String,
         val error: Throwable? = null
-    ) : ConfirmEmailUIState(email = email)
+    ) : ConfirmEmailUIState(id = id)
 }

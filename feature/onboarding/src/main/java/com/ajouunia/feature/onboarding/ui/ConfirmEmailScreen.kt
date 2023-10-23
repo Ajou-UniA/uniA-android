@@ -1,25 +1,29 @@
-package com.ajouunia.feature.onboarding
+package com.ajouunia.feature.onboarding.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -33,6 +37,7 @@ import com.ajouunia.core.designsystem.component.UniATextField
 import com.ajouunia.core.designsystem.extensions.nonScaleSp
 import com.ajouunia.core.designsystem.urbanistFamily
 import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
+import com.ajouunia.feature.onboarding.vm.ConfirmEmailViewModel
 
 @Composable
 fun ConfirmEmailScreen(
@@ -65,10 +70,37 @@ fun ConfirmEmailScreen(
             fontWeight = FontWeight(600),
             lineHeight = 8.sp,
         )
-        UniATextField(
-            value = uiState.email,
-            onValueChange = changeInputEmail
-        )
+        Row {
+            UniATextField(
+                modifier = Modifier.weight(0.5f),
+                value = uiState.id,
+                onValueChange = changeInputEmail
+            )
+            Spacer(modifier = Modifier.width(6.dp))
+            Box(
+                modifier = Modifier
+                    .weight(0.5f)
+                    .heightIn(min = 52.dp)
+                    .background(
+                        color = Color(0xffF5F5F5),
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .border(
+                        width = 1.dp,
+                        color = Color(0xffE3E3E3),
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .padding(horizontal = 15.dp),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                NonScaleText(
+                    text = ConfirmEmailViewModel.AJOU_UNIV_DEFAULT_EMAIL_FORM,
+                    color = Color(0xFF8A8A8A),
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight(600),
+                )
+            }
+        }
         Spacer(modifier = Modifier.height(42.dp))
         Button(
             modifier = Modifier

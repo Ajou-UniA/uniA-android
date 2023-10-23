@@ -25,8 +25,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
-import com.ajouunia.feature.onboarding.VerificationCodeScreen
-import com.ajouunia.feature.onboarding.VerificationCodeViewModel
+import com.ajouunia.feature.onboarding.ui.VerificationCodeScreen
+import com.ajouunia.feature.onboarding.vm.VerificationCodeViewModel
 import com.ajouunia.feature.onboarding.navigation.VERIFICATION_CODE_SIGN_UP_NAVIGATION_ROUTE
 import com.ajouunia.feature.onboarding.state.VerificationCodeUIState
 

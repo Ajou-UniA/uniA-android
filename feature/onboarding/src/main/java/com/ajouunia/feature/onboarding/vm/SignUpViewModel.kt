@@ -1,4 +1,4 @@
-package com.ajouunia.feature.onboarding
+package com.ajouunia.feature.onboarding.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

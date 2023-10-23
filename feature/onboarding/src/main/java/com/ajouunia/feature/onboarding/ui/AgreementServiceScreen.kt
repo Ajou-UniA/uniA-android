@@ -1,7 +1,9 @@
-package com.ajouunia.feature.onboarding
+package com.ajouunia.feature.onboarding.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,14 +17,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,13 +35,17 @@ import com.ajouunia.core.designsystem.R
 import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.uniaiconpack.IconArrow
+import com.ajouunia.core.designsystem.uniaiconpack.IconCheckedEllipse
 import com.ajouunia.core.designsystem.uniaiconpack.IconUncheckEllipse
-import com.ajouunia.core.designsystem.urbanistFamily
 import com.ajouunia.feature.onboarding.navigation.AGREEMENT_SERVICE_NAVIGATION_ROUTE
+import com.ajouunia.feature.onboarding.state.AgreementServiceUIState
 
 @Composable
 fun AgreementServiceScreen(
     modifier: Modifier = Modifier,
+    uiState: AgreementServiceUIState,
+    changeInputTermsOfUse: () -> Unit = {},
+    changeInputPrivacyPolicy: () -> Unit = {},
     navigateToConfirmEmail: (NavOptions) -> Unit,
 ) {
     val context = LocalContext.current
@@ -67,8 +72,16 @@ fun AgreementServiceScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    imageVector = UniAIconPack.IconUncheckEllipse,
+                    imageVector = when (uiState.acceptTermsOfUse) {
+                        true -> UniAIconPack.IconCheckedEllipse
+                        false -> UniAIconPack.IconUncheckEllipse
+                    },
                     contentDescription = null,
+                    modifier = Modifier.clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClick = changeInputTermsOfUse
+                    )
                 )
                 Row {
                     NonScaleText(
@@ -102,8 +115,16 @@ fun AgreementServiceScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    imageVector = UniAIconPack.IconUncheckEllipse,
+                    imageVector = when (uiState.acceptPrivacyPolicy) {
+                        true -> UniAIconPack.IconCheckedEllipse
+                        false -> UniAIconPack.IconUncheckEllipse
+                    },
                     contentDescription = null,
+                    modifier = Modifier.clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClick = changeInputPrivacyPolicy
+                    )
                 )
                 Row {
                     NonScaleText(
@@ -136,6 +157,7 @@ fun AgreementServiceScreen(
                     .heightIn(min = 52.dp),
                 shape = RoundedCornerShape(size = 10.dp),
                 colors = ButtonDefaults.buttonColors(Purple4),
+                enabled = uiState.acceptTermsOfUse and uiState.acceptPrivacyPolicy,
                 onClick = {
                     val options = NavOptions.Builder()
                         .setPopUpTo(AGREEMENT_SERVICE_NAVIGATION_ROUTE, inclusive = true)
@@ -160,6 +182,10 @@ fun AgreementServiceScreen(
 @Composable
 fun AgreementServiceScreenPreview() {
     AgreementServiceScreen(
+        uiState = AgreementServiceUIState.UpdateInfo(
+            acceptTermsOfUse = true,
+            acceptPrivacyPolicy = false
+        ),
         navigateToConfirmEmail = {}
     )
 }

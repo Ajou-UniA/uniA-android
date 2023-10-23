@@ -25,8 +25,8 @@ import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.component.UniASelectDialog
 import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
-import com.ajouunia.feature.onboarding.SignUpScreen
-import com.ajouunia.feature.onboarding.SignUpViewModel
+import com.ajouunia.feature.onboarding.ui.SignUpScreen
+import com.ajouunia.feature.onboarding.vm.SignUpViewModel
 import com.ajouunia.feature.onboarding.state.SignUpUiState
 
 private val list by lazy {
