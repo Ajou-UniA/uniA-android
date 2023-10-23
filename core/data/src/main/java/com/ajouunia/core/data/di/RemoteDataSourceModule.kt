@@ -4,11 +4,13 @@ import com.ajouunia.core.data.remote.GuideDataSource
 import com.ajouunia.core.data.remote.MemberDataSource
 import com.ajouunia.core.data.remote.ResetPasswordDataSource
 import com.ajouunia.core.data.remote.SignUpDataSource
+import com.ajouunia.core.data.remote.TaskDataSource
 import com.ajouunia.core.data.remote.VerificationDataSource
 import com.ajouunia.core.data.remote.impl.GuideDataSourceImpl
 import com.ajouunia.core.data.remote.impl.MemberDataSourceImpl
 import com.ajouunia.core.data.remote.impl.ResetPasswordDataSourceImpl
 import com.ajouunia.core.data.remote.impl.SignUpDataSourceImpl
+import com.ajouunia.core.data.remote.impl.TaskDataSourceImpl
 import com.ajouunia.core.data.remote.impl.VerificationDataSourceImpl
 import dagger.Binds
 import dagger.Module
@@ -49,5 +51,11 @@ internal abstract class RemoteDataSourceModule {
     abstract fun bindGuideDataSource(
         guideDataSourceImpl: GuideDataSourceImpl,
     ): GuideDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindTaskDataSource(
+        taskDataSourceImpl: TaskDataSourceImpl,
+    ): TaskDataSource
 
 }

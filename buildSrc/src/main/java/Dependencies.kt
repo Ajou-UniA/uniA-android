@@ -73,6 +73,10 @@ object Dependencies {
     private val timber = "com.jakewharton.timber:timber:${LibVersions.TIMBER}"
     //endregion
 
+    //region time
+    private val time = "com.jakewharton.threetenabp:threetenabp:1.4.6"
+    //endregion
+
     fun DependencyHandler.usingActivityDepdendencies() {
         implementation(activity)
         implementation(activity_compose)
@@ -151,6 +155,10 @@ object Dependencies {
 
     fun DependencyHandler.usingTimberDependencies() {
         implementation(timber)
+    }
+
+    fun DependencyHandler.usingTimeDependencies() {
+        implementation(time)
     }
 
 

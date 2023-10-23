@@ -6,6 +6,7 @@ import Dependencies.usingTimberDependencies
 import Dependencies.usingUnitTestDependencies
 import Dependencies.usingSplashDependencies
 import Dependencies.usingComposeDependencies
+import Dependencies.usingTimeDependencies
 
 plugins {
     id("com.android.library")
@@ -65,4 +66,5 @@ dependencies {
     this.usingAndroidTestDependencies()
 
     this.usingTimberDependencies()
+    this.usingTimeDependencies()
 }

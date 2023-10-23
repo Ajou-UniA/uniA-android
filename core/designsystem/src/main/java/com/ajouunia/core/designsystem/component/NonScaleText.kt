@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.ajouunia.core.designsystem.extensions.nonScaleSp
 import com.ajouunia.core.designsystem.urbanistFamily
+import kotlin.math.max
 
 @Composable
 fun NonScaleText(
@@ -22,6 +23,7 @@ fun NonScaleText(
     letterSpacing: TextUnit = TextUnit.Unspecified,
     textAlign: TextAlign? = null,
     lineHeight: TextUnit = TextUnit.Unspecified,
+    maxLines: Int = Int.MAX_VALUE,
 ) = Text(
     text = text,
     modifier = modifier,
@@ -32,6 +34,7 @@ fun NonScaleText(
     letterSpacing = letterSpacing.nonScaleSp,
     textAlign = textAlign,
     lineHeight = lineHeight.nonScaleSp,
+    maxLines = maxLines
 )
 
 @Preview(showBackground = true)

@@ -4,6 +4,9 @@ import com.ajouunia.core.data.model.response.SignInResponse
 import com.ajouunia.core.data.remote.MemberDataSource
 import com.ajouunia.core.data.service.MemberService
 import com.ajouunia.core.data.utils.safeAPICall
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
 class MemberDataSourceImpl
@@ -16,10 +19,8 @@ constructor(
         password: String
     ): SignInResponse? = safeAPICall {
         service.signIn(
-            partMap = mapOf(
-                "loginId" to email,
-                "password" to password
-            )
+            email = email,
+            password = password
         )
     }.body
 
