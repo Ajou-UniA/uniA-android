@@ -77,6 +77,10 @@ object Dependencies {
     private val time = "com.jakewharton.threetenabp:threetenabp:1.4.6"
     //endregion
 
+    //region Gson
+    private val gson = "com.google.code.gson:gson:${LibVersions.GSON}"
+    //endregion
+
     fun DependencyHandler.usingActivityDepdendencies() {
         implementation(activity)
         implementation(activity_compose)
@@ -161,5 +165,8 @@ object Dependencies {
         implementation(time)
     }
 
+    fun DependencyHandler.usingGsonDependencies() {
+        implementation(gson)
+    }
 
 }

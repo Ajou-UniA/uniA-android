@@ -17,4 +17,5 @@ object LibVersions {
     const val ANDROID_JUNIT = "1.1.5"
     const val ESPRESSO_CORE = "3.5.1"
     const val TIMBER = "5.0.1"
+    const val GSON = "2.10.1"
 }

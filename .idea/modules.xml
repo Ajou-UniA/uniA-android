@@ -3,11 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/designsystem/Unia-Android.core.designsystem.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/designsystem/Unia-Android.core.designsystem.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/feature/mainroot/Unia-Android.feature.mainroot.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/feature/mainroot/Unia-Android.feature.mainroot.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/feature/mainroot/Unia-Android.feature.mainroot.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/feature/mainroot/Unia-Android.feature.mainroot.unitTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/feature/task/Unia-Android.feature.task.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/feature/task/Unia-Android.feature.task.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/feature/task/Unia-Android.feature.task.main.iml" filepath="$PROJECT_DIR$/.idea/modules/feature/task/Unia-Android.feature.task.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/feature/task/Unia-Android.feature.task.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/feature/task/Unia-Android.feature.task.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/feature/home/Unia-Android.feature.home.main.iml" filepath="$PROJECT_DIR$/.idea/modules/feature/home/Unia-Android.feature.home.main.iml" />
     </modules>
   </component>
 </project>
