@@ -1,10 +1,12 @@
 package com.ajouunia.feature.home.ui
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -137,6 +140,20 @@ fun HomeScreen(
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth
             )
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(34.dp))
+            LazyRow(modifier = Modifier.fillMaxWidth()) {
+                items(uiState.partitions.size) { listIndex ->
+                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        (uiState.partitions[listIndex].indices).forEach { index ->
+                            GuideItemScreen(item = uiState.partitions[listIndex][index])
+                        }
+                    }
+                    Spacer(modifier = Modifier.width(30.dp))
+                }
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.ajouunia.feature.home.route
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -12,12 +13,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +39,13 @@ internal fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.observeAsState()
+    val context = LocalContext.current
 
+    LaunchedEffect(key1 = true) {
+        viewModel.fetchMapGuide(context.resources.assets)
+    }
+
+    Log.d("uiState", "uiState = ${uiState ?: "null"}")
     when (val state = uiState) {
         is HomeUIState.Map -> AjouUnivMapScreen(onClickClose = viewModel::closeMapState)
         else -> Unit
