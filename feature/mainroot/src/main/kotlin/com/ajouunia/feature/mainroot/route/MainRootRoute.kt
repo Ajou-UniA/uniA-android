@@ -1,5 +1,6 @@
 package com.ajouunia.feature.mainroot.route
 
+import android.util.Log
 import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.EnterTransition
@@ -122,6 +123,7 @@ internal fun MainRootRoute(
                         onClick = {
                             navigationSelectedItem = index
                             navController.navigate(navigationItem.route) {
+                                Log.d("graph", "navController.graph: ${navController.graph.toString()}")
                                 popUpTo(navController.graph.findStartDestination().id) {
                                     saveState = true
                                 }
@@ -167,9 +169,6 @@ fun MainRootRoutePreview() {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White),
-        topBar = {
-
-        },
         bottomBar = {
             NavigationBar(
                 modifier = Modifier
@@ -233,6 +232,5 @@ fun MainRootRoutePreview() {
                 }
             }
         }
-    ) { padding ->
-    }
+    ) { _ -> }
 }

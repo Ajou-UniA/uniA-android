@@ -1,4 +1,4 @@
-package com.ajouunia.feature.home
+package com.ajouunia.feature.home.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,5 +17,15 @@ constructor(
     val uiState: LiveData<HomeUIState>
         get() = _uiState
 
+
+    fun changeMapState() {
+        val state = _uiState.value ?: return
+
+        _uiState.value = HomeUIState.Map(state.taskList)
+    }
+
+    fun closeMapState() {
+        _uiState.value = HomeUIState.Init
+    }
 
 }

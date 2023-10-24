@@ -33,9 +33,10 @@ public val UniAIconPack.UniAAllIcons: ____KtList<ImageVector>
     if (__UniAAllIcons != null) {
       return __UniAAllIcons!!
     }
-    __UniAAllIcons= listOf(IcUnselectedCircle, IconBackArrow, IcHome, IcSelectedAjouGuide,
-        IcMyTasks, IconLogoName, IcMyPage, IcCommunity, IcMoreSee, IcSelectedMyPage, IcAjouGuide,
-        IconUncheckEllipse, IcSelectedCommunity, IconCheckedEllipse, IcSelectedMyTaks, IcHamMenu,
-        IcSelectedCircle, IconArrow, IcSelectedHome, IconEyeHide, IconEyeShow)
+    __UniAAllIcons= listOf(IcUnselectedCircle, IconBackArrow, IcHome,
+        IcSelectedAjouGuide, IcMyTasks, IconLogoName, IcMyPage, IcCommunity,
+        IcMoreSee, IcSelectedMyPage, IcAjouGuide, IconUncheckEllipse, IcSelectedCommunity,
+        IconCheckedEllipse, IcSelectedMyTaks, IcHamMenu, IcSelectedCircle, IconArrow,
+        IcSelectedHome, IconEyeHide, IconEyeShow)
     return __UniAAllIcons!!
   }
