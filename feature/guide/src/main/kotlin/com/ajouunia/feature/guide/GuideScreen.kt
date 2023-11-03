@@ -63,7 +63,7 @@ fun GuideScreen(
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun GuideScreenPreview() {
     GuideScreen(uiState = GuideUIState.Init)

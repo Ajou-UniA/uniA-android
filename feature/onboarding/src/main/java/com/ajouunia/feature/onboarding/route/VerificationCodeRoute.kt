@@ -100,7 +100,7 @@ internal fun VerificationCodeRoute(
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun VerificationCodeRoutePreview() {
     Scaffold(

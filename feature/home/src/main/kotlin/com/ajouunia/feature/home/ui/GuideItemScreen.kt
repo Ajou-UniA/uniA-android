@@ -42,7 +42,7 @@ fun GuideItemScreen(
 }
 
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun GuideItemScreenPreview() {
     GuideItemScreen(

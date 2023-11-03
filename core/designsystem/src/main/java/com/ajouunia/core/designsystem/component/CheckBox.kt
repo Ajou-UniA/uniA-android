@@ -129,10 +129,10 @@ fun UniACheckbox(
     }
 }
 
-@Preview(
-    showBackground = true,
-    backgroundColor = -1
-)
+//@Preview(
+//    showBackground = true,
+//    backgroundColor = -1
+//)
 @Composable
 fun UniACheckboxPreview() {
     UniACheckbox(

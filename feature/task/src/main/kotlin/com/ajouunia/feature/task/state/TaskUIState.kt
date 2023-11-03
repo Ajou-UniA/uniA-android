@@ -16,11 +16,13 @@ sealed class TaskUIState(
     ) : TaskUIState(taskList = taskList)
 
     data class CreateDialog(
-        override val taskList: List<TaskEntity>
+        override val taskList: List<TaskEntity>,
+        val taskState: TaskState
     ) : TaskUIState(taskList = taskList)
 
     data class EditDialog(
-        override val taskList: List<TaskEntity>
+        override val taskList: List<TaskEntity>,
+        val taskState: TaskState
     ) : TaskUIState(taskList = taskList)
 
     data class Error(

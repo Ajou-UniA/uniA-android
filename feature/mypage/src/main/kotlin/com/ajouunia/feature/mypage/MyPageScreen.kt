@@ -27,7 +27,7 @@ fun MyPageScreen(
 
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun MyPageScreenPreview() {
     MyPageScreen(uiState = MyPageUIState.Init)

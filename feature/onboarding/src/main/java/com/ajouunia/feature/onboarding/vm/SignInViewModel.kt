@@ -84,10 +84,11 @@ constructor(
             Log.d("signInUseCase", it.toString())
             when (it.result) {
                 true -> remoteFetchIdToken(state)
-                false -> remoteFetchIdToken(state)
+                false ->
+                    remoteFetchIdToken(state)
 //                    _uiState.postValue(
 //                    SignInUIState.FailSignIn(
-//                        email = state.email,
+//                        id = state.id,
 //                        password = state.password,
 //                        rememberSign = state.rememberSign,
 //                    )
@@ -98,7 +99,7 @@ constructor(
             remoteFetchIdToken(state)
 //            _uiState.postValue(
 //                SignInUIState.FailSignIn(
-//                    email = state.email,
+//                    id = state.id,
 //                    password = state.password,
 //                    rememberSign = state.rememberSign,
 //                    error = it

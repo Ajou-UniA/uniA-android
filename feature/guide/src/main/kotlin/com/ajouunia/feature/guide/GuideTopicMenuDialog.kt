@@ -124,7 +124,7 @@ fun GuideTopicMenuItemScreen(
     )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun GuideTopicMenuDialogPreview() {
     GuideTopicMenuDialog(
@@ -133,7 +133,7 @@ fun GuideTopicMenuDialogPreview() {
     )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun GuideTopicMenuItemScreenPreview() {
     GuideTopicMenuItemScreen(

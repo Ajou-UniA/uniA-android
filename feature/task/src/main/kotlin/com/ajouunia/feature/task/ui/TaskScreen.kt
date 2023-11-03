@@ -37,7 +37,7 @@ fun TaskScreen(
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun TaskScreenPreview() {
     TaskScreen(uiState = TaskUIState.Init)

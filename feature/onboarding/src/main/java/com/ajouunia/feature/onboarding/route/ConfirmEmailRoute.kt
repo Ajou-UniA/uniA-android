@@ -119,7 +119,7 @@ internal fun ConfirmEmailRoute(
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun ConfirmEmailRoutePreview() {
     Scaffold(

@@ -105,7 +105,7 @@ fun UniATwoButtonDialog(
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun UniADialogPreview() {
     UniATwoButtonDialog(
@@ -117,7 +117,7 @@ fun UniADialogPreview() {
     )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun UniADialogTwoLinePreview() {
     UniATwoButtonDialog(
@@ -130,7 +130,7 @@ fun UniADialogTwoLinePreview() {
     )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun UniATwoButtonDialogPreview() {
     UniATwoButtonDialog(
@@ -145,7 +145,7 @@ fun UniATwoButtonDialogPreview() {
     )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun UniATwoButtonDialogTwoLinePreview() {
     UniATwoButtonDialog(

@@ -157,7 +157,7 @@ internal fun MainRootRoute(
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun MainRootRoutePreview() {
     var navigationSelectedItem by remember {

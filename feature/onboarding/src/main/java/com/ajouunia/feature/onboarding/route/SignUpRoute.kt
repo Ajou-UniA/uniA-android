@@ -114,7 +114,7 @@ internal fun SignUpRoute(
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun SignUpRoutePreview() {
     Scaffold(

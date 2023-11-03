@@ -84,7 +84,7 @@ internal fun GuideInfoRoute(
 
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun GuideInfoRoutePreview() {
     GuideInfoRoute(

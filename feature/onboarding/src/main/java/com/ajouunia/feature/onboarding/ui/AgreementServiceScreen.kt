@@ -178,7 +178,7 @@ fun AgreementServiceScreen(
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun AgreementServiceScreenPreview() {
     AgreementServiceScreen(

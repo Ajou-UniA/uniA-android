@@ -129,10 +129,10 @@ private fun CharView(
 //    )
 }
 
-@Preview(
-    showBackground = true,
-    backgroundColor = -1
-)
+//@Preview(
+//    showBackground = true,
+//    backgroundColor = -1
+//)
 @Composable
 fun OtpTextFieldPreview() {
     OtpTextField(
@@ -142,10 +142,10 @@ fun OtpTextFieldPreview() {
     )
 }
 
-@Preview(
-    showBackground = true,
-    backgroundColor = -1
-)
+//@Preview(
+//    showBackground = true,
+//    backgroundColor = -1
+//)
 @Composable
 fun CharViewPreview() {
     CharView(

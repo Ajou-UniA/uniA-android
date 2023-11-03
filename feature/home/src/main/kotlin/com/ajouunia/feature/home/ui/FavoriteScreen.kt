@@ -56,7 +56,7 @@ fun FavoriteScreen(
     )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun FavoriteScreenPreview() {
     Column {

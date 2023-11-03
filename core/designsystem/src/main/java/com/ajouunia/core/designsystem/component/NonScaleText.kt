@@ -37,7 +37,7 @@ fun NonScaleText(
     maxLines = maxLines
 )
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun NonScaleTextPreview() {
     NonScaleText(

@@ -138,7 +138,7 @@ private fun Long.parseMonth(): String = when (this) {
     else -> "Jan."
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun TaskInfoScreenPreview() {
     val dateString = "2023-10-20T10:00:00"

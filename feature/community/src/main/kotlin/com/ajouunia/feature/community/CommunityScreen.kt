@@ -27,7 +27,7 @@ fun CommunityScreen(
 
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun CommunityScreenPreview() {
     CommunityScreen(uiState = CommunityUIState.Init)

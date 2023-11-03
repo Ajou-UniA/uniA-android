@@ -249,7 +249,7 @@ fun SignUpScreen(
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun SignUpScreenPreview() {
     SignUpScreen(

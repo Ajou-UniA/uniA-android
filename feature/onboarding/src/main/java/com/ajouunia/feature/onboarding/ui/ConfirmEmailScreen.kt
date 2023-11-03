@@ -170,7 +170,7 @@ fun ConfirmEmailScreen(
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun ConfirmEmailScreenEnablePreview() {
     ConfirmEmailScreen(
@@ -181,7 +181,7 @@ fun ConfirmEmailScreenEnablePreview() {
     )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun ConfirmEmailScreenDisablePreview() {
     ConfirmEmailScreen(

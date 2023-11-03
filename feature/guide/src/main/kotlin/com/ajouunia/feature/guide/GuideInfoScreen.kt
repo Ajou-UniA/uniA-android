@@ -57,7 +57,7 @@ fun GuideInfoScreen(
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun GuideInfoScreenPreview() {
     GuideInfoScreen(

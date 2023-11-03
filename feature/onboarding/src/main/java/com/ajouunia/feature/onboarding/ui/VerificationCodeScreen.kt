@@ -171,7 +171,7 @@ fun Timer(
     )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun VerificationCodeScreenPreview() {
     VerificationCodeScreen(

@@ -149,7 +149,7 @@ fun UniASelectDialog(
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun UniASelectDialogPreview() {
     UniASelectDialog(
