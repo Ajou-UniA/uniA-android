@@ -12,7 +12,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,6 +20,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.component.UniATwoButtonDialog
@@ -29,7 +29,7 @@ import com.ajouunia.feature.onboarding.ui.ConfirmEmailScreen
 import com.ajouunia.feature.onboarding.vm.ConfirmEmailViewModel
 import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_FORGOT_PASSWORD_NAVIGATION_ROUTE
 import com.ajouunia.feature.onboarding.navigation.CONFIRM_EMAIL_SIGN_UP_NAVIGATION_ROUTE
-import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
+import com.ajouunia.feature.onboarding.model.ConfirmEmailUIState
 
 @Composable
 internal fun ConfirmEmailRoute(
@@ -39,7 +39,7 @@ internal fun ConfirmEmailRoute(
     navigateToConfirmCodeForgotPassword: (NavOptions, String) -> Unit,
     viewModel: ConfirmEmailViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.observeAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -107,21 +107,19 @@ internal fun ConfirmEmailRoute(
             }
         }
     ) { padding ->
-        uiState?.let { state ->
-            ConfirmEmailScreen(
-                modifier = Modifier.padding(padding),
-                uiState = state,
-                changeInputEmail = viewModel::changeInputEmail,
-                enableButton = viewModel.isValidEmail(),
-                onClickSubmit = viewModel::submitEmail,
-            )
-        }
+        ConfirmEmailScreen(
+            modifier = Modifier.padding(padding),
+            uiState = uiState,
+            changeInputEmail = viewModel::changeInputEmail,
+            enableButton = viewModel.isValidEmail(),
+            onClickSubmit = viewModel::submitEmail,
+        )
     }
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun ConfirmEmailRoutePreview() {
+private fun ConfirmEmailRoutePreview() {
     Scaffold(
         modifier = Modifier
             .fillMaxSize()

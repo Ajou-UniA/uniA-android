@@ -7,7 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun rememberUniAAppState(
+internal fun rememberUniAAppState(
     navController: NavHostController = rememberNavController()
 ): UniAAppState = remember(key1 = navController) {
     UniAAppState(navController = navController)

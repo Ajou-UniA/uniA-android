@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import com.ajouunia.unia_android.navigation.UniANavHost
 
 @Composable
-fun UniAApp(appState: UniAAppState = rememberUniAAppState()) {
+internal fun UniAApp(appState: UniAAppState = rememberUniAAppState()) {
     val snackBarHostState = remember { SnackbarHostState() }
     val height = LocalConfiguration.current.screenHeightDp
 
@@ -24,7 +24,7 @@ fun UniAApp(appState: UniAAppState = rememberUniAAppState()) {
 }
 
 @Composable
-fun UniAAppBody(
+internal fun UniAAppBody(
     appState: UniAAppState,
     hostState: SnackbarHostState,
     height: Int

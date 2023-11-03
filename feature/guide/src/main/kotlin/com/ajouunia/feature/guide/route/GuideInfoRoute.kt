@@ -23,8 +23,8 @@ import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
 import com.ajouunia.core.domain.entity.GuideEntity
-import com.ajouunia.feature.guide.GuideInfoScreen
-import com.ajouunia.feature.guide.menuList
+import com.ajouunia.feature.guide.ui.GuideInfoScreen
+import com.ajouunia.feature.guide.ui.menuList
 
 @Composable
 internal fun GuideInfoRoute(
@@ -84,9 +84,9 @@ internal fun GuideInfoRoute(
 
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun GuideInfoRoutePreview() {
+private fun GuideInfoRoutePreview() {
     GuideInfoRoute(
         topicIndex = 1,
         guideEntity = GuideEntity(

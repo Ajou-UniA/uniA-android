@@ -10,13 +10,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextRange
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
@@ -26,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
 import com.ajouunia.core.designsystem.Purple4
-import com.ajouunia.core.designsystem.urbanistFamily
 
 @Composable
 fun OtpTextField(
@@ -99,42 +96,14 @@ private fun CharView(
         fontWeight = FontWeight(700),
         textAlign = TextAlign.Center
     )
-//    Text(
-//        modifier = Modifier
-//            .width(65.dp)
-//            .height(48.dp)
-//            .border(
-//                width = 1.dp,
-//                color = when {
-//                    isFocused -> Purple4
-//                    else -> Color(0xFFE3E3E3)
-//                },
-//                shape = RoundedCornerShape(8.dp)
-//            )
-//            .padding(2.dp),
-//        text = char,
-//        style = TextStyle(
-//            fontSize = 30.sp,
-//            lineHeight = 22.sp,
-//            fontFamily = urbanistFamily,
-//            fontWeight = FontWeight(700),
-//            color = Color(0xFF000000),
-//        ),
-//        color = if (isFocused) {
-//            Color(0xFFB5B6BA)
-//        } else {
-//            Color(0xFF60626C)
-//        },
-//        textAlign = TextAlign.Center
-//    )
 }
 
-//@Preview(
-//    showBackground = true,
-//    backgroundColor = -1
-//)
+@Preview(
+    showBackground = true,
+    backgroundColor = -1
+)
 @Composable
-fun OtpTextFieldPreview() {
+private fun OtpTextFieldPreview() {
     OtpTextField(
         otpText = "",
         otpCount = 4,
@@ -142,12 +111,12 @@ fun OtpTextFieldPreview() {
     )
 }
 
-//@Preview(
-//    showBackground = true,
-//    backgroundColor = -1
-//)
+@Preview(
+    showBackground = true,
+    backgroundColor = -1
+)
 @Composable
-fun CharViewPreview() {
+private fun CharViewPreview() {
     CharView(
         index = 0,
         text = "0"

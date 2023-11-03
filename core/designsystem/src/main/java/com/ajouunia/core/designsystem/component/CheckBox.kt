@@ -1,6 +1,5 @@
 package com.ajouunia.core.designsystem.component
 
-import android.graphics.fonts.FontStyle
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandHorizontally
@@ -22,7 +21,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -129,12 +127,12 @@ fun UniACheckbox(
     }
 }
 
-//@Preview(
-//    showBackground = true,
-//    backgroundColor = -1
-//)
+@Preview(
+    showBackground = true,
+    backgroundColor = -1
+)
 @Composable
-fun UniACheckboxPreview() {
+private fun UniACheckboxPreview() {
     UniACheckbox(
         label = "Remember-me",
         labelStyle = TextStyle(

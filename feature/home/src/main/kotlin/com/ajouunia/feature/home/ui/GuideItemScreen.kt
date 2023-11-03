@@ -17,7 +17,7 @@ import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.domain.entity.AjouMapGuideEntity
 
 @Composable
-fun GuideItemScreen(
+internal fun GuideItemScreen(
     modifier: Modifier = Modifier,
     item: AjouMapGuideEntity
 ) = Row(
@@ -42,9 +42,9 @@ fun GuideItemScreen(
 }
 
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun GuideItemScreenPreview() {
+private fun GuideItemScreenPreview() {
     GuideItemScreen(
         item = AjouMapGuideEntity(
             index = 1,

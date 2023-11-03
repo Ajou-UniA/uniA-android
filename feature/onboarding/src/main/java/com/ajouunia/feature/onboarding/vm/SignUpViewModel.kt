@@ -1,10 +1,10 @@
 package com.ajouunia.feature.onboarding.vm
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ajouunia.feature.onboarding.state.SignUpUiState
+import com.ajouunia.feature.onboarding.model.SignUpUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -13,8 +13,8 @@ class SignUpViewModel
 constructor(
 
 ) : ViewModel() {
-    private val _uiState = MutableLiveData<SignUpUiState>(SignUpUiState.Init)
-    val uiState: LiveData<SignUpUiState>
+    private val _uiState = MutableStateFlow<SignUpUiState>(SignUpUiState.Init)
+    val uiState: StateFlow<SignUpUiState>
         get() = _uiState
 
     private val specialCharacters by lazy{
@@ -44,7 +44,6 @@ constructor(
         val state = _uiState.value
 
         when (state) {
-            null -> return
             is SignUpUiState.Loading -> return
             else -> Unit
         }
@@ -56,7 +55,6 @@ constructor(
         val state = _uiState.value
 
         when (state) {
-            null -> return
             is SignUpUiState.Loading -> return
             else -> Unit
         }
@@ -73,7 +71,6 @@ constructor(
         }
 
         when (state) {
-            null -> return
             is SignUpUiState.Loading -> return
             else -> Unit
         }
@@ -85,7 +82,6 @@ constructor(
         val state = _uiState.value
 
         when (state) {
-            null -> return
             is SignUpUiState.Loading -> return
             else -> Unit
         }
@@ -97,7 +93,6 @@ constructor(
         val state = _uiState.value
 
         when (state) {
-            null -> return
             is SignUpUiState.Loading -> return
             else -> Unit
         }
@@ -120,7 +115,6 @@ constructor(
         val state = _uiState.value
 
         when (state) {
-            null -> return
             is SignUpUiState.Loading -> return
             else -> Unit
         }
@@ -142,7 +136,6 @@ constructor(
         val state = _uiState.value
 
         when (state) {
-            null -> return
             is SignUpUiState.Loading -> return
             else -> Unit
         }

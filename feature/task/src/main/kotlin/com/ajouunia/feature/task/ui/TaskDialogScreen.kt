@@ -1,13 +1,11 @@
 package com.ajouunia.feature.task.ui
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,22 +17,9 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material3.DatePicker
-import androidx.compose.material3.DatePickerDefaults
-import androidx.compose.material3.DatePickerDialog
-import androidx.compose.material3.DatePickerFormatter
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TimePicker
-import androidx.compose.material3.TimePickerDefaults
-import androidx.compose.material3.rememberDatePickerState
-import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -46,13 +31,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import com.ajouunia.core.designsystem.Blue4
 import com.ajouunia.core.designsystem.Purple4
 import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.component.UniATextField
-import com.ajouunia.feature.task.state.TaskState
-import org.threeten.bp.Instant
+import com.ajouunia.feature.task.model.TaskDataState
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
@@ -75,9 +58,9 @@ private val timeFormatter by lazy {
 }
 
 @Composable
-fun TaskDialogScreen(
+internal fun TaskDialogScreen(
     modifier: Modifier = Modifier,
-    taskState: TaskState,
+    taskState: TaskDataState,
     changeInputCourseName: (String, Boolean) -> Unit = { _, _ -> },
     changeInputTaskName: (String, Boolean) -> Unit = { _, _ -> },
     changeInputDate: (LocalDateTime, Boolean) -> Unit = { _, _ -> },
@@ -348,16 +331,16 @@ private fun changeMonthFormat(month: String): String = kotlin.runCatching {
     }
 }.getOrDefault("January")
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun EditTaskDialogScreenPreview() {
+private fun EditTaskDialogScreenPreview() {
     val dateString = "2023-09-20T08:59:00"
 
     val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
     val dateTime = LocalDateTime.parse(dateString, dateTimeFormatter)
 
     TaskDialogScreen(
-        taskState = TaskState(
+        taskState = TaskDataState(
             taskId = -1L,
             deadLine = dateTime,
             courseName = "test course name",
@@ -366,16 +349,16 @@ fun EditTaskDialogScreenPreview() {
     )
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun CreateTaskDialogScreenPreview() {
+private fun CreateTaskDialogScreenPreview() {
     val dateString = "2023-09-20T08:59:00"
 
     val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
     val dateTime = LocalDateTime.parse(dateString, dateTimeFormatter)
 
     TaskDialogScreen(
-        taskState = TaskState(
+        taskState = TaskDataState(
             taskId = -1L,
             deadLine = dateTime,
             courseName = "test course name",

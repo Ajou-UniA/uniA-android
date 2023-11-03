@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -34,7 +33,6 @@ fun UniASingleButtonDialog(
     message: String,
     onClickConfirm: () -> Unit
 ) {
-    val context = LocalContext.current
     Dialog(onDismissRequest = {}) {
         Surface(
             shape = RoundedCornerShape(16.dp),
@@ -101,9 +99,10 @@ fun UniASingleButtonDialog(
     }
 }
 
-//@Preview(showBackground = true)
+@Suppress("DEPRECATION")
+@Preview(showBackground = true)
 @Composable
-fun UniASingleButtonDialogPreview() {
+private fun UniASingleButtonDialogPreview() {
     UniASingleButtonDialog(
         title = "Login failed",
         message = "Sorry, incorrect email or password."

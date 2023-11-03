@@ -28,7 +28,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavOptions
@@ -36,7 +35,7 @@ import com.ajouunia.core.designsystem.Purple4
 import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.component.UniACheckbox
 import com.ajouunia.core.designsystem.component.UniATextField
-import com.ajouunia.feature.onboarding.state.SignInUIState
+import com.ajouunia.feature.onboarding.model.SignInUIState
 import com.ajouunia.feature.onboarding.vm.ConfirmEmailViewModel.Companion.AJOU_UNIV_DEFAULT_EMAIL_FORM
 
 @Composable

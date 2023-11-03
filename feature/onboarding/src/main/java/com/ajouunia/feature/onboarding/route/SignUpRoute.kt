@@ -21,13 +21,14 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavOptions
 import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.component.UniASelectDialog
 import com.ajouunia.core.designsystem.uniaiconpack.IconBackArrow
 import com.ajouunia.feature.onboarding.ui.SignUpScreen
 import com.ajouunia.feature.onboarding.vm.SignUpViewModel
-import com.ajouunia.feature.onboarding.state.SignUpUiState
+import com.ajouunia.feature.onboarding.model.SignUpUiState
 
 private val list by lazy {
     listOf(
@@ -52,7 +53,7 @@ internal fun SignUpRoute(
     navigateToOnBoarding: (NavOptions) -> Unit,
     viewModel: SignUpViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.observeAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -98,25 +99,23 @@ internal fun SignUpRoute(
             }
         }
     ) { padding ->
-        uiState?.let {  state ->
-            SignUpScreen(
-                modifier = Modifier.padding(padding),
-                uiState = state,
-                navigateToOnBoarding = navigateToOnBoarding,
-                changeInputFirstName = viewModel::changeInfoFirstName,
-                changeInfoLastName = viewModel::changeInfoLastName,
-                changeInfoStudentId = viewModel::changeInfoStudentId,
-                onClickDepartment = viewModel::onClickDepartment,
-                changeInfoPassword = viewModel::changeInfoPassword,
-                changeInfoConfirmPassword = viewModel::changeInfoConfirmPassword
-            )
-        }
+        SignUpScreen(
+            modifier = Modifier.padding(padding),
+            uiState = uiState,
+            navigateToOnBoarding = navigateToOnBoarding,
+            changeInputFirstName = viewModel::changeInfoFirstName,
+            changeInfoLastName = viewModel::changeInfoLastName,
+            changeInfoStudentId = viewModel::changeInfoStudentId,
+            onClickDepartment = viewModel::onClickDepartment,
+            changeInfoPassword = viewModel::changeInfoPassword,
+            changeInfoConfirmPassword = viewModel::changeInfoConfirmPassword
+        )
     }
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun SignUpRoutePreview() {
+private fun SignUpRoutePreview() {
     Scaffold(
         modifier = Modifier
             .fillMaxSize()

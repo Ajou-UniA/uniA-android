@@ -1,14 +1,14 @@
 package com.ajouunia.feature.onboarding.vm
 
 import androidx.core.text.isDigitsOnly
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ajouunia.core.domain.usecase.IsVerifyCodeUseCase
 import com.ajouunia.core.domain.usecase.SendVerificationCodeUseCase
-import com.ajouunia.feature.onboarding.state.VerificationCodeUIState
+import com.ajouunia.feature.onboarding.model.VerificationCodeUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,8 +19,8 @@ constructor(
     private val isVerifyCodeUseCase: IsVerifyCodeUseCase,
     private val sendVerificationCodeUseCase: SendVerificationCodeUseCase
 ) : ViewModel() {
-    private val _uiState = MutableLiveData<VerificationCodeUIState>(VerificationCodeUIState.Init)
-    val uiState: LiveData<VerificationCodeUIState>
+    private val _uiState = MutableStateFlow<VerificationCodeUIState>(VerificationCodeUIState.Init)
+    val uiState: StateFlow<VerificationCodeUIState>
         get() = _uiState
 
     fun changeInputCode(code: String) {
@@ -38,7 +38,7 @@ constructor(
             return
         }
 
-        val code = _uiState.value?.code ?: ""
+        val code = _uiState.value.code
 
         if (!code.isDigitsOnly() || code.length != 4 || userEmail.isEmpty()) {
             return
@@ -63,9 +63,9 @@ constructor(
                 code = code
             )
         ).onSuccess {
-            _uiState.postValue(VerificationCodeUIState.Success(code))
+            _uiState.emit(VerificationCodeUIState.Success(code))
         }.onFailure {
-            _uiState.postValue(
+            _uiState.emit(
                 VerificationCodeUIState.Error(
                     code = code,
                     exception = it
@@ -86,9 +86,9 @@ constructor(
 
     private fun remoteResendCode(userEmail: String) = viewModelScope.launch {
         sendVerificationCodeUseCase(userEmail).onSuccess {
-            _uiState.postValue(VerificationCodeUIState.Resend(code = ""))
+            _uiState.emit(VerificationCodeUIState.Resend(code = ""))
         }.onFailure {
-            _uiState.postValue(
+            _uiState.emit(
                 VerificationCodeUIState.Error(
                     code = "",
                     exception = it

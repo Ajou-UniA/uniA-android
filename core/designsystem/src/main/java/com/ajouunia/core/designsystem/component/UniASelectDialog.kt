@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -149,9 +148,9 @@ fun UniASelectDialog(
     }
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun UniASelectDialogPreview() {
+private fun UniASelectDialogPreview() {
     UniASelectDialog(
         title = "Select department",
         list = listOf(

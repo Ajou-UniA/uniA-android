@@ -20,7 +20,7 @@ import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.domain.entity.FavoriteEntity
 
 @Composable
-fun FavoriteScreen(
+internal fun FavoriteScreen(
     modifier: Modifier = Modifier,
     entity: FavoriteEntity,
     onClick: (FavoriteEntity) -> Unit = {}
@@ -56,9 +56,9 @@ fun FavoriteScreen(
     )
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun FavoriteScreenPreview() {
+private fun FavoriteScreenPreview() {
     Column {
         FavoriteScreen(
             entity = FavoriteEntity(

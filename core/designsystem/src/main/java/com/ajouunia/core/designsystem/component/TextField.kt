@@ -35,9 +35,9 @@ import com.ajouunia.core.designsystem.uniaiconpack.IconEyeShow
 import com.ajouunia.core.designsystem.urbanistFamily
 
 // region const value field
-private val TextFieldHeight: Dp = 52.dp
-private val DefaultTextFieldRound: Dp = 10.dp
-private val BasicTextFieldStartPadding = 10.dp
+private val textFieldHeight: Dp = 52.dp
+private val defaultTextFieldRound: Dp = 10.dp
+private val basicTextFieldStartPadding = 10.dp
 // endregion
 
 @Composable
@@ -52,7 +52,7 @@ fun UniATextField(
     hintBackgroundColor: Color? = Color.Transparent,
     enabledSideBtn: Boolean = false,
     sideBtnText: String? = null,
-    round: Dp = DefaultTextFieldRound,
+    round: Dp = defaultTextFieldRound,
     onSideBtnClick: (() -> Unit)? = null,
     error: String? = null,
     success: String? = null,
@@ -80,7 +80,7 @@ fun UniATextField(
 
         Box(
             modifier = Modifier
-                .heightIn(min = TextFieldHeight)
+                .heightIn(min = textFieldHeight)
                 .wrapContentHeight(Alignment.CenterVertically)
                 .background(
                     color = backgroundColor,
@@ -158,7 +158,7 @@ private fun UniABasicTextField(
     onPasswordVisibleChanged: (Boolean) -> Unit,
     enabledSideBtn: Boolean = false,
     sideBtnText: String? = null,
-    round: Dp = DefaultTextFieldRound,
+    round: Dp = defaultTextFieldRound,
     onSideBtnClick: (() -> Unit)? = null,
     isPassword: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -170,9 +170,9 @@ private fun UniABasicTextField(
 ) {
     BasicTextField(
         modifier = Modifier
-            .height(TextFieldHeight)
+            .height(textFieldHeight)
             .fillMaxWidth()
-            .padding(start = BasicTextFieldStartPadding),
+            .padding(start = basicTextFieldStartPadding),
         enabled = enable,
         value = value,
         onValueChange = onValueChange,
@@ -224,9 +224,9 @@ private fun UniABasicTextField(
     )
 }
 
-//@Preview
+@Preview
 @Composable
-fun PreviewUniATextField() {
+private fun PreviewUniATextField() {
     var value by remember { mutableStateOf<String?>(null) }
     var value2 by remember { mutableStateOf<String?>(null) }
     var value3 by remember { mutableStateOf<String?>(null) }

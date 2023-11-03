@@ -1,10 +1,10 @@
 package com.ajouunia.feature.onboarding.vm
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ajouunia.feature.onboarding.state.AgreementServiceUIState
+import com.ajouunia.feature.onboarding.model.AgreementServiceUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 
@@ -14,12 +14,12 @@ class AgreementServiceViewModel
 constructor(
 
 ) : ViewModel() {
-    private val _uiState = MutableLiveData<AgreementServiceUIState>(AgreementServiceUIState.Init)
-    val uiState: LiveData<AgreementServiceUIState>
+    private val _uiState = MutableStateFlow<AgreementServiceUIState>(AgreementServiceUIState.Init)
+    val uiState: StateFlow<AgreementServiceUIState>
         get() = _uiState
 
     fun changeInputTermsOfUse() {
-        val state = _uiState.value ?: return
+        val state = _uiState.value
 
         _uiState.value = AgreementServiceUIState.UpdateInfo(
             acceptTermsOfUse = !state.acceptTermsOfUse,
@@ -28,7 +28,7 @@ constructor(
     }
 
     fun changeInputPrivacyPolicy() {
-        val state = _uiState.value ?: return
+        val state = _uiState.value
 
         _uiState.value = AgreementServiceUIState.UpdateInfo(
             acceptTermsOfUse = state.acceptTermsOfUse,

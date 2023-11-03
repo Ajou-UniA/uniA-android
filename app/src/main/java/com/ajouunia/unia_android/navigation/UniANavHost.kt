@@ -22,7 +22,7 @@ import com.ajouunia.feature.splash.navigation.SPLASH_NAVIGATION_ROUTE
 import com.ajouunia.feature.splash.navigation.splashScreen
 
 @Composable
-fun UniANavHost(
+internal fun UniANavHost(
     modifier: Modifier = Modifier,
     appState: UniAAppState,
     onShowSnackBar: suspend (String) -> Boolean,

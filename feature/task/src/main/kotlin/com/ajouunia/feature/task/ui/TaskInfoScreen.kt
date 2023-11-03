@@ -32,7 +32,7 @@ private val monthFormat = DateTimeFormatter.ofPattern("MM")
 private val timeFormat = DateTimeFormatter.ofPattern("hh:mm a").withLocale(Locale.US)
 
 @Composable
-fun TaskInfoScreen(
+internal fun TaskInfoScreen(
     modifier: Modifier = Modifier,
     entity: TaskEntity
 ) = Column {
@@ -138,9 +138,9 @@ private fun Long.parseMonth(): String = when (this) {
     else -> "Jan."
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun TaskInfoScreenPreview() {
+private fun TaskInfoScreenPreview() {
     val dateString = "2023-10-20T10:00:00"
 
     val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")

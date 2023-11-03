@@ -1,15 +1,15 @@
 package com.ajouunia.feature.onboarding.vm
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ajouunia.core.domain.usecase.FindIdTokenByEmailUseCase
 import com.ajouunia.core.domain.usecase.SignInUseCase
-import com.ajouunia.feature.onboarding.state.SignInUIState
+import com.ajouunia.feature.onboarding.model.SignInUIState
 import com.ajouunia.feature.onboarding.vm.ConfirmEmailViewModel.Companion.AJOU_UNIV_DEFAULT_EMAIL_FORM
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,30 +20,30 @@ constructor(
     private val signInUseCase: SignInUseCase,
     private val findIdTokenByEmailUseCase: FindIdTokenByEmailUseCase
 ) : ViewModel() {
-    private val _uiState = MutableLiveData<SignInUIState>(SignInUIState.Init)
-    val uiState: LiveData<SignInUIState>
+    private val _uiState = MutableStateFlow<SignInUIState>(SignInUIState.Init)
+    val uiState: StateFlow<SignInUIState>
         get() = _uiState
 
     fun changeInputId(id: String) {
         _uiState.value = SignInUIState.UpdateInfo(
             id = id.replace(" ", ""),
-            password = _uiState.value?.password ?: "",
-            rememberSign = _uiState.value?.rememberSign ?: false
+            password = _uiState.value.password,
+            rememberSign = _uiState.value.rememberSign
         )
     }
 
     fun changeInputPassword(password: String) {
         _uiState.value = SignInUIState.UpdateInfo(
-            id = _uiState.value?.id ?: "",
+            id = _uiState.value.id,
             password = password.replace(" ", ""),
-            rememberSign = _uiState.value?.rememberSign ?: false
+            rememberSign = _uiState.value.rememberSign
         )
     }
 
     fun changeInputRemember(remember: Boolean) {
         _uiState.value = SignInUIState.UpdateInfo(
-            id = _uiState.value?.id ?: "",
-            password = _uiState.value?.password ?: "",
+            id = _uiState.value.id,
+            password = _uiState.value.password,
             rememberSign = remember
         )
     }
@@ -59,7 +59,7 @@ constructor(
     fun isAvailableSignIn() = isValidId() and isValidPassword()
 
     fun signIn() {
-        val state = _uiState.value ?: return
+        val state = _uiState.value
 
         if (!isAvailableSignIn()) {
             return
@@ -112,7 +112,7 @@ constructor(
         findIdTokenByEmailUseCase(
             state.id + AJOU_UNIV_DEFAULT_EMAIL_FORM
         ).onSuccess {
-            _uiState.postValue(
+            _uiState.emit(
                 when (it.result) {
                     true -> SignInUIState.MoveMain(
                         id = state.id,
@@ -128,7 +128,7 @@ constructor(
                 }
             )
         }.onFailure {
-            _uiState.postValue(
+            _uiState.emit(
                 SignInUIState.FailSignIn(
                     id = state.id,
                     password = state.password,
@@ -139,10 +139,8 @@ constructor(
         }
     }
 
-    private fun isValidId(): Boolean = _uiState.value?.id?.isNotEmpty() ?: false
+    private fun isValidId(): Boolean = _uiState.value.id.isNotEmpty()
 
-    private fun isValidPassword(): Boolean = _uiState.value?.password?.let { password ->
-        password.length in 4..12
-    } ?: false
+    private fun isValidPassword(): Boolean = _uiState.value.password.length in 4..12
 
 }

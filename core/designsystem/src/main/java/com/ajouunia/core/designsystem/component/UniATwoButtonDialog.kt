@@ -11,11 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,7 +30,6 @@ fun UniATwoButtonDialog(
     onClickConfirm: () -> Unit = {},
     onClickCancel: (() -> Unit)? = null
 ) {
-    val context = LocalContext.current
     Dialog(onDismissRequest = {}) {
         Column(
             modifier = modifier
@@ -105,9 +102,9 @@ fun UniATwoButtonDialog(
     }
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun UniADialogPreview() {
+private fun UniADialogPreview() {
     UniATwoButtonDialog(
         title = "Dialog message",
         message = "Dialog message with just OK button.",
@@ -117,9 +114,9 @@ fun UniADialogPreview() {
     )
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun UniADialogTwoLinePreview() {
+private fun UniADialogTwoLinePreview() {
     UniATwoButtonDialog(
         title = "Dialog message",
         message = "Diaglog message with just OK button\n" +
@@ -130,9 +127,9 @@ fun UniADialogTwoLinePreview() {
     )
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun UniATwoButtonDialogPreview() {
+private fun UniATwoButtonDialogPreview() {
     UniATwoButtonDialog(
         title = "Dialog message",
         message = "Dialog message with just OK button.",
@@ -145,9 +142,9 @@ fun UniATwoButtonDialogPreview() {
     )
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun UniATwoButtonDialogTwoLinePreview() {
+private fun UniATwoButtonDialogTwoLinePreview() {
     UniATwoButtonDialog(
         title = "Dialog message",
         message = "Diaglog message with just OK button\n" +

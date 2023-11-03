@@ -4,7 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.ajouunia.feature.splash.SplashRoute
+import com.ajouunia.feature.splash.route.SplashRoute
 
 const val SPLASH_NAVIGATION_ROUTE = "splash_route"
 

@@ -28,7 +28,6 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ajouunia.core.designsystem.Purple4
@@ -36,7 +35,7 @@ import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.component.UniATextField
 import com.ajouunia.core.designsystem.extensions.nonScaleSp
 import com.ajouunia.core.designsystem.urbanistFamily
-import com.ajouunia.feature.onboarding.state.ConfirmEmailUIState
+import com.ajouunia.feature.onboarding.model.ConfirmEmailUIState
 import com.ajouunia.feature.onboarding.vm.ConfirmEmailViewModel
 
 @Composable

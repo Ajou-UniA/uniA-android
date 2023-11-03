@@ -1,14 +1,13 @@
 package com.ajouunia.feature.task.vm
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ajouunia.core.domain.usecase.FetchRemoteUserTaskListUseCase
-import com.ajouunia.feature.task.state.TaskState
-import com.ajouunia.feature.task.state.TaskUIState
+import com.ajouunia.feature.task.model.TaskDataState
+import com.ajouunia.feature.task.model.TaskUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDateTime
 import javax.inject.Inject
@@ -19,12 +18,12 @@ class TaskViewModel
 constructor(
     private val fetchRemoteUserTaskListUseCase: FetchRemoteUserTaskListUseCase
 ) : ViewModel() {
-    private val _uiState = MutableLiveData<TaskUIState>()
-    val uiState: LiveData<TaskUIState>
+    private val _uiState = MutableStateFlow<TaskUIState>(TaskUIState.Init)
+    val uiState: StateFlow<TaskUIState>
         get() = _uiState
 
     fun createState() {
-        val state = _uiState.value ?: return
+        val state = _uiState.value
 
         when (state) {
             is TaskUIState.CreateDialog,
@@ -35,12 +34,12 @@ constructor(
 
         _uiState.value = TaskUIState.CreateDialog(
             taskList = state.taskList,
-            taskState = TaskState()
+            taskState = TaskDataState()
         )
     }
 
     fun changeInputDate(deadline: LocalDateTime, isCreateMode: Boolean) {
-        val state = _uiState.value ?: return
+        val state = _uiState.value
 
         when (state) {
             is TaskUIState.CreateDialog,
@@ -49,13 +48,13 @@ constructor(
         }
 
         _uiState.value = when (isCreateMode) {
-            true -> (state as? TaskUIState.CreateDialog)?.let {
+            true -> (state as TaskUIState.CreateDialog).let {
                 TaskUIState.CreateDialog(
                     taskList = state.taskList,
                     taskState = state.taskState.copy(deadLine = deadline)
                 )
             }
-            false -> (state as? TaskUIState.EditDialog)?.let {
+            false -> (state as TaskUIState.EditDialog).let {
                 TaskUIState.EditDialog(
                     taskList = state.taskList,
                     taskState = state.taskState.copy(deadLine = deadline)
@@ -69,7 +68,7 @@ constructor(
         minute: Int,
         isCreateMode: Boolean
     ) {
-        val state = _uiState.value ?: return
+        val state = _uiState.value
 
         when (state) {
             is TaskUIState.CreateDialog,
@@ -78,7 +77,7 @@ constructor(
         }
 
         _uiState.value = when (isCreateMode) {
-            true -> (state as? TaskUIState.CreateDialog)?.let {
+            true -> (state as TaskUIState.CreateDialog).let {
                 val deadline = state.taskState.deadLine
                     .withHour(hour)
                     .withMinute(minute)
@@ -88,7 +87,7 @@ constructor(
                     taskState = state.taskState.copy(deadLine = deadline)
                 )
             }
-            false -> (state as? TaskUIState.EditDialog)?.let {
+            false -> (state as TaskUIState.EditDialog).let {
                 val deadline = state.taskState.deadLine
                     .withHour(hour)
                     .withMinute(minute)
@@ -114,9 +113,9 @@ constructor(
 
     private fun fetchRemoteTaskList() = viewModelScope.launch {
         fetchRemoteUserTaskListUseCase().onSuccess {
-            _uiState.postValue(TaskUIState.UpdateInfo(it))
+            _uiState.emit(TaskUIState.UpdateInfo(it))
         }.onFailure {
-            _uiState.postValue(TaskUIState.Error(emptyList(), it))
+            _uiState.emit(TaskUIState.Error(emptyList(), it))
         }
     }
 

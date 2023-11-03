@@ -1,8 +1,6 @@
 package com.ajouunia.feature.task.ui
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -10,9 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TextButton
@@ -30,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.ajouunia.core.designsystem.Purple4
 import com.ajouunia.core.designsystem.component.NonScaleText
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
@@ -45,7 +40,7 @@ private val minFormatter by lazy {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskTimePickerDialog(
+internal fun TaskTimePickerDialog(
     title: String = "Select Time",
     dateTime: LocalDateTime,
     isCreateMode: Boolean = false,
@@ -152,7 +147,7 @@ fun TaskTimePickerDialog(
 
 @Preview(showBackground = true)
 @Composable
-fun TaskTimePickerDialogPreview() {
+private fun TaskTimePickerDialogPreview() {
     val dateString = "2023-09-20T23:59:00"
 
     val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")

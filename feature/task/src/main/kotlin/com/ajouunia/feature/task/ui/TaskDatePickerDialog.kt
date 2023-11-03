@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
-import androidx.compose.material3.DatePickerFormatter
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -19,8 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ajouunia.core.designsystem.Blue2
-import com.ajouunia.core.designsystem.Purple1
-import com.ajouunia.core.designsystem.Purple2
 import com.ajouunia.core.designsystem.Purple4
 import com.ajouunia.core.designsystem.component.NonScaleText
 import org.threeten.bp.Instant
@@ -29,7 +26,7 @@ import org.threeten.bp.ZoneId
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskDatePickerDialog(
+internal fun TaskDatePickerDialog(
     initialSelectedDateMillis: Long,
     isCreateMode: Boolean = false,
     onClickCancel: () -> Unit,
@@ -136,7 +133,7 @@ fun TaskDatePickerDialog(
 
 @Preview(showBackground = true)
 @Composable
-fun TaskDatePickerDialogPreview() {
+private fun TaskDatePickerDialogPreview() {
     TaskDatePickerDialog(
         initialSelectedDateMillis = -1L,
         onClickCancel = {},

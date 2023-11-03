@@ -17,7 +17,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,10 +26,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ajouunia.core.designsystem.Purple4
 import com.ajouunia.core.designsystem.R
 import com.ajouunia.core.designsystem.component.NonScaleText
-import com.ajouunia.feature.task.state.TaskUIState
+import com.ajouunia.feature.task.model.TaskUIState
 import com.ajouunia.feature.task.ui.TaskDialogScreen
 import com.ajouunia.feature.task.ui.TaskScreen
 import com.ajouunia.feature.task.vm.TaskViewModel
@@ -39,25 +39,23 @@ import com.ajouunia.feature.task.vm.TaskViewModel
 internal fun TaskRoute(
     viewModel: TaskViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.observeAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = true) {
         viewModel.fetchTaskList()
     }
 
-    uiState?.let { state ->
-        when (state) {
-            is TaskUIState.CreateDialog -> TaskDialogScreen(
-                taskState = state.taskState,
-                changeInputDate = viewModel::changeInputDate,
-                changeInputTime = viewModel::changeInputTime,
-                isCreateMode = true,
-            )
-            is TaskUIState.EditDialog -> TaskDialogScreen(
-                taskState = state.taskState
-            )
-            else -> Unit
-        }
+    when (val state = uiState) {
+        is TaskUIState.CreateDialog -> TaskDialogScreen(
+            taskState = state.taskState,
+            changeInputDate = viewModel::changeInputDate,
+            changeInputTime = viewModel::changeInputTime,
+            isCreateMode = true,
+        )
+        is TaskUIState.EditDialog -> TaskDialogScreen(
+            taskState = state.taskState
+        )
+        else -> Unit
     }
 
     Scaffold(
@@ -102,17 +100,15 @@ internal fun TaskRoute(
             }
         }
     ) { paddingValues ->
-        uiState?.let { state ->
-            TaskScreen(
-                modifier = Modifier.padding(paddingValues),
-                uiState = state
-            )
-        }
+        TaskScreen(
+            modifier = Modifier.padding(paddingValues),
+            uiState = uiState
+        )
     }
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun TaskRoutePreview() {
+private fun TaskRoutePreview() {
     TaskRoute()
 }

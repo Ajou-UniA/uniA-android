@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ajouunia.feature.task.state.TaskUIState
+import com.ajouunia.feature.task.model.TaskUIState
 
 @Composable
-fun TaskScreen(
+internal fun TaskScreen(
     modifier: Modifier = Modifier,
     uiState: TaskUIState
 ) {
@@ -37,8 +37,8 @@ fun TaskScreen(
     }
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun TaskScreenPreview() {
+private fun TaskScreenPreview() {
     TaskScreen(uiState = TaskUIState.Init)
 }

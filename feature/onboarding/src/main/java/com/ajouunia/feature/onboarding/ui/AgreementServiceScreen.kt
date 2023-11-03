@@ -26,7 +26,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavOptions
@@ -38,7 +37,7 @@ import com.ajouunia.core.designsystem.uniaiconpack.IconArrow
 import com.ajouunia.core.designsystem.uniaiconpack.IconCheckedEllipse
 import com.ajouunia.core.designsystem.uniaiconpack.IconUncheckEllipse
 import com.ajouunia.feature.onboarding.navigation.AGREEMENT_SERVICE_NAVIGATION_ROUTE
-import com.ajouunia.feature.onboarding.state.AgreementServiceUIState
+import com.ajouunia.feature.onboarding.model.AgreementServiceUIState
 
 @Composable
 fun AgreementServiceScreen(

@@ -25,7 +25,7 @@ import com.ajouunia.core.designsystem.component.ZoomableBox
 
 
 @Composable
-fun AjouUnivMapScreen(
+internal fun AjouUnivMapScreen(
     modifier: Modifier = Modifier,
     onClickClose: () -> Unit = {}
 ) {
@@ -70,8 +70,8 @@ fun AjouUnivMapScreen(
     }
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun AjouUniVMapScreenPreview() {
+private fun AjouUniVMapScreenPreview() {
     AjouUnivMapScreen()
 }

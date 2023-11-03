@@ -11,12 +11,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,24 +26,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavOptions
-import com.ajouunia.feature.guide.GuideScreen
-import com.ajouunia.feature.guide.GuideViewModel
+import com.ajouunia.feature.guide.ui.GuideScreen
+import com.ajouunia.feature.guide.vm.GuideViewModel
 import com.ajouunia.core.designsystem.R
 import com.ajouunia.core.designsystem.UniAIconPack
 import com.ajouunia.core.designsystem.component.NonScaleText
 import com.ajouunia.core.designsystem.uniaiconpack.IcHamMenu
-import com.ajouunia.core.designsystem.uniaiconpack.IconArrow
 import com.ajouunia.core.domain.entity.GuideEntity
-import com.ajouunia.feature.guide.GuideTopicMenuDialog
-import com.ajouunia.feature.guide.state.GuideUIState
+import com.ajouunia.feature.guide.ui.GuideTopicMenuDialog
+import com.ajouunia.feature.guide.model.GuideUIState
 
 @Composable
 internal fun GuideRoute(
     navigateToGuideInfo: (NavOptions, Int, GuideEntity) -> Unit = { _, _, _ -> },
     viewModel: GuideViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.observeAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(true) {
         viewModel.getGuideList()
@@ -102,18 +100,16 @@ internal fun GuideRoute(
             }
         }
     ) { paddingValues ->
-        uiState?.let { state ->
-            GuideScreen(
-                modifier = Modifier.padding(paddingValues),
-                uiState = state,
-                navigateToGuideInfo = navigateToGuideInfo
-            )
-        }
+        GuideScreen(
+            modifier = Modifier.padding(paddingValues),
+            uiState = uiState,
+            navigateToGuideInfo = navigateToGuideInfo
+        )
     }
 }
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
-fun GuideRoutePreview() {
+private fun GuideRoutePreview() {
     GuideRoute()
 }

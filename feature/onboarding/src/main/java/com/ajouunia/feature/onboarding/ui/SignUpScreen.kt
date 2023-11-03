@@ -27,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavOptions
@@ -38,7 +37,7 @@ import com.ajouunia.core.designsystem.component.UniATextField
 import com.ajouunia.core.designsystem.extensions.nonScaleSp
 import com.ajouunia.core.designsystem.urbanistFamily
 import com.ajouunia.feature.onboarding.navigation.SIGN_UP_NAVIGATION_ROUTE
-import com.ajouunia.feature.onboarding.state.SignUpUiState
+import com.ajouunia.feature.onboarding.model.SignUpUiState
 
 @Composable
 fun SignUpScreen(
